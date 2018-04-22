@@ -15,7 +15,7 @@ import javax.xml.parsers.*;
 import java.io.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//alvin
+// share with ­Û
 /**
  *
  * @author Administrator
