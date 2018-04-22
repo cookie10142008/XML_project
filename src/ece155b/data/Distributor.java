@@ -4,6 +4,10 @@ import java.util.Vector;
 
 public class Distributor extends Company
 {
+	
+	int i =1; //test
+	
+	
 	Vector sellitems;	// Vector of sell items
 	Vector needitems;	// Vector of items needed
 
