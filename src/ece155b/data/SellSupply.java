@@ -4,6 +4,8 @@ public class SellSupply
 {
 	public Supply supply;
 	public int amountAvailable;
+	
+	int i =1; //test
 
 	public String toXML()
 	{
