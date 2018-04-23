@@ -20,12 +20,14 @@ import java.io.*;
 import java.util.Enumeration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.border.LineBorder;
 
 /**
  * @author 林瑋鴻、鍾昀倫
  */
 public class DistributorApplet extends JApplet implements ActionListener{
 	public DistributorApplet() {
+		
 	}
 
   /* You will definitely have more functions below,
@@ -34,19 +36,17 @@ public class DistributorApplet extends JApplet implements ActionListener{
    */
     Distributor distributor;
     String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to
-
+    Container content = getContentPane();
+    private JTextField textField;
+    private JTextField textField_1;
     public void init()
     {
     	setUIFont(new FontUIResource("微軟正黑體",Font.PLAIN,20));
-    	
-	    Container content = getContentPane();
-	    content.setBackground(Color.white);
-	    content.setLayout(new FlowLayout());
-	    content.add(new JLabel("Hello World"));
+    	setSize(1600,800); // set JApplet window size
+	    content.setBackground(Color.LIGHT_GRAY);
+	    content.setLayout(null);
 	
 	    try {       //try to read the xml file if present
-	        //readXmlFile(fileurl);
-	        content.add(new JLabel("Hello!"));
 	        
 	        
 	        
@@ -56,7 +56,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	    }
     
     
-	    makeGUI(content);
+	    makeGUI();
+	    
+	   
+	     
     
     }
     // set component font
@@ -81,58 +84,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
     }
 
 
-	public void makeGUI(Container content){
+	public void makeGUI(){
 		JFrame frame;
-		JTextField textField;
-		JTextField textField_1;
 		JTextField textField_2;
 		JTable table_1;
-//		frame = new JFrame();
-//		frame.setBounds(100, 100, 636, 450);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.getContentPane().setLayout(new FlowLayout());
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(10, 26, 46, 15);
-		//frame.getContentPane().add(lblNewLabel);
-		content.add(lblNewLabel);
-
-		
-		JLabel label = new JLabel("New label");
-		label.setBounds(10, 59, 46, 15);
-		content.add(label);
-		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(202, 38, 46, 15);
-		content.add(lblNewLabel_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(261, 35, 96, 21);
-		content.add(textField_2);
-		textField_2.setColumns(10);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 6, 414, 86);
-		content.add(panel);
-		panel.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setBounds(58, 10, 96, 21);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(58, 55, 96, 21);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JButton btnNewButton = new JButton("Add a row");	
-		btnNewButton.setBounds(20, 206, 87, 23);
-		content.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(117, 206, 87, 23);
-		content.add(btnNewButton_1);
 		
 /*		table = new JTable();
 		table.setBounds(27, 113, 177, 70);
@@ -156,22 +111,97 @@ public class DistributorApplet extends JApplet implements ActionListener{
              {"Item X","50.5","300"},
              {"Item Y","42.2","200"}
              }; 
-			
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 97, 238, 99);
-			content.add(scrollPane);
-			// Step 3: 建�?? Table
-			 //   javax.swing.JTable table=new javax.swing.JTable(data,headings);
-			 JTable table = new JTable(data, headings);
-			 scrollPane.setViewportView(table);
-			 table.setCellSelectionEnabled(true);
-			 table.setColumnSelectionAllowed(true);
-			 
-			 table.setRowHeight(50); //設定列高度為50		
-			 TableColumnModel cModel = table.getColumnModel();//取得這個table的欄位模型 	
+             
+             JPanel customer_Panel = new JPanel();
+             customer_Panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+     	    customer_Panel.setBounds(15, 229, 685, 450);
+     	    content.add(customer_Panel);
+     	    customer_Panel.setLayout(null);
+     	    
+     	    JScrollPane scrollPane = new JScrollPane();
+     	    scrollPane.setBounds(101, 53, 452, 285);
+     	    customer_Panel.add(scrollPane);
+     	    // Step 3: 建�?? Table
+     	     //   javax.swing.JTable table=new javax.swing.JTable(data,headings);
+     	     JTable table = new JTable(data, headings);
+     	     scrollPane.setViewportView(table);
+     	     table.setCellSelectionEnabled(true);
+     	     table.setColumnSelectionAllowed(true);
+     	     
+     	     table.setRowHeight(50); //設定列高度為50		
+     	     
+     	     JButton btnNewButton = new JButton("Add a row");
+     	     btnNewButton.setBounds(114, 371, 140, 31);
+     	     customer_Panel.add(btnNewButton);
+     	     
+     	     JButton btnNewButton_1 = new JButton("Delete selected rows");
+     	     btnNewButton_1.addActionListener(new ActionListener() {
+     	     	public void actionPerformed(ActionEvent arg0) {
+     	     	}
+     	     });
+     	     btnNewButton_1.setBounds(337, 371, 243, 31);
+     	     customer_Panel.add(btnNewButton_1);
+     	     
+     	     		
+     	     		JLabel lblItemsSoldTo = new JLabel("Items sold to customers");
+     	     		lblItemsSoldTo.setFont(new Font("新細明體", Font.BOLD, 25));
+     	     		lblItemsSoldTo.setBounds(15, 0, 336, 38);
+     	     		customer_Panel.add(lblItemsSoldTo);
+     	     		
+     	     		JPanel Company_panel = new JPanel();
+     	     		Company_panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+     	     		Company_panel.setBounds(342, 26, 974, 187);
+     	     		getContentPane().add(Company_panel);
+     	     		Company_panel.setLayout(null);
+     	     		
+     	     		textField_2 = new JTextField();
+     	     		textField_2.setBounds(229, 55, 136, 29);
+     	     		Company_panel.add(textField_2);
+     	     		textField_2.setColumns(10);
+     	     		
+     	     		JLabel lblNewLabel = new JLabel("Company information");
+     	     		lblNewLabel.setFont(new Font("新細明體", Font.BOLD, 25));
+     	     		lblNewLabel.setBounds(15, 0, 289, 40);
+     	     		Company_panel.add(lblNewLabel);
+     	     		
+     	     		JLabel lblNewDlabel = new JLabel("Company name:");
+     	     		lblNewDlabel.setBounds(58, 58, 195, 23);
+     	     		Company_panel.add(lblNewDlabel);
+     	     		
+     	     		JLabel lblContactAddress = new JLabel("Contact address:");
+     	     		lblContactAddress.setBounds(58, 102, 195, 23);
+     	     		Company_panel.add(lblContactAddress);
+     	     		
+     	     		textField = new JTextField();
+     	     		textField.setColumns(10);
+     	     		textField.setBounds(229, 99, 136, 29);
+     	     		Company_panel.add(textField);
+     	     		
+     	     		JLabel lblAddress = new JLabel("Address:");
+     	     		lblAddress.setBounds(447, 58, 162, 23);
+     	     		Company_panel.add(lblAddress);
+     	     		
+     	     		textField_1 = new JTextField();
+     	     		textField_1.setColumns(10);
+     	     		textField_1.setBounds(539, 55, 136, 29);
+     	     		Company_panel.add(textField_1);
+     	     
+     	     	btnNewButton.addActionListener(new ActionListener() {		//Add a row ??��??	
+     	     				public void actionPerformed(ActionEvent arg0) {
+     	     				/*	data[i+1][0] = " ";
+     	     					data[i+1][1] = " ";
+     	     					data[i+1][2] = " "; */ 
+     	     					 Object[][] data = new Object[][] {
+     	     			             {"1","井�?�全","交�?�大�? "},
+     	     			             {"2","小山","清華大學 "},
+     	     			             {" ", " ", " "}
+     	     			             };  
+     	     				}
+     	     			});
+             
+   			 TableColumnModel cModel = table.getColumnModel();//取得這個table的欄位模型 	
 			 TableColumn columnName = cModel.getColumn(0);  //取得這個table某個欄位的資訊 
 			 columnName.setPreferredWidth(200);  //個別設定偏好的寬度 
-		
 			 
 			 
 			 
@@ -193,19 +223,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			 
 			 int i = data.length;
 			 int j = data[0].length;
-	
-		btnNewButton.addActionListener(new ActionListener() {		//Add a row ??��??	
-					public void actionPerformed(ActionEvent arg0) {
-					/*	data[i+1][0] = " ";
-						data[i+1][1] = " ";
-						data[i+1][2] = " "; */ 
-						 Object[][] data = new Object[][] {
-				             {"1","井�?�全","交�?�大�? "},
-				             {"2","小山","清華大學 "},
-				             {" ", " ", " "}
-				             };  
-					}
-				});
 		
 		
 	}
@@ -223,6 +240,4 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		 
 		
 	 }
-	 
-	 
 }// end class DistributorApplet
