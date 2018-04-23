@@ -5,16 +5,13 @@ import java.util.Vector;
 public class Distributor extends Company
 {
 	
-	int i =1; //test
-	
-	
-	Vector sellitems;	// Vector of sell items
-	Vector needitems;	// Vector of items needed
+	Vector sellItems;	// Vector of sell items
+	Vector needItems;	// Vector of items needed
 
 	public Distributor()
 	{
-		sellitems = new Vector ();
-		needitems = new Vector ();
+		sellItems = new Vector ();
+		needItems = new Vector ();
 	}
 
 	public void addSellItem(SellSupply ss)
@@ -27,37 +24,37 @@ public class Distributor extends Company
 
 	public String toXML()
 	{
-		String returnstr="";
-		returnstr += "<Distributor>";
-			returnstr += "<CompanyInfo>";
-				returnstr += "<CompanyName>"+name+"</CompanyName>";
-				returnstr += "<CompanyAddress>"+address+"</CompanyAddress>";
-				returnstr += "<CompanyContact>"+contact+"</CompanyContact>";
-			returnstr += "</CompanyInfo>";
+		String returnStr="";
+		returnStr += "<Distributor>";
+		returnStr += "<CompanyInfo>";
+		returnStr += "<CompanyName>"+name+"</CompanyName>";
+		returnStr += "<CompanyAddress>"+address+"</CompanyAddress>";
+		returnStr += "<CompanyContact>"+contact+"</CompanyContact>";
+		returnStr += "</CompanyInfo>";
 
-			returnstr += "<ItemsSold>";
-				for (int i = 0; i<sellitems.size(); i++)
-				returnstr += ((SellSupply)sellitems.elementAt(i)).toXML();
-			returnstr += "</ItemsSold>";
+		returnStr += "<ItemsSold>";
+		for (int i = 0; i < sellItems.size(); i++)
+		returnStr += ((SellSupply)sellItems.elementAt(i)).toXML();
+		returnStr += "</ItemsSold>";
 
-		returnstr += "</Distributor>";
-		return returnstr;
+		returnStr += "</Distributor>";
+		return returnStr;
 	}
 
 	public String toString()
 	{
-		String returnstr="";
-			returnstr += "| CompanyInfo\n";
-				returnstr += "|| CompanyName: "+name+"\n";
-				returnstr += "|| CompanyAddress: "+address+"\n";
-				returnstr += "|| CompanyContact: "+contact+"\n";
-			returnstr += "\n";
+		String returnStr="";
+		returnStr += "| CompanyInfo\n";
+		returnStr += "|| CompanyName: "+name+"\n";
+		returnStr += "|| CompanyAddress: "+address+"\n";
+		returnStr += "|| CompanyContact: "+contact+"\n";
+		returnStr += "\n";
 
-			returnstr += "| ItemsSold\n";
-				for (int i = 0; i<sellitems.size(); i++)
-				returnstr += ((SellSupply)sellitems.elementAt(i)).toString();
-			returnstr += "\n";
+		returnStr += "| ItemsSold\n";
+		for (int i = 0; i < sellItems.size(); i++)
+		returnStr += ((SellSupply)sellItems.elementAt(i)).toString();
+		returnStr += "\n";
 
-		return returnstr;
+		return returnStr;
 	}
 }

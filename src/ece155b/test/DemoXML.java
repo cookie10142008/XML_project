@@ -17,19 +17,19 @@ public class DemoXML {
     }
     
     public DemoXML(String  args) {
-    	String fileurl = "hello.xml";
+    	String fileUrl = "hello.xml";
 
     	Distributor dist = new Distributor();
     	dist.name = "The Company";
     	dist.address = "Address";
-    	dist.contact = "Contact me";
+    	dist.contact = "Contact me at 9 night a.m.";
 
     	Supply supply = new Supply();
     	supply.ID 	= "ID";
 
     	System.out.println (dist);
-    	toXmlFile (dist,fileurl);
-    	System.out.println (readXmlFile(fileurl));
+    	toXmlFile (dist,fileUrl);
+    	System.out.println (readXmlFile(fileUrl));
     }
 
 
@@ -40,8 +40,8 @@ public class DemoXML {
 	    {
 	    	File xmlfile = new File(url);
     		BufferedWriter br = new BufferedWriter(new FileWriter(xmlfile));
-    			br.write("<?xml version='1.0' ?>");
-    			br.write(dist.toXML());
+    		br.write("<?xml version='1.0' ?>");
+    		br.write(dist.toXML());
     		br.close();
 	    }
 	    catch (Exception ex)

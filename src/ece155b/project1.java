@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel; //?–°å¢?
+import javax.swing.table.DefaultTableModel; //?ï¿½ï¿½ï¿½?
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -56,7 +56,7 @@ public class project1 {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 636, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -69,13 +69,8 @@ public class project1 {
 		frame.getContentPane().add(label);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(202, 38, 46, 15);
+		lblNewLabel_1.setBounds(202, 26, 87, 27);
 		frame.getContentPane().add(lblNewLabel_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(261, 35, 96, 21);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 6, 414, 86);
@@ -92,12 +87,17 @@ public class project1 {
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 		
+		textField_2 = new JTextField();
+		textField_2.setBounds(303, 27, 96, 21);
+		panel.add(textField_2);
+		textField_2.setColumns(10);
+		
 		JButton btnNewButton = new JButton("Add a row");	
-		btnNewButton.setBounds(20, 206, 87, 23);
+		btnNewButton.setBounds(46, 322, 87, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(117, 206, 87, 23);
+		btnNewButton_1.setBounds(161, 322, 87, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
 /*		table = new JTable();
@@ -110,12 +110,12 @@ public class project1 {
 		table.setModel(JTableModel); */
 		
 		
-//	     String [] headings= new String[] {"åºè??","?????","?–®ä½?","?—¥???","æ¬Šé??"};
+//	     String [] headings= new String[] {"åºï¿½??","?????","?ï¿½ï¿½ï¿½?","?ï¿½ï¿½???","æ¬Šï¿½??"};
 	     String [] headings= new String[] {"Item Type","Price","Available"};
 
-	     // Step 2: ??‡å?šè?é¡¯ç¤ºåœ¨è¡¨æ ¼ä¸­ç?„è?‡æ??
+	     // Step 2: ??ï¿½ï¿½?ï¿½ï¿½?ï¿½é¡¯ç¤ºåœ¨è¡¨æ ¼ä¸­ï¿½?ï¿½ï¿½?ï¿½ï¿½??
 	      /*   Object[][] data = new Object[][] {
-	                    {"1",Boolean.FALSE,"äº•æ?‘å…¨","äº¤é?šå¤§å­? ","02/06/2000",new Float(1)},
+	                    {"1",Boolean.FALSE,"äº•ï¿½?ï¿½å…¨","äº¤ï¿½?ï¿½å¤§ï¿½? ","02/06/2000",new Float(1)},
 	                    {"2",Boolean.TRUE,"å°å±±","æ¸…è¯å¤§å­¸ ","02/07/2000",new Float(2)}
 	                    }; */
 	     Object[][] data = new Object[][] {
@@ -124,9 +124,9 @@ public class project1 {
              }; 
 			
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 97, 238, 99);
+			scrollPane.setBounds(10, 97, 414, 210);
 			frame.getContentPane().add(scrollPane);
-			// Step 3: å»ºç?? Table
+			// Step 3: å»ºï¿½?? Table
 			 //   javax.swing.JTable table=new javax.swing.JTable(data,headings);
 			 JTable table = new JTable(data, headings);
 			 scrollPane.setViewportView(table);
@@ -151,13 +151,13 @@ public class project1 {
 			 int i = data.length;
 			 int j = data[0].length;
 	
-		btnNewButton.addActionListener(new ActionListener() {		//Add a row ??‰é??	
+		btnNewButton.addActionListener(new ActionListener() {		//Add a row ??ï¿½ï¿½??	
 					public void actionPerformed(ActionEvent arg0) {
 					/*	data[i+1][0] = " ";
 						data[i+1][1] = " ";
 						data[i+1][2] = " "; */ 
 						 Object[][] data = new Object[][] {
-				             {"1","äº•æ?‘å…¨","äº¤é?šå¤§å­? "},
+				             {"1","äº•ï¿½?ï¿½å…¨","äº¤ï¿½?ï¿½å¤§ï¿½? "},
 				             {"2","å°å±±","æ¸…è¯å¤§å­¸ "},
 				             {" ", " ", " "}
 				             };  
@@ -167,7 +167,7 @@ public class project1 {
 	
 
 	         
-	     // å»ºç?‹ä??? Frame ç§??‡ºè¡¨æ ¼
+	     // å»ºï¿½?ï¿½ï¿½??? Frame ï¿½??ï¿½ï¿½è¡¨æ ¼
 	     /*    javax.swing.JFrame MyFrame=new javax.swing.JFrame("TableStep1 è¡¨æ ¼æ¸¬è©¦");
 	         MyFrame.setSize(500,200);
 	         MyFrame.setLocation(200,200);
