@@ -24,8 +24,8 @@ public class DemoXML {
     	dist.address = "Address";
     	dist.contact = "Contact me at 9 night a.m.";
 
-    	Supply supply = new Supply();
-    	supply.ID 	= "ID";
+    	//Supply supply = new Supply();
+    	//supply.ID 	= "ID";
 
     	System.out.println (dist);
     	toXmlFile (dist,fileUrl);

@@ -157,8 +157,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		
      	     		JPanel companyPanel = new JPanel();
      	     		companyPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-     	     		companyPanel.setBounds(342, 26, 974, 187);
-     	     		getContentPane().add(companyPanel);
+     	     		companyPanel.setBounds(341, 39, 974, 187);
+     	     		//getContentPane().add(companyPanel);
      	     		companyPanel.setLayout(null);
      	     		
      	     		textField_companyName = new JTextField();
@@ -223,6 +223,18 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		JButton btnLoadInformation = new JButton("Load Information");
      	     		btnLoadInformation.setBounds(426, 723, 234, 31);
      	     		getContentPane().add(btnLoadInformation);
+     	     		
+     	     		// tab to transfer between panels
+     	     		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+     	     		tabbedPane.setBounds(0, 0, 244, 20);
+     	     		tabbedPane.addTab("company info",companyPanel);
+     	     		tabbedPane.addTab("item",providerPanel);
+     	     		tabbedPane.addTab("items",customer_Panel);
+     	     		getContentPane().add(tabbedPane);
+     	     		
+     	     		
+     	     		
+     	     		
      	     
      	     	customerAddRowBtn.addActionListener(new ActionListener() {		//Add a row ??��??	
      	     				public void actionPerformed(ActionEvent arg0) {
@@ -294,8 +306,4 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		 
 		
 	}
-	
-	
-	
-	
 }// end class DistributorApplet

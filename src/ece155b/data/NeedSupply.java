@@ -1,6 +1,6 @@
 package ece155b.data;
 
-public class NeedSupply
+public class NeedSupply // item needed from providers (provider give us)
 {
 	public Supply supply;
 	public int amountNeeded;
