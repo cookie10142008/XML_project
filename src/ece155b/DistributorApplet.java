@@ -122,7 +122,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
             JPanel customer_Panel = new JPanel();
             customer_Panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
      	    customer_Panel.setBounds(15, 229, 685, 450);
-     	    content.add(customer_Panel);
+     	    //content.add(customer_Panel);
      	    customer_Panel.setLayout(null);
      	    
      	    JScrollPane customerScrollPane = new JScrollPane();
@@ -197,7 +197,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		providerPanel.setLayout(null);
      	     		providerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
      	     		providerPanel.setBounds(765, 229, 685, 450);
-     	     		getContentPane().add(providerPanel);
+     	     		//getContentPane().add(providerPanel);
      	     		
      	     		JScrollPane providerScrollPane = new JScrollPane();
      	     		providerScrollPane.setBounds(101, 53, 452, 285);
@@ -226,10 +226,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		
      	     		// tab to transfer between panels
      	     		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-     	     		tabbedPane.setBounds(0, 0, 244, 20);
+     	     		tabbedPane.setBounds(0, 0, 1539, 767);
+     	     		//JPanel panel = new JPanel();
      	     		tabbedPane.addTab("company info",companyPanel);
-     	     		tabbedPane.addTab("item",providerPanel);
-     	     		tabbedPane.addTab("items",customer_Panel);
+     	     		tabbedPane.addTab("company info",customer_Panel);
+     	     		tabbedPane.addTab("company info",providerPanel);
      	     		getContentPane().add(tabbedPane);
      	     		
      	     		
