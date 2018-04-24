@@ -11,7 +11,7 @@ public class Supply
 	{
 		String returnstr="";
 		returnstr += "<Supply>";
-		returnstr += "<SupplyID>"+ID+"</SupplyID>";
+			returnstr += "<SupplyID>"+ID+"</SupplyID>";
 		returnstr += "</Supply>";
 		return returnstr;
 	}
@@ -20,7 +20,7 @@ public class Supply
 	{
 		String returnstr="";
 		returnstr += "||| Supply\n";
-		returnstr += "|||| SupplyID:"+ID+"\n";
+			returnstr += "|||| SupplyID:"+ID+"\n";
 		return returnstr;
 	}
 }

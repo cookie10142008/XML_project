@@ -10,8 +10,10 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import ece155b.data.Company;
 import ece155b.data.Distributor;
 import ece155b.data.Supply;
+import ece155b.test.DemoXML;
 import ece155b.data.SellSupply;
 import ece155b.data.NeedSupply;
 import ece155b.xml.XMLParser;
@@ -35,10 +37,9 @@ public class DistributorApplet extends JApplet implements ActionListener{
    * mouse/action event listeners...
    */
     Distributor distributor;
-    String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to
+    String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to (under bin dir)
     Container content = getContentPane();
-    private JTextField textField;
-    private JTextField textField_1;
+    
     public void init()
     {
     	setUIFont(new FontUIResource("微軟正黑體",Font.PLAIN,20));
@@ -58,7 +59,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
     
 	    makeGUI();
 	    
-	   
+	    
 	     
     
     }
@@ -79,15 +80,23 @@ public class DistributorApplet extends JApplet implements ActionListener{
     //destructor that writes the doctor object to file before closing
         System.out.println("...closing "+fileurl);
         
-        //toXmlFile(...);
+        String fileUrl = "Distributor.xml";
+        Distributor dist = new Distributor();
+    	dist.name = "The company success";
+    	dist.address = "Address";
+    	dist.contact = "Contact me at 9 night a.m.";
         
+    	toXmlFile(dist,fileUrl);
+    	
+        //Company company = new Company();
     }
 
 
 	public void makeGUI(){
-		JFrame frame;
-		JTextField textField_2;
+		
+		JTextField textField_companyName, textField_contactMe, textField_address;
 		JTable table_1;
+		
 		
 /*		table = new JTable();
 		table.setBounds(27, 113, 177, 70);
@@ -98,8 +107,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		createTableModel();
 		table.setModel(JTableModel); */
 		
-		
-//	     String [] headings= new String[] {"序�??","?????","?���?","?��???","權�??"};
 	     String [] headings= new String[] {"Item Type","Price","Available"};
 
 	     // Step 2: ??��?��?�顯示在表格中�?��?��??
@@ -112,81 +119,112 @@ public class DistributorApplet extends JApplet implements ActionListener{
              {"Item Y","42.2","200"}
              }; 
              
-             JPanel customer_Panel = new JPanel();
-             customer_Panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+            JPanel customer_Panel = new JPanel();
+            customer_Panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
      	    customer_Panel.setBounds(15, 229, 685, 450);
      	    content.add(customer_Panel);
      	    customer_Panel.setLayout(null);
      	    
-     	    JScrollPane scrollPane = new JScrollPane();
-     	    scrollPane.setBounds(101, 53, 452, 285);
-     	    customer_Panel.add(scrollPane);
+     	    JScrollPane customerScrollPane = new JScrollPane();
+     	    customerScrollPane.setBounds(101, 53, 452, 285);
+     	    customer_Panel.add(customerScrollPane);
      	    // Step 3: 建�?? Table
      	     //   javax.swing.JTable table=new javax.swing.JTable(data,headings);
-     	     JTable table = new JTable(data, headings);
-     	     scrollPane.setViewportView(table);
-     	     table.setCellSelectionEnabled(true);
-     	     table.setColumnSelectionAllowed(true);
+     	     JTable customerTable = new JTable(data, headings);
+     	     customerScrollPane.setViewportView(customerTable);
+     	     customerTable.setCellSelectionEnabled(true);
+     	     customerTable.setColumnSelectionAllowed(true);
      	     
-     	     table.setRowHeight(50); //設定列高度為50		
+     	     customerTable.setRowHeight(50); //設定列高度為50		
      	     
-     	     JButton btnNewButton = new JButton("Add a row");
-     	     btnNewButton.setBounds(114, 371, 140, 31);
-     	     customer_Panel.add(btnNewButton);
+     	     JButton customerAddRowBtn = new JButton("Add a row");
+     	     customerAddRowBtn.setBounds(114, 371, 140, 31);
+     	     customer_Panel.add(customerAddRowBtn);
      	     
-     	     JButton btnNewButton_1 = new JButton("Delete selected rows");
-     	     btnNewButton_1.addActionListener(new ActionListener() {
+     	     JButton customerDelRowBtn = new JButton("Delete selected rows");
+     	     customerDelRowBtn.addActionListener(new ActionListener() {
      	     	public void actionPerformed(ActionEvent arg0) {
      	     	}
      	     });
-     	     btnNewButton_1.setBounds(337, 371, 243, 31);
-     	     customer_Panel.add(btnNewButton_1);
+     	     customerDelRowBtn.setBounds(337, 371, 243, 31);
+     	     customer_Panel.add(customerDelRowBtn);
      	     
      	     		
-     	     		JLabel lblItemsSoldTo = new JLabel("Items sold to customers");
-     	     		lblItemsSoldTo.setFont(new Font("新細明體", Font.BOLD, 25));
-     	     		lblItemsSoldTo.setBounds(15, 0, 336, 38);
-     	     		customer_Panel.add(lblItemsSoldTo);
+     	     		JLabel labelItemsSold = new JLabel("Items sold to customers");
+     	     		labelItemsSold.setFont(new Font("新細明體", Font.BOLD, 25));
+     	     		labelItemsSold.setBounds(15, 0, 336, 38);
+     	     		customer_Panel.add(labelItemsSold);
      	     		
-     	     		JPanel Company_panel = new JPanel();
-     	     		Company_panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-     	     		Company_panel.setBounds(342, 26, 974, 187);
-     	     		getContentPane().add(Company_panel);
-     	     		Company_panel.setLayout(null);
+     	     		JPanel companyPanel = new JPanel();
+     	     		companyPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+     	     		companyPanel.setBounds(342, 26, 974, 187);
+     	     		getContentPane().add(companyPanel);
+     	     		companyPanel.setLayout(null);
      	     		
-     	     		textField_2 = new JTextField();
-     	     		textField_2.setBounds(229, 55, 136, 29);
-     	     		Company_panel.add(textField_2);
-     	     		textField_2.setColumns(10);
+     	     		textField_companyName = new JTextField();
+     	     		textField_companyName.setBounds(229, 55, 136, 29);
+     	     		companyPanel.add(textField_companyName);
+     	     		textField_companyName.setColumns(10);
      	     		
-     	     		JLabel lblNewLabel = new JLabel("Company information");
-     	     		lblNewLabel.setFont(new Font("新細明體", Font.BOLD, 25));
-     	     		lblNewLabel.setBounds(15, 0, 289, 40);
-     	     		Company_panel.add(lblNewLabel);
+     	     		JLabel labelCompanyInfo = new JLabel("Company information");
+     	     		labelCompanyInfo.setFont(new Font("新細明體", Font.BOLD, 25));
+     	     		labelCompanyInfo.setBounds(15, 0, 289, 40);
+     	     		companyPanel.add(labelCompanyInfo);
      	     		
-     	     		JLabel lblNewDlabel = new JLabel("Company name:");
-     	     		lblNewDlabel.setBounds(58, 58, 195, 23);
-     	     		Company_panel.add(lblNewDlabel);
+     	     		JLabel labelCompanyName = new JLabel("Company name:");
+     	     		labelCompanyName.setBounds(58, 58, 195, 23);
+     	     		companyPanel.add(labelCompanyName);
      	     		
-     	     		JLabel lblContactAddress = new JLabel("Contact address:");
-     	     		lblContactAddress.setBounds(58, 102, 195, 23);
-     	     		Company_panel.add(lblContactAddress);
+     	     		JLabel labelContactMe = new JLabel("Contact me:");
+     	     		labelContactMe.setBounds(58, 102, 195, 23);
+     	     		companyPanel.add(labelContactMe);
      	     		
-     	     		textField = new JTextField();
-     	     		textField.setColumns(10);
-     	     		textField.setBounds(229, 99, 136, 29);
-     	     		Company_panel.add(textField);
+     	     		textField_contactMe = new JTextField();
+     	     		textField_contactMe.setColumns(10);
+     	     		textField_contactMe.setBounds(229, 99, 136, 29);
+     	     		companyPanel.add(textField_contactMe);
      	     		
-     	     		JLabel lblAddress = new JLabel("Address:");
-     	     		lblAddress.setBounds(447, 58, 162, 23);
-     	     		Company_panel.add(lblAddress);
+     	     		JLabel labelAddress = new JLabel("Address:");
+     	     		labelAddress.setBounds(447, 58, 85, 23);
+     	     		companyPanel.add(labelAddress);
      	     		
-     	     		textField_1 = new JTextField();
-     	     		textField_1.setColumns(10);
-     	     		textField_1.setBounds(539, 55, 136, 29);
-     	     		Company_panel.add(textField_1);
+     	     		textField_address = new JTextField();
+     	     		textField_address.setColumns(10);
+     	     		textField_address.setBounds(539, 55, 136, 29);
+     	     		companyPanel.add(textField_address);
+     	     		
+     	     		JPanel providerPanel = new JPanel();
+     	     		providerPanel.setLayout(null);
+     	     		providerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+     	     		providerPanel.setBounds(765, 229, 685, 450);
+     	     		getContentPane().add(providerPanel);
+     	     		
+     	     		JScrollPane providerScrollPane = new JScrollPane();
+     	     		providerScrollPane.setBounds(101, 53, 452, 285);
+     	     		providerPanel.add(providerScrollPane);
+     	     		
+     	     		JButton pro_addRowBtn = new JButton("Add a row");
+     	     		pro_addRowBtn.setBounds(114, 371, 140, 31);
+     	     		providerPanel.add(pro_addRowBtn);
+     	     		
+     	     		JButton pro_delRowBtn = new JButton("Delete selected rows");
+     	     		pro_delRowBtn.setBounds(337, 371, 243, 31);
+     	     		providerPanel.add(pro_delRowBtn);
+     	     		
+     	     		JLabel labelItemsNeeded = new JLabel("Items needed from providers");
+     	     		labelItemsNeeded.setFont(new Font("新細明體", Font.BOLD, 25));
+     	     		labelItemsNeeded.setBounds(15, 0, 336, 38);
+     	     		providerPanel.add(labelItemsNeeded);
+     	     		
+     	     		JButton btnSaveInformation = new JButton("Save Information");
+     	     		btnSaveInformation.setBounds(126, 723, 234, 31);
+     	     		getContentPane().add(btnSaveInformation);
+     	     		
+     	     		JButton btnLoadInformation = new JButton("Load Information");
+     	     		btnLoadInformation.setBounds(426, 723, 234, 31);
+     	     		getContentPane().add(btnLoadInformation);
      	     
-     	     	btnNewButton.addActionListener(new ActionListener() {		//Add a row ??��??	
+     	     	customerAddRowBtn.addActionListener(new ActionListener() {		//Add a row ??��??	
      	     				public void actionPerformed(ActionEvent arg0) {
      	     				/*	data[i+1][0] = " ";
      	     					data[i+1][1] = " ";
@@ -199,7 +237,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     				}
      	     			});
              
-   			 TableColumnModel cModel = table.getColumnModel();//取得這個table的欄位模型 	
+   			 TableColumnModel cModel = customerTable.getColumnModel();//取得這個table的欄位模型 	
 			 TableColumn columnName = cModel.getColumn(0);  //取得這個table某個欄位的資訊 
 			 columnName.setPreferredWidth(200);  //個別設定偏好的寬度 
 			 
@@ -227,17 +265,37 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		
 	}
  
- 
+	public void toXmlFile(Distributor dist, String url)
+    {
+    	try
+	    {
+	    	File xmlfile = new File(url);
+    		BufferedWriter br = new BufferedWriter(new FileWriter(xmlfile));
+    		br.write("<?xml version='1.0' ?>"); // start to write XML into file
+    		br.write(dist.toXML());
+    		br.close();
+	    }
+	    catch (Exception ex)
+	    {
+	    	System.out.println ("Exception:"+ex);
+	    }
+    }
 
-	 class SupplyTab extends JTabbedPane implements ActionListener{
+	class SupplyTab extends JTabbedPane implements ActionListener{
 	    public SupplyTab(SellSupply viewsellsupply, int index){}
 	    
 	    public void actionPerformed(ActionEvent s){}
 	 
-	 }
+	}
 
-	 public void actionPerformed(ActionEvent e){
+	public void actionPerformed(ActionEvent e){
+
+		
 		 
 		
-	 }
+	}
+	
+	
+	
+	
 }// end class DistributorApplet

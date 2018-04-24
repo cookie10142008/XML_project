@@ -11,16 +11,16 @@ import javax.xml.parsers.*;
 
 public class DemoXML {
     
-    public static void main(String [] args) {
-       // new DemoXML(args);
-    	new DemoXML(System.getProperty("user.dir") + File.separator + "test.xml");
-    }
+//    public static void main(String [] args) {
+//       // new DemoXML(args);
+//    	new DemoXML(System.getProperty("user.dir") + File.separator + "test.xml"); // the same directory with src (under java project)
+//    }
     
     public DemoXML(String  args) {
     	String fileUrl = "hello.xml";
 
     	Distributor dist = new Distributor();
-    	dist.name = "The Company";
+    	dist.name = "The company";
     	dist.address = "Address";
     	dist.contact = "Contact me at 9 night a.m.";
 

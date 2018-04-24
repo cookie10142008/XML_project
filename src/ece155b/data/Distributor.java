@@ -26,6 +26,7 @@ public class Distributor extends Company
 	{
 		String returnStr="";
 		returnStr += "<Distributor>";
+		
 		returnStr += "<CompanyInfo>";
 		returnStr += "<CompanyName>"+name+"</CompanyName>";
 		returnStr += "<CompanyAddress>"+address+"</CompanyAddress>";
@@ -38,6 +39,10 @@ public class Distributor extends Company
 		returnStr += "</ItemsSold>";
 
 		returnStr += "</Distributor>";
+		
+		
+		
+		
 		return returnStr;
 	}
 
