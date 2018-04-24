@@ -43,7 +43,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
     public void init()
     {
     	setUIFont(new FontUIResource("微軟正黑體",Font.PLAIN,20));
-    	setSize(1600,800); // set JApplet window size
+    	setSize(1300,800); // set JApplet window size
 	    content.setBackground(Color.LIGHT_GRAY);
 	    content.setLayout(null);
 	
@@ -226,11 +226,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		
      	     		// tab to transfer between panels
      	     		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-     	     		tabbedPane.setBounds(0, 0, 1539, 767);
+     	     		tabbedPane.setBounds(0, 0, 1200, 500);
      	     		//JPanel panel = new JPanel();
-     	     		tabbedPane.addTab("company info",companyPanel);
-     	     		tabbedPane.addTab("company info",customer_Panel);
-     	     		tabbedPane.addTab("company info",providerPanel);
+     	     		tabbedPane.addTab("Company",companyPanel);
+     	     		tabbedPane.addTab("Customer",customer_Panel);
+     	     		tabbedPane.addTab("Provider",providerPanel);
      	     		getContentPane().add(tabbedPane);
      	     		
      	     		

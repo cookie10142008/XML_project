@@ -5,31 +5,31 @@ import java.util.Vector;
 public class Distributor extends Company
 {
 	
-	Vector <Supply> sellItems;	// Vector of sell items
-	Vector needItems;	// Vector of items needed
+	Vector <SellSupply> sellItems;	// Vector of sell items
+	Vector <NeedSupply> needItems;	// Vector of items needed
 	
 	
 	
 	public Distributor()
 	{
-		sellItems = new Vector<Supply>();
-		needItems = new Vector ();
+		sellItems = new Vector<SellSupply>();
+		needItems = new Vector<NeedSupply>();
 		
-		Supply item1 = new Supply("12","cookie","cosmed",100);
-		Supply item2 = new Supply("11","chocolate","cosmed",20);
+		SellSupply item1 = new SellSupply("12","cookie","cosmed",100,3000);
+		SellSupply item2 = new SellSupply("11","chocolate","cosmed",20,5000);
 		sellItems.add(item1);
 		sellItems.add(item2);
 		
+		NeedSupply item3 = new NeedSupply("12","cookie","7-11",100,3000);
+		NeedSupply item4 = new NeedSupply("11","chocolate","7-11",20,5000);
+		needItems.add(item3);
+		needItems.add(item4);
 		
 		
 	}
 
 	public void addSellItem(SellSupply ss)
 	{
-		Supply item1 = new Supply("12","cookie","cosmed",100);
-		
-		sellItems.add(item1);
-		
 		
 		
 	}
@@ -55,22 +55,25 @@ public class Distributor extends Company
 		returnStr += "</CompanyInfo>";
 
 		returnStr += "<ItemsSold>";
-		
-//		for (int i = 0; i < sellItems.size(); i++)
+		// template
+//		for (int i = 0; i < sellItems.size(); i++) 
 //		returnStr += ((SellSupply)sellItems.elementAt(i)).toXML();
-		
 		for (int i = 0; i < sellItems.size(); i++) {
 			returnStr += (sellItems.get(i)).toXML();
-		    //returnStr += amountAvaiList.get(i).toXML();
+		    
 		}
-		
 		returnStr += "</ItemsSold>";
 
+		
+		returnStr += "<ItemsNeeded>";
+		for (int i = 0; i < needItems.size(); i++) {
+			returnStr += (needItems.get(i)).toXML();
+		    
+		}
+		returnStr += "</ItemsNeeded>";
+		
+		
 		returnStr += "</Distributor>";
-		
-		
-		
-		
 		return returnStr;
 	}
 

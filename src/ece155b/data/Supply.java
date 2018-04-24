@@ -9,10 +9,13 @@ public class Supply // an item with id, name, price, brand
 	public String brand;
 	public double price;
 	
-	Vector <SellSupply> amountAvaiList;
+	//Vector <SellSupply> amountAvaiList;
 	
+	public Supply(){
+		
+	}
 	
-	public  Supply(String id, String name, String brand, double price)
+	public Supply(String id, String name, String brand, double price)
 	{
 		this.ID = id;
 		this.name = name;
@@ -23,15 +26,15 @@ public class Supply // an item with id, name, price, brand
 		
 	}
 	
-	
+	/*
 	public String toXML()
 	{
 		
-		amountAvaiList = new Vector<SellSupply>();
-		SellSupply amountAvai1 = new SellSupply(20);
-		SellSupply amountAvai2 = new SellSupply(50);
-		amountAvaiList.add(amountAvai1);
-		amountAvaiList.add(amountAvai2);
+//		amountAvaiList = new Vector<SellSupply>();
+//		SellSupply amountAvai1 = new SellSupply(20);
+//		SellSupply amountAvai2 = new SellSupply(50);
+//		amountAvaiList.add(amountAvai1);
+//		amountAvaiList.add(amountAvai2);
 		
 		
 
@@ -41,15 +44,15 @@ public class Supply // an item with id, name, price, brand
 		returnstr += "<SupplyName>"+name+"</SupplyName>";
 		returnstr += "<SupplyBrand>"+brand+"</SupplyBrand>";
 		returnstr += "<SupplyPrice>"+price+"</SupplyPrice>";
-		
-		for (int i = 0; i < amountAvaiList.size(); i++) {
-			returnstr += (amountAvaiList.get(i)).toXML();
-		    
-		}
+		//returnstr += SellSupply.toXML();
+//		for (int i = 0; i < amountAvaiList.size(); i++) {
+//			returnstr += amountAvaiList.get(i).toXML();
+//		    
+//		}
 		
 		returnstr += "</Supply>";
 		return returnstr;
-	}
+	}*/
 
 	public String toString()
 	{

@@ -32,8 +32,8 @@ public class XMLParser extends DefaultHandler {
   		//	New SellSupply starts
   		if(name.equals ("SellSupply"))
   		{
-  			//ssupply = new SellSupply();
-			//supply = new Supply();
+  			ssupply = new SellSupply();
+			supply = new Supply();
 			ssupply.supply = supply;
 		}
 		// - - - - - - - - - - - - - - - - - - - - -
@@ -41,7 +41,7 @@ public class XMLParser extends DefaultHandler {
 		else if(name.equals ("NeedSupply"))
   		{
   			nsupply = new NeedSupply();
-  			//supply = new Supply();
+  			supply = new Supply();
 			nsupply.supply = supply;
   		}
   		// - - - - - - - - - - - - - - - - - - - - -
