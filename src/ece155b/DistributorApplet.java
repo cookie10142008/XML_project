@@ -116,10 +116,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    JScrollPane customerScrollPane = new JScrollPane();
      	    customerScrollPane.setBounds(101, 53, 452, 285);
      	    customer_Panel.add(customerScrollPane);
-     	    //建立table
-     	    DefaultTableModel tableM;  
-     	    tableM = new DefaultTableModel(data, headings); 
-     	    JTable customerTable = new JTable(tableM);
+     	    //用DefaultTableModel建立table
+     	    DefaultTableModel custTable;  
+     	    custTable = new DefaultTableModel(data, headings); 
+     	    JTable customerTable = new JTable(custTable);
      	    
  //    	     JTable customerTable = new JTable(data, headings);
      	     customerScrollPane.setViewportView(customerTable);
@@ -239,13 +239,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		tabbedPane.addTab("Provider",providerPanel);
      	     		getContentPane().add(tabbedPane);
      	     		
-//customerTable的表格
      	     
-     	     	customerAddRowBtn.addActionListener(new ActionListener() {		//Add a row ??��??	
+     	     	customerAddRowBtn.addActionListener(new ActionListener() {		//Add a row Button
      	     				public void actionPerformed(ActionEvent arg0) {
      	     					
-     	     					 tableM.addRow(new Vector()); 
-
+     	     					 custTable.addRow(new Vector()); //新增空白一列
      	     				}
      	     			});
      	     	
@@ -253,10 +251,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
              
    			 TableColumnModel cModel = customerTable.getColumnModel();//取得這個table的欄位模型 	
 			 TableColumn columnName = cModel.getColumn(0);  //取得這個table某個欄位的資訊 
-			 columnName.setPreferredWidth(200);  //個別設定偏好的寬度 
-			 
-			 
-			 
+			 columnName.setPreferredWidth(200);  //個別設定偏好的寬度  			 
 			 
 /*			 table_1 = new JTable();
 			 table_1.setBounds(280, 102, 144, 76);
@@ -271,12 +266,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	          table_1 = new JTable(data_1, headings_1);
 				 table_1.setCellSelectionEnabled(true);
 				 table_1.setColumnSelectionAllowed(true);
-				 
-			 
-			 int i = data.length;
-			 int j = data[0].length;
-		
-		
+				 		
 	}
  
 	public void toXmlFile(Distributor dist, String url)
