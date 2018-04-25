@@ -124,8 +124,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 
 			customerTable = new JTable(custTable);// track!!!!!!!!!!!!!!!
      	    customerScrollPane.setViewportView(customerTable);
-     	    customerTable.setCellSelectionEnabled(true);
-     	    customerTable.setColumnSelectionAllowed(true);
 
      	    customerTable.setRowHeight(50); //設定列高度為50		
      	     
@@ -133,9 +131,17 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    customerAddRowBtn.setBounds(114, 371, 140, 31);
      	    customer_Panel.add(customerAddRowBtn);
      	     
-     	    JButton customerDelRowBtn = new JButton("Delete selected rows");
+     	    JButton customerDelRowBtn = new JButton("Delete selected rows"); //custermoTable刪除列
      	    customerDelRowBtn.addActionListener(new ActionListener() {
      	    	public void actionPerformed(ActionEvent arg0) {
+     	    		int i = customerTable.getSelectedRow();
+     	    		
+     	    		if (i >= 0){
+     	    			custTable.removeRow(i);
+     	    		}
+     	    		else{
+     	    			JOptionPane.showMessageDialog(null, "Unable to Delete");
+     	    		}     	    		
      	     	}
      	     });
      	     customerDelRowBtn.setBounds(337, 371, 243, 31);
@@ -209,11 +215,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    JTable providerTable = new JTable(provTable);     	    
      	    customerScrollPane.setViewportView(customerTable);
      	    providerScrollPane.setViewportView(providerTable);
-     	    providerTable.setCellSelectionEnabled(true);
-     	    providerTable.setColumnSelectionAllowed(true);
      	     		
-     	    providerTable.setRowHeight(50); //設定列高度為50	
-     	     		
+     	    providerTable.setRowHeight(50); //設定列高度為50
+     	    
+     	 	
      	    JButton pro_addRowBtn = new JButton("Add a row"); //providerTable的Add a row按鈕 
      	    pro_addRowBtn.addActionListener(new ActionListener() {
      	    	public void actionPerformed(ActionEvent e) {
@@ -226,14 +231,23 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
      	    pro_delRowBtn.addActionListener(new ActionListener() {
      	    	public void actionPerformed(ActionEvent e) {
-     	    		DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
+     	    		
+     	    		int i = providerTable.getSelectedRow();
+     	    		
+     	    		if (i >= 0){
+     	    			provTable.removeRow(i);
+     	    		}
+     	    		else{
+     	    			JOptionPane.showMessageDialog(null, "Unable to Delete");
+     	    		}
+     	  /*  		DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
      	    		
      	    		try{
      	    		int SelectedRowIndex = customerTable.getSelectedRow();
      	    		model.removeRow(SelectedRowIndex);
      	    		}catch (Exception ex){
      	    			JOptionPane.showMessageDialog(null,  ex);
-     	    		}
+     	    		} */
      	    	}
      	    });
      	    pro_delRowBtn.setBounds(337, 371, 243, 31);
