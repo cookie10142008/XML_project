@@ -7,6 +7,7 @@ package ece155b;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -20,6 +21,7 @@ import ece155b.xml.XMLParser;
 import javax.xml.parsers.*;
 import java.io.*;
 import java.util.Enumeration;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
@@ -114,7 +116,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    customerScrollPane.setBounds(101, 53, 452, 285);
      	    customer_Panel.add(customerScrollPane);
      	    //建立table
-     	     JTable customerTable = new JTable(data, headings);
+     	    DefaultTableModel tableM;  
+     	    tableM = new DefaultTableModel(data, headings); 
+     	    JTable customerTable = new JTable(tableM);
+     	    
+ //    	     JTable customerTable = new JTable(data, headings);
      	     customerScrollPane.setViewportView(customerTable);
      	     customerTable.setCellSelectionEnabled(true);
      	     customerTable.setColumnSelectionAllowed(true);
@@ -200,6 +206,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		providerTable.setCellSelectionEnabled(true);
      	     		providerTable.setColumnSelectionAllowed(true);
      	     		
+     	     		providerTable.setRowHeight(50); //設定列高度為50	
+     	     		
      	     		JButton pro_addRowBtn = new JButton("Add a row");
      	     		pro_addRowBtn.setBounds(114, 371, 140, 31);
      	     		providerPanel.add(pro_addRowBtn);
@@ -232,21 +240,13 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		tabbedPane.addTab("Provider",providerPanel);
      	     		getContentPane().add(tabbedPane);
      	     		
-     	     		
-     //新增
-     	     		
-     	     		
+//customerTable的表格
      	     
      	     	customerAddRowBtn.addActionListener(new ActionListener() {		//Add a row ??��??	
      	     				public void actionPerformed(ActionEvent arg0) {
-     	     				/*	data[i+1][0] = " ";
-     	     					data[i+1][1] = " ";
-     	     					data[i+1][2] = " "; */ 
-     	     					 Object[][] data = new Object[][] {
-     	     			             {"1","井�?�全","交�?�大�? "},
-     	     			             {"2","小山","清華大學 "},
-     	     			             {" ", " ", " "}
-     	     			             };  
+     	     					
+     	     					 tableM.addRow(new Vector()); 
+
      	     				}
      	     			});
      	     	
