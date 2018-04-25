@@ -40,6 +40,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
     Distributor distributor;
     String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to (under bin dir)
     Container content = getContentPane();
+    public JTextField textField_companyName, textField_contactMe, textField_address;
+    
     
     public void init()
     {
@@ -81,24 +83,21 @@ public class DistributorApplet extends JApplet implements ActionListener{
     //destructor that writes the doctor object to file before closing
         System.out.println("...closing "+fileurl);
         
-        String fileUrl = "Distributor.xml";
-        Distributor dist = new Distributor();
-    	dist.name = "The company success";
-    	dist.address = "Address";
-    	dist.contact = "Contact me at 9 night a.m.";
-        System.out.println("123");
-    	toXmlFile(dist,fileUrl);
-    	
+//        String fileUrl = "Distributor.xml";
+//        Distributor dist = new Distributor();
+//    	dist.name = textField_companyName.getText();
+//    	dist.address = textField_contactMe.getText();
+//    	dist.contact = textField_address.getText();
+//    	toXmlFile(dist,fileUrl);
+    	//System.out.println(textField_companyName.getText());
         //Company company = new Company();
     }
 
 
 	public void makeGUI(){
 		
-		JTextField textField_companyName, textField_contactMe, textField_address;
+		
 		JTable table_1;
-		
-		
 		
 	     String [] headings= new String[] {"Item Type","Price","Available"}; //Item Sold
 	     //customerTable的資料
@@ -225,10 +224,12 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		JButton btnSaveInformation = new JButton("Save Information");
      	     		btnSaveInformation.setBounds(126, 723, 234, 31);
      	     		getContentPane().add(btnSaveInformation);
+     	     		btnSaveInformation.addActionListener(this);
      	     		
      	     		JButton btnLoadInformation = new JButton("Load Information");
      	     		btnLoadInformation.setBounds(426, 723, 234, 31);
      	     		getContentPane().add(btnLoadInformation);
+     	     		btnLoadInformation.addActionListener(this);
      	     		
      	     		// tab to transfer between panels
      	     		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -292,8 +293,28 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	 
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e){
-
+		switch(e.getActionCommand()){
+        	
+			case "Save Information":
+				System.out.println("save info");
+				
+				 String fileUrl = "Distributor.xml";
+			        Distributor dist = new Distributor();
+			    	dist.name = textField_companyName.getText();
+			    	dist.address = textField_contactMe.getText();
+			    	dist.contact = textField_address.getText();
+			    	toXmlFile(dist,fileUrl);
+				
+				
+				break;
+				
+			case "Load Information":
+				System.out.println("load info");
+				break;
+	                
+		}
 		
 		 
 		
