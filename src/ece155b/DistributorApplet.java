@@ -102,6 +102,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	     //customerTable的資料
 	     Object[][] data = new Object[][] {
 	    	 {"","",""},
+	    	 {"Item X","50.5","300"},
+             {"Item Y","42.2","200"}
              }; 
              
             JPanel customer_Panel = new JPanel();
@@ -113,7 +115,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    JScrollPane customerScrollPane = new JScrollPane();
      	    customerScrollPane.setBounds(101, 53, 452, 285);
      	    customer_Panel.add(customerScrollPane);
-     	    //用DefaultTableModel建立table
+     	    //用DefaultTableModel建立customerTable
      	    DefaultTableModel custTable;  
      	    custTable = new DefaultTableModel(data, headings); 
      	    JTable customerTable = new JTable(custTable);    	    
@@ -196,7 +198,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    JScrollPane providerScrollPane = new JScrollPane();
      	    providerScrollPane.setBounds(101, 53, 452, 285);
      	    providerPanel.add(providerScrollPane);
-     	    //用DefaultTableModel建立table
+     	    
+     	    //用DefaultTableModel建立providerTable
      	    DefaultTableModel provTable;  
      	    provTable = new DefaultTableModel(data1, headings1); 
      	    JTable providerTable = new JTable(provTable);     	    
@@ -216,7 +219,19 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    pro_addRowBtn.setBounds(114, 371, 140, 31);
      	    providerPanel.add(pro_addRowBtn);
      	     		
-     	    JButton pro_delRowBtn = new JButton("Delete selected rows");
+     	    JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
+     	    pro_delRowBtn.addActionListener(new ActionListener() {
+     	    	public void actionPerformed(ActionEvent e) {
+     	    		DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
+     	    		
+     	    		try{
+     	    		int SelectedRowIndex = customerTable.getSelectedRow();
+     	    		model.removeRow(SelectedRowIndex);
+     	    		}catch (Exception ex){
+     	    			JOptionPane.showMessageDialog(null,  ex);
+     	    		}
+     	    	}
+     	    });
      	    pro_delRowBtn.setBounds(337, 371, 243, 31);
      	    providerPanel.add(pro_delRowBtn);
      	    		
