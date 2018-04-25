@@ -29,7 +29,6 @@ import javax.swing.border.LineBorder;
  */
 public class DistributorApplet extends JApplet implements ActionListener{
 	public DistributorApplet() {
-		// test
 	}
 
   /* You will definitely have more functions below,
@@ -98,22 +97,9 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		JTable table_1;
 		
 		
-/*		table = new JTable();
-		table.setBounds(27, 113, 177, 70);
-		frame.getContentPane().add(table);
 		
-		
-		JTableModel = new DefaultTableModel();
-		createTableModel();
-		table.setModel(JTableModel); */
-		
-	     String [] headings= new String[] {"Item Type","Price","Available"};
-
-	     // Step 2: ??��?��?�顯示在表格中�?��?��??
-	      /*   Object[][] data = new Object[][] {
-	                    {"1",Boolean.FALSE,"井�?�全","交�?�大�? ","02/06/2000",new Float(1)},
-	                    {"2",Boolean.TRUE,"小山","清華大學 ","02/07/2000",new Float(2)}
-	                    }; */
+	     String [] headings= new String[] {"Item Type","Price","Available"}; //Item Sold
+	     //customerTable的資料
 	     Object[][] data = new Object[][] {
              {"Item X","50.5","300"},
              {"Item Y","42.2","200"}
@@ -128,8 +114,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    JScrollPane customerScrollPane = new JScrollPane();
      	    customerScrollPane.setBounds(101, 53, 452, 285);
      	    customer_Panel.add(customerScrollPane);
-     	    // Step 3: 建�?? Table
-     	     //   javax.swing.JTable table=new javax.swing.JTable(data,headings);
+     	    //建立table
      	     JTable customerTable = new JTable(data, headings);
      	     customerScrollPane.setViewportView(customerTable);
      	     customerTable.setCellSelectionEnabled(true);
@@ -193,6 +178,14 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		textField_address.setBounds(539, 55, 136, 29);
      	     		companyPanel.add(textField_address);
      	     		
+     	     		String [] headings1 = new String[] {"Item Type", "Required"}; //Item Needed
+     			   //providerTable的資料
+     			Object[][] data1 = new Object[][]{
+     				{"Item X", "250"},
+     				{"Item Y", "300"}
+     			};
+     	     		
+     	     		
      	     		JPanel providerPanel = new JPanel();
      	     		providerPanel.setLayout(null);
      	     		providerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
@@ -202,6 +195,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		JScrollPane providerScrollPane = new JScrollPane();
      	     		providerScrollPane.setBounds(101, 53, 452, 285);
      	     		providerPanel.add(providerScrollPane);
+     	     		//建立providerTable
+     	     		JTable providerTable = new JTable(data1, headings1);
+     	     		providerScrollPane.setViewportView(providerTable);
+     	     		providerTable.setCellSelectionEnabled(true);
+     	     		providerTable.setColumnSelectionAllowed(true);
      	     		
      	     		JButton pro_addRowBtn = new JButton("Add a row");
      	     		pro_addRowBtn.setBounds(114, 371, 140, 31);
