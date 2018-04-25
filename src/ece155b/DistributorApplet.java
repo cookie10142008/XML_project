@@ -116,9 +116,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    //用DefaultTableModel建立table
      	    DefaultTableModel custTable;  
      	    custTable = new DefaultTableModel(data, headings); 
-     	    JTable customerTable = new JTable(custTable);
-     	    
- //    	     JTable customerTable = new JTable(data, headings);
+     	    JTable customerTable = new JTable(custTable);    	    
      	    customerScrollPane.setViewportView(customerTable);
      	    customerTable.setCellSelectionEnabled(true);
      	    customerTable.setColumnSelectionAllowed(true);
@@ -198,8 +196,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    JScrollPane providerScrollPane = new JScrollPane();
      	    providerScrollPane.setBounds(101, 53, 452, 285);
      	    providerPanel.add(providerScrollPane);
-     	    //建立providerTable
-     	    JTable providerTable = new JTable(data1, headings1);
+     	    //用DefaultTableModel建立table
+     	    DefaultTableModel provTable;  
+     	    provTable = new DefaultTableModel(data1, headings1); 
+     	    JTable providerTable = new JTable(provTable);     	    
+     	    customerScrollPane.setViewportView(customerTable);
      	    providerScrollPane.setViewportView(providerTable);
      	    providerTable.setCellSelectionEnabled(true);
      	    providerTable.setColumnSelectionAllowed(true);
@@ -209,7 +210,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    JButton pro_addRowBtn = new JButton("Add a row"); //providerTable的Add a row按鈕 
      	    pro_addRowBtn.addActionListener(new ActionListener() {
      	    	public void actionPerformed(ActionEvent e) {
- //   				provTable.addRow(new Vector()); //新增空白一列    
+    				provTable.addRow(new Vector()); //新增空白一列    
      	    	}
      	     		});
      	    pro_addRowBtn.setBounds(114, 371, 140, 31);
@@ -254,17 +255,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
    			TableColumnModel cModel = customerTable.getColumnModel();//取得這個table的欄位模型 	
 			TableColumn columnName = cModel.getColumn(0);  //取得這個table某個欄位的資訊 
 			columnName.setPreferredWidth(200);  //個別設定偏好的寬度  			 
-			 
-			 
-			String [] headings_1= new String[] {"Item Type","Required"};
-			Object[][] data_1 = new Object[][] {
-		             {"Item X", "250"},
-		             {"Item X", "400"}
-		             };
-		    JTable table_1;       
-	        table_1 = new JTable(data_1, headings_1);
-			table_1.setCellSelectionEnabled(true);
-			table_1.setColumnSelectionAllowed(true);
 				 		
 	}
  
