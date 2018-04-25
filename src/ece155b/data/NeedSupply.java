@@ -4,7 +4,7 @@ public class NeedSupply extends Supply// item needed from providers (provider gi
 {
 	public Supply supply;
 	public int amountNeeded;
-
+	//test
 	public NeedSupply(){
 		
 	}
