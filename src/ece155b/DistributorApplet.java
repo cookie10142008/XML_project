@@ -122,7 +122,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    DefaultTableModel custTable;  
      	    custTable = new DefaultTableModel(data, headings); 
 
-			JTable customerTable = new JTable(custTable);// track!!!!!!!!!!!!!!!
+			customerTable = new JTable(custTable);// track!!!!!!!!!!!!!!!
      	    customerScrollPane.setViewportView(customerTable);
      	    customerTable.setCellSelectionEnabled(true);
      	    customerTable.setColumnSelectionAllowed(true);
