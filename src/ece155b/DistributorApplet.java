@@ -84,7 +84,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
     	dist.name = "The company success";
     	dist.address = "Address";
     	dist.contact = "Contact me at 9 night a.m.";
-        
+        System.out.println("123");
     	toXmlFile(dist,fileUrl);
     	
         //Company company = new Company();
