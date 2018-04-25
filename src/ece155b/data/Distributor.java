@@ -15,9 +15,9 @@ public class Distributor extends Company
 		sellItems = new Vector<SellSupply>();
 		needItems = new Vector<NeedSupply>();
 		
-		SellSupply item1 = new SellSupply("12","cookie","cosmed",100,3000);
+		//SellSupply item1 = new SellSupply("12","cookie","cosmed",100,3000);
 		SellSupply item2 = new SellSupply("11","chocolate","cosmed",20,5000);
-		sellItems.add(item1);
+		//sellItems.add(item1);
 		sellItems.add(item2);
 		
 		NeedSupply item3 = new NeedSupply("12","cookie","7-11",100,3000);
@@ -28,9 +28,9 @@ public class Distributor extends Company
 		
 	}
 
-	public void addSellItem(SellSupply ss)
+	public void addSellItem(SellSupply item)
 	{
-		
+		sellItems.add(item);
 		
 	}
 

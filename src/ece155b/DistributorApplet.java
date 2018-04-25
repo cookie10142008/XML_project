@@ -37,11 +37,14 @@ public class DistributorApplet extends JApplet implements ActionListener{
    * such as reading/writing XML files, GUI parts,
    * mouse/action event listeners...
    */
-    Distributor distributor;
-    String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to (under bin dir)
-    Container content = getContentPane();
-    public JTextField textField_companyName, textField_contactMe, textField_address;
     
+    String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to (under bin dir)
+    //
+    Distributor dist = new Distributor();
+    //GUI
+    Container content = getContentPane();
+    private JTextField textField_companyName, textField_contactMe, textField_address;
+    private JTable customerTable;
     
     public void init()
     {
@@ -118,7 +121,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    //用DefaultTableModel建立table
      	    DefaultTableModel custTable;  
      	    custTable = new DefaultTableModel(data, headings); 
-     	    JTable customerTable = new JTable(custTable);
+     	    customerTable = new JTable(custTable);// track!!!!!!!!!!!!!!!
      	    
  //    	     JTable customerTable = new JTable(data, headings);
      	     customerScrollPane.setViewportView(customerTable);
@@ -300,14 +303,61 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			case "Save Information":
 				System.out.println("save info");
 				
-				 String fileUrl = "Distributor.xml";
-			        Distributor dist = new Distributor();
-			    	dist.name = textField_companyName.getText();
-			    	dist.address = textField_contactMe.getText();
-			    	dist.contact = textField_address.getText();
-			    	toXmlFile(dist,fileUrl);
+//				SellSupply item1 = new SellSupply("12","coke","cosco",100,3);
+//    			dist.addSellItem(item1);
 				
-				
+    			String fileUrl = "Distributor.xml";
+		        
+		    	dist.name = textField_companyName.getText();
+		    	dist.address = textField_contactMe.getText();
+		    	dist.contact = textField_address.getText();
+//		    	toXmlFile(dist,fileUrl);
+			    
+		    	
+		    	int row = customerTable.getRowCount(); //get Row Count = 5
+		        int col = customerTable.getColumnCount();  //get Column Count = 5
+		        String id="", name="", brand="";
+		        double price = 0;
+		        int count = 0;
+		        //System.out.println("col欄位數:"+col+"; row列數:"+row);
+		            
+		        for(int i = 0; row > i; i++){   //from first row to last row
+		        	for(int j = 0; col > j; j++){  //row1: from first column to last column
+		        		
+		        		switch(j) {
+		        			case 0:
+		        				id = (String) customerTable.getValueAt(i, j);
+		        				break;
+		        				
+		        			case 1:
+		        				name = (String) customerTable.getValueAt(i, j);
+		        				break;
+		        				
+		        			case 2:
+		        				brand = (String) customerTable.getValueAt(i, j);
+		        				break;
+		        			
+		        			case 3:
+		        				price  =  (double) customerTable.getValueAt(i, j);
+		        				break;
+		        			
+		        			case 4:
+		        				count = (int) customerTable.getValueAt(i, j);
+		        				break;
+		        			
+		        		}
+		        		
+		        		
+		        	}
+		        	
+		        	//SellSupply item = new SellSupply("12","coke","cosco",100,3);
+		        	SellSupply item = new SellSupply(id,name,brand,price,count);
+        			dist.addSellItem(item);   // problem:  repeat to add item 
+		        	
+		        	
+		        }
+		        
+		        toXmlFile(dist,fileUrl);				
 				break;
 				
 			case "Load Information":
