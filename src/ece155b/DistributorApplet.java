@@ -232,6 +232,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		getContentPane().add(tabbedPane);
      	     		
      	     		
+     //新增
      	     		
      	     		
      	     
@@ -247,6 +248,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     			             };  
      	     				}
      	     			});
+     	     	
+     	     	System.out.println("測試");
              
    			 TableColumnModel cModel = customerTable.getColumnModel();//取得這個table的欄位模型 	
 			 TableColumn columnName = cModel.getColumn(0);  //取得這個table某個欄位的資訊 
