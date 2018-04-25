@@ -29,7 +29,7 @@ import javax.swing.border.LineBorder;
  */
 public class DistributorApplet extends JApplet implements ActionListener{
 	public DistributorApplet() {
-		
+		// test
 	}
 
   /* You will definitely have more functions below,
