@@ -379,6 +379,15 @@ public class DistributorApplet extends JApplet implements ActionListener{
 				
 			case "Load Information":
 				System.out.println("load info");
+				
+				JFileChooser fileChooser = new JFileChooser();//declare filechooser 
+				int returnValue = fileChooser.showOpenDialog(null);//call filechooser 
+				if (returnValue == JFileChooser.APPROVE_OPTION) //choosing file or not 
+				{ 
+					File selectedFile = fileChooser.getSelectedFile();//assign to File 
+					System.out.println(selectedFile.getName()); //print file name 
+				} 
+				
 				break;
 	                
 		}
