@@ -5,8 +5,8 @@ import java.util.Vector;
 public class Distributor extends Company
 {
 	
-	Vector <SellSupply> sellItems;	// Vector of sell items
-	Vector <NeedSupply> needItems;	// Vector of items needed
+	public Vector <SellSupply> sellItems;	// Vector of sell items
+	public Vector <NeedSupply> needItems;	// Vector of items needed
 	
 	
 	

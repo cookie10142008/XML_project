@@ -39,7 +39,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
    */
     
     String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to (under bin dir)
-    //
+    // new two item lists(sellsupply &　needsupply)
     Distributor dist = new Distributor();
     //GUI
     Container content = getContentPane();
@@ -121,7 +121,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	 //用DefaultTableModel建立customerTable
      	 DefaultTableModel custTable;  
      	 custTable = new DefaultTableModel(data, headings); 
-     	 customerTable = new JTable(custTable);// track!!!!!!!!!!!!!!!
+     	 customerTable = new JTable(custTable);
      	 customerScrollPane.setViewportView(customerTable);
 
      	 customerTable.setRowHeight(50); //設定列高度為50		
@@ -319,7 +319,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
         	
 			case "Save Information":
 				System.out.println("save info");
-				
+				dist.sellItems.removeAllElements(); // remove all items in vector sellItems
 //				SellSupply item1 = new SellSupply("12","coke","cosco",100,3);
 //    			dist.addSellItem(item1);
 				
@@ -367,9 +367,9 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        		
 		        	}
 		        	
-		        	//SellSupply item = new SellSupply("12","coke","cosco",100,3);
+		        	// new SellSupply("12","coke","cosco",100,3);
 		        	SellSupply item = new SellSupply(id,name,brand,price,count);
-        			dist.addSellItem(item);   // problem:  repeat to add item 
+        			dist.addSellItem(item);   
 		        	
 		        	
 		        }
@@ -380,12 +380,17 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			case "Load Information":
 				System.out.println("load info");
 				
-				JFileChooser fileChooser = new JFileChooser();//declare filechooser 
-				int returnValue = fileChooser.showOpenDialog(null);//call filechooser 
+				JFileChooser fileChooser = new JFileChooser();//declare file chooser 
+				int returnValue = fileChooser.showOpenDialog(null);//call file chooser 
 				if (returnValue == JFileChooser.APPROVE_OPTION) //choosing file or not 
 				{ 
-					File selectedFile = fileChooser.getSelectedFile();//assign to File 
+					File selectedFile = fileChooser.getSelectedFile();//get file & assign to File 
+					
+					
 					System.out.println(selectedFile.getName()); //print file name 
+					
+					
+					
 				} 
 				
 				break;
