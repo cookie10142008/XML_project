@@ -101,17 +101,17 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		
 		
 		
-	     String [] headings= new String[] {"Item Type","Price","Available"}; //Item Sold
+	     String [] headings= new String[] {"ID","Name","Item Type","Price","Available"}; //Item Sold
 	     //customerTable的資料
 	     Object[][] data = new Object[][] {
-	    	 {"","",""},
-	    	 {"Item X","50.5","300"},
-             {"Item Y","42.2","200"}
+	    	 {"","","","",""},
+	    	 //{"Item X","50.5","300"},
+             //{"Item Y","42.2","200"}
              }; 
              
          JPanel customer_Panel = new JPanel();
          customer_Panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-     	 customer_Panel.setBounds(15, 229, 685, 450);
+     	 customer_Panel.setBounds(15, 229, 685, 600);
      	 //content.add(customer_Panel);
      	 customer_Panel.setLayout(null);
      	    
@@ -119,8 +119,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	    customerScrollPane.setBounds(101, 53, 452, 285);
      	 customer_Panel.add(customerScrollPane);
      	 //用DefaultTableModel建立customerTable
-     	 DefaultTableModel custTable;  
-     	 custTable = new DefaultTableModel(data, headings); 
+    
+     	 DefaultTableModel custTable = new DefaultTableModel(data, headings); 
      	 customerTable = new JTable(custTable);
      	 customerScrollPane.setViewportView(customerTable);
 
@@ -269,10 +269,21 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	     		
      	 // tab to transfer between panels
      	 JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-     	 tabbedPane.setBounds(0, 0, 1200, 500);
+     	 tabbedPane.setBounds(0, 0, 1000, 700);
      	 //JPanel panel = new JPanel();
      	 tabbedPane.addTab("Company",companyPanel);
      	 tabbedPane.addTab("Customer",customer_Panel);
+     	 
+     	 JTextArea txtarea_PressEnter = new JTextArea();
+     	 txtarea_PressEnter.setForeground(Color.BLUE);
+     	 txtarea_PressEnter.setBackground(Color.LIGHT_GRAY);
+     	 txtarea_PressEnter.setWrapStyleWord(true);
+     	 txtarea_PressEnter.setLineWrap(true);
+     	 txtarea_PressEnter.setFont(new Font("新細明體", Font.BOLD, 25));
+     	 txtarea_PressEnter.setEditable(false);
+     	 txtarea_PressEnter.setText("please press enter after finishing to edit info in table(make sure to leave the editting situation)");
+     	 txtarea_PressEnter.setBounds(101, 442, 471, 133);
+     	 customer_Panel.add(txtarea_PressEnter);
      	 tabbedPane.addTab("Provider",providerPanel);
      	 getContentPane().add(tabbedPane);
      	     		
@@ -316,7 +327,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e){
 		switch(e.getActionCommand()){
-        	
+        	// !!! problem: no blank row + row can't be in typing situation 
 			case "Save Information":
 				System.out.println("save info");
 				dist.sellItems.removeAllElements(); // remove all items in vector sellItems
@@ -355,11 +366,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				break;
 		        			
 		        			case 3:
-		        				price  =  (double) customerTable.getValueAt(i, j);
+		        				price  =  Double.parseDouble((String) customerTable.getValueAt(i, j));
 		        				break;
 		        			
 		        			case 4:
-		        				count = (int) customerTable.getValueAt(i, j);
+		        				count = Integer.parseInt((String) customerTable.getValueAt(i, j));
 		        				break;
 		        			
 		        		}
