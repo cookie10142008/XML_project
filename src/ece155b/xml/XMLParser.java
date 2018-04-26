@@ -4,6 +4,9 @@ import ece155b.data.Distributor;
 import ece155b.data.SellSupply;
 import ece155b.data.NeedSupply;
 import ece155b.data.Supply;
+
+import java.io.File;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.*;
@@ -16,8 +19,11 @@ public class XMLParser extends DefaultHandler {
     private Supply supply;
     private StringBuffer accumulator = new StringBuffer();    
     
-    public XMLParser() {
+    public XMLParser() /*throws ParserConfigurationException, SAXException*/{
       distributor = new Distributor();
+      
+		/*SAXParserFactory factory = SAXParserFactory.newInstance();
+		SAXParser saxParser = factory.newSAXParser(); */
     }
     public void characters(char[] buffer, int start, int length) {
         accumulator.append(buffer, start, length);
@@ -35,6 +41,9 @@ public class XMLParser extends DefaultHandler {
   			ssupply = new SellSupply();
 			supply = new Supply();
 			ssupply.supply = supply;
+			
+/*			String tag = name;
+			System.out.println(tag); */
 		}
 		// - - - - - - - - - - - - - - - - - - - - -
 		//	New NeedSupply starts
@@ -69,4 +78,7 @@ public class XMLParser extends DefaultHandler {
   		else if(name.equals ("SupplyID"))
   			supply.ID = value;
 	}
+  	
+/*	File savefile = new File("hello.xml");
+	saxParser.parse(savefile handler); */	
 }
