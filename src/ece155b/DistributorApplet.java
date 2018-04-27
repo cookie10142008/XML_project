@@ -19,6 +19,9 @@ import ece155b.data.SellSupply;
 import ece155b.data.NeedSupply;
 import ece155b.xml.XMLParser;
 import javax.xml.parsers.*;
+
+import org.xml.sax.SAXException;
+
 import java.io.*;
 import java.util.Enumeration;
 import java.util.Vector;
@@ -43,8 +46,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
     public Distributor dist = new Distributor();
     //GUI
     Container content = getContentPane();
-    private JTextField textField_companyName, textField_contactMe, textField_address;
-    private JTable customerTable;
+    public static JTextField textField_companyName, textField_contactMe, textField_address;
+    public JTable customerTable;
     
     public void init()
     {
@@ -409,12 +412,27 @@ public class DistributorApplet extends JApplet implements ActionListener{
 					File selectedFile = fileChooser.getSelectedFile();//get file & assign to File 
 					
 					
-					System.out.println(selectedFile.getName()); //print file name 				
+					System.out.println(selectedFile.getName() +"  " + selectedFile.getAbsolutePath()); //print file name & path				
+					//XMLParser xmlParser = new XMLParser(dist,selectedFile);
+					XMLParser xmlParser = new XMLParser();
+					
+					try {
+						xmlParser.readXmlFile(selectedFile.getAbsolutePath()); // transfer file to parse
+						
+					} catch (SAXException | IOException | ParserConfigurationException e1) {
+						
+						e1.printStackTrace();
+					}
 					
 					
 				} 
 				
-				XMLParser xmlParser = new XMLParser(dist);
+				
+				
+				
+				
+				
+				
 				
 				break;
 	                
