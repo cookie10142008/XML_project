@@ -17,13 +17,14 @@ public class XMLParser extends DefaultHandler {
     private SellSupply ssupply;
     private NeedSupply nsupply;
     private Supply supply;
-    private StringBuffer accumulator = new StringBuffer();    
+    private StringBuffer accumulator = new StringBuffer();  
+
     
     public XMLParser() /*throws ParserConfigurationException, SAXException*/{
       distributor = new Distributor();
       
-		/*SAXParserFactory factory = SAXParserFactory.newInstance();
-		SAXParser saxParser = factory.newSAXParser(); */
+/*		SAXParserFactory factory = SAXParserFactory.newInstance();
+		SAXParser saxParser = factory.newSAXParser();  */
     }
     public void characters(char[] buffer, int start, int length) {
         accumulator.append(buffer, start, length);
@@ -78,7 +79,7 @@ public class XMLParser extends DefaultHandler {
   		else if(name.equals ("SupplyID"))
   			supply.ID = value;
 	}
-  	
-/*	File savefile = new File("hello.xml");
-	saxParser.parse(savefile handler); */	
+	
+/*	File savefile = new File("hello.xml"); 
+	saxParser.parse(savefile, handler); */
 }

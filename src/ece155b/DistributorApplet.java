@@ -258,7 +258,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	 providerPanel.add(labelItemsNeeded);
      	     		
      	 JButton btnSaveInformation = new JButton("Save Information");
-     	 btnSaveInformation.setBounds(126, 723, 234, 31);
+     	 btnSaveInformation.setBounds(125, 723, 234, 31);
      	 getContentPane().add(btnSaveInformation);
      	 btnSaveInformation.addActionListener(this);
      	     
