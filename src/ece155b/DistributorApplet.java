@@ -47,11 +47,9 @@ public class DistributorApplet extends JApplet implements ActionListener{
     //GUI
     Container content = getContentPane();
     public static JTextField textField_companyName, textField_contactMe, textField_address;
-    
-    
-    public static JTable providerTable;
-    
+
     public static JTable customerTable;
+
     
     public void init()
     {
@@ -231,7 +229,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		//用DefaultTableModel建立providerTable
 		DefaultTableModel provTable;  
 		provTable = new DefaultTableModel(data1, headings1); 
-		JTable providerTable = new JTable(provTable);     	    
+		providerTable = new JTable(provTable);     	    
 		customerScrollPane.setViewportView(customerTable);
 		providerScrollPane.setViewportView(providerTable);
 
@@ -359,18 +357,22 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		    	dist.contact = textField_address.getText();
 //		    	toXmlFile(dist,fileUrl);
 			    
+//		    	int provRow = providerTable.getRowCount(); //get Row Count = 5
+//		    	int provCol = providerTable.getColumnCount();  //get Column Count = 5;
 		    	
-		    	int row = customerTable.getRowCount(); //get Row Count = 5
-		        int col = customerTable.getColumnCount();  //get Column Count = 5
+		    	int custRow = customerTable.getRowCount(); //get Row Count = 5
+		        int custCol = customerTable.getColumnCount();  //get Column Count = 5
 		        String id="", name="", brand="";
 		        double price = 0;
 		        int count = 0;
 //		        System.out.println("col欄位數:"+col+"; row列數:"+row);
-		       
+		        		       
 		            
-		        for(int i = 0; row > i; i++){   //from first row to last row
-		        	for(int j = 0; col > j; j++){  //row1: from first column to last column
+		        for(int i = 0; custRow >= i; i++){   //from first row to last row
+		        	for(int j = 0; custCol >= j; j++){  //row1: from first column to last column
+//		        		System.out.println("col欄位數:"+j+"; row列數:"+i);
 		        		System.out.println("col欄位數:"+j+"; row列數:"+i);
+		        		System.out.println("getrowcount:"+custRow+"; colcount:"+custCol);
 		        		if ((String) customerTable.getValueAt(i, j) != ""){		        			
 		        			switch(j) {
 		        			case 0:
@@ -408,10 +410,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
 		        				}
 //		        				count = Integer.parseInt((String) customerTable.getValueAt(i, j));
-//		        				break;
+		        				break;
 		        			
 		        		}
-		        			}else{
+		        			}else {
 		        				/*switch(j){
 		        				case 0:
 			        				JOptionPane.showMessageDialog(null, "ID第"+ String.valueOf(i+1) +"行未填寫");
@@ -430,6 +432,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        					break;
 		        				} */
 		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行第"+ String.valueOf(j+1) +"列空白");
+		        				System.out.println("col欄位數:"+j+"; row列數:"+i);
 //			        			break;
 		        			} 
 	        		
@@ -439,7 +442,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        	SellSupply item = new SellSupply(id,name,brand,price,count);
         			dist.addSellItem(item);         	
 		        	
-		        }
+		        }  
 		        
 		        toXmlFile(dist,fileUrl);				
 				break;
