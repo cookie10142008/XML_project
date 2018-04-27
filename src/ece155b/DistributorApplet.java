@@ -100,204 +100,215 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	public void makeGUI(){
 		
 		
-		
-	     String [] headings= new String[] {"ID","Name","Item Type","Price","Available"}; //Item Sold
-	     //customerTable的資料
-	     Object[][] data = new Object[][] {
-	    	 {"","","","",""},
-	    	 //{"Item X","50.5","300"},
-             //{"Item Y","42.2","200"}
-             }; 
-             
-         JPanel customer_Panel = new JPanel();
-         customer_Panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-     	 customer_Panel.setBounds(15, 229, 685, 600);
-     	 //content.add(customer_Panel);
-     	 customer_Panel.setLayout(null);
-     	    
-     	 JScrollPane customerScrollPane = new JScrollPane();
-     	    customerScrollPane.setBounds(101, 53, 452, 285);
-     	 customer_Panel.add(customerScrollPane);
-     	 //用DefaultTableModel建立customerTable
-    
-     	 DefaultTableModel custTable = new DefaultTableModel(data, headings); 
-     	 customerTable = new JTable(custTable);
-     	 customerScrollPane.setViewportView(customerTable);
+		//
+		String[] headings = new String[] { "ID", "Name", "Item Type", "Price", "Available" }; // Item Sold
+		// customerTable的資料
+		Object[][] data = new Object[][] { 
+			{ "", "", "", "", "" },
+			// {"Item X","50.5","300"},
+			// {"Item Y","42.2","200"}
+		};
 
-     	 customerTable.setRowHeight(50); //設定列高度為50		
-     	     
-     	 JButton customerAddRowBtn = new JButton("Add a row");
-     	 customerAddRowBtn.setBounds(114, 371, 140, 31);
-     	 customer_Panel.add(customerAddRowBtn);
+		JPanel customer_Panel = new JPanel();
+		customer_Panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		customer_Panel.setBounds(15, 229, 685, 600);
+		//content.add(customer_Panel);
+		customer_Panel.setLayout(null);
      	    
-     	 JButton customerDelRowBtn = new JButton("Delete selected rows"); //custermoTable刪除列
-     	 customerDelRowBtn.addActionListener(new ActionListener() {
-     	   	public void actionPerformed(ActionEvent arg0) {
-     	   		int i = customerTable.getSelectedRow();
-     	    		
-     	   		if (i >= 0){
-     	    			custTable.removeRow(i);
-     	   		}
-     	  		else{
-     	    			JOptionPane.showMessageDialog(null, "Unable to Delete");
-     	    		}     	    		
-     	     	}
-     	     });
-     	 customerDelRowBtn.setBounds(337, 371, 243, 31);
-     	 customer_Panel.add(customerDelRowBtn);
-     	     
+		JScrollPane customerScrollPane = new JScrollPane();
+		customerScrollPane.setBounds(101, 53, 650, 285);
+		customer_Panel.add(customerScrollPane);
+		//用DefaultTableModel建立customerTable
+
+		DefaultTableModel custTable = new DefaultTableModel(data, headings); 
+		customerTable = new JTable(custTable);
+		customerTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		customerScrollPane.setViewportView(customerTable);
+
+		customerTable.setRowHeight(50); //設定列高度為50		
+		TableColumnModel customerModel = customerTable.getColumnModel();//取得這個table的欄位模型 	
+		TableColumn columnID = customerModel.getColumn(0);  //取得這個table某個欄位的資訊 
+		TableColumn columnName = customerModel.getColumn(1);
+		TableColumn columnItemType = customerModel.getColumn(2);
+		TableColumn columnPrice = customerModel.getColumn(3);
+		TableColumn columnCount = customerModel.getColumn(4);
+
+		columnID.setPreferredWidth(150);  //個別設定偏好的寬度  		
+		columnName.setPreferredWidth(150);
+		columnItemType.setPreferredWidth(150);  
+		columnPrice.setPreferredWidth(150);
+		columnCount.setPreferredWidth(150);
+
+		JButton customerAddRowBtn = new JButton("Add a row");
+		customerAddRowBtn.setBounds(114, 371, 140, 31);
+		customer_Panel.add(customerAddRowBtn);
+
+		JButton customerDelRowBtn = new JButton("Delete selected rows"); //custermoTable刪除列
+		customerDelRowBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int i = customerTable.getSelectedRow();
+
+				if (i >= 0){
+					custTable.removeRow(i);
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Unable to Delete");
+				}     	    		
+			}
+		});
+		customerDelRowBtn.setBounds(337, 371, 243, 31);
+		customer_Panel.add(customerDelRowBtn);
+
+
+		JLabel labelItemsSold = new JLabel("Items sold to customers");
+		labelItemsSold.setFont(new Font("新細明體", Font.BOLD, 25));
+		labelItemsSold.setBounds(15, 0, 336, 38);
+		customer_Panel.add(labelItemsSold);
+
+		JPanel companyPanel = new JPanel();
+		companyPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		companyPanel.setBounds(341, 39, 974, 187);
+		//getContentPane().add(companyPanel);
+		companyPanel.setLayout(null);
+
+		textField_companyName = new JTextField();
+		textField_companyName.setBounds(229, 55, 136, 29);
+		companyPanel.add(textField_companyName);
+		textField_companyName.setColumns(10);
+
+		JLabel labelCompanyInfo = new JLabel("Company information");
+		labelCompanyInfo.setFont(new Font("新細明體", Font.BOLD, 25));
+		labelCompanyInfo.setBounds(15, 0, 289, 40);
+		companyPanel.add(labelCompanyInfo);
+
+		JLabel labelCompanyName = new JLabel("Company name:");
+		labelCompanyName.setBounds(58, 58, 195, 23);
+		companyPanel.add(labelCompanyName);
+
+		JLabel labelContactMe = new JLabel("Contact me:");
+		labelContactMe.setBounds(58, 102, 195, 23);
+		companyPanel.add(labelContactMe);
+
+		textField_contactMe = new JTextField();
+		textField_contactMe.setColumns(10);
+		textField_contactMe.setBounds(229, 99, 136, 29);
+		companyPanel.add(textField_contactMe);
+
+		JLabel labelAddress = new JLabel("Address:");
+		labelAddress.setBounds(447, 58, 85, 23);
+		companyPanel.add(labelAddress);
      	     		
-     	 JLabel labelItemsSold = new JLabel("Items sold to customers");
-     	 labelItemsSold.setFont(new Font("新細明體", Font.BOLD, 25));
-     	 labelItemsSold.setBounds(15, 0, 336, 38);
-     	 customer_Panel.add(labelItemsSold);
+		textField_address = new JTextField();
+		textField_address.setColumns(10);
+		textField_address.setBounds(539, 55, 136, 29);
+		companyPanel.add(textField_address);
+
+		String [] headings1 = new String[] {"Item Type", "Required"}; //Item Needed
+		//providerTable的資料
+		Object[][] data1 = new Object[][]{
+			{"Item X", "250"},
+			{"Item Y", "300"}
+		};
+
+
+		JPanel providerPanel = new JPanel();
+		providerPanel.setLayout(null);
+		providerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		providerPanel.setBounds(765, 229, 685, 450);
+		//getContentPane().add(providerPanel);
+
+		JScrollPane providerScrollPane = new JScrollPane();
+		providerScrollPane.setBounds(101, 53, 452, 285);
+		providerPanel.add(providerScrollPane);
+
+		//用DefaultTableModel建立providerTable
+		DefaultTableModel provTable;  
+		provTable = new DefaultTableModel(data1, headings1); 
+		JTable providerTable = new JTable(provTable);     	    
+		customerScrollPane.setViewportView(customerTable);
+		providerScrollPane.setViewportView(providerTable);
+
+		providerTable.setRowHeight(50); //設定列高度為50
+
+
+		JButton pro_addRowBtn = new JButton("Add a row"); //providerTable的Add a row按鈕 
+		pro_addRowBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				provTable.addRow(new Vector()); //新增空白一列    
+			}
+		});
+		pro_addRowBtn.setBounds(114, 371, 140, 31);
+		providerPanel.add(pro_addRowBtn);
      	     		
-     	 JPanel companyPanel = new JPanel();
-     	 companyPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-     	 companyPanel.setBounds(341, 39, 974, 187);
-     	 //getContentPane().add(companyPanel);
-     	 companyPanel.setLayout(null);
-     	    		
-     	 textField_companyName = new JTextField();
-     	 textField_companyName.setBounds(229, 55, 136, 29);
-     	 companyPanel.add(textField_companyName);
-     	 textField_companyName.setColumns(10);
-     	     		
-     	 JLabel labelCompanyInfo = new JLabel("Company information");
-     	 labelCompanyInfo.setFont(new Font("新細明體", Font.BOLD, 25));
-     	 labelCompanyInfo.setBounds(15, 0, 289, 40);
-     	 companyPanel.add(labelCompanyInfo);
-     	     		
-     	 JLabel labelCompanyName = new JLabel("Company name:");
-     	 labelCompanyName.setBounds(58, 58, 195, 23);
-     	 companyPanel.add(labelCompanyName);
-     	    		
-     	 JLabel labelContactMe = new JLabel("Contact me:");
-     	 labelContactMe.setBounds(58, 102, 195, 23);
-     	 companyPanel.add(labelContactMe);
-     	    		
-     	 textField_contactMe = new JTextField();
-     	 textField_contactMe.setColumns(10);
-     	 textField_contactMe.setBounds(229, 99, 136, 29);
-     	 companyPanel.add(textField_contactMe);
-     	     		
-     	 JLabel labelAddress = new JLabel("Address:");
-     	 labelAddress.setBounds(447, 58, 85, 23);
-     	 companyPanel.add(labelAddress);
-     	     		
-     	 textField_address = new JTextField();
-     	 textField_address.setColumns(10);
-     	 textField_address.setBounds(539, 55, 136, 29);
-     	 companyPanel.add(textField_address);
-     	     		
-     	 String [] headings1 = new String[] {"Item Type", "Required"}; //Item Needed
-     	 //providerTable的資料
-     	 Object[][] data1 = new Object[][]{
-     				{"Item X", "250"},
-     				{"Item Y", "300"}
-     			};
-     	     		
-     	     		
-     	 JPanel providerPanel = new JPanel();
-     	 providerPanel.setLayout(null);
-     	 providerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-     	 providerPanel.setBounds(765, 229, 685, 450);
-     	 //getContentPane().add(providerPanel);
-     	   		
-     	 JScrollPane providerScrollPane = new JScrollPane();
-     	 providerScrollPane.setBounds(101, 53, 452, 285);
-     	 providerPanel.add(providerScrollPane);
-     	  
-     	 //用DefaultTableModel建立providerTable
-     	 DefaultTableModel provTable;  
-     	 provTable = new DefaultTableModel(data1, headings1); 
-     	 JTable providerTable = new JTable(provTable);     	    
-     	 customerScrollPane.setViewportView(customerTable);
-     	 providerScrollPane.setViewportView(providerTable);
-     	     		
-     	 providerTable.setRowHeight(50); //設定列高度為50
-     	    
-     	 	
-     	 JButton pro_addRowBtn = new JButton("Add a row"); //providerTable的Add a row按鈕 
-     	 pro_addRowBtn.addActionListener(new ActionListener() {
-     	 public void actionPerformed(ActionEvent e) {
-     	 provTable.addRow(new Vector()); //新增空白一列    
-     	    	}
-     	     		});
-     	 pro_addRowBtn.setBounds(114, 371, 140, 31);
-     	 providerPanel.add(pro_addRowBtn);
-     	     		
-     	 JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
-     	 pro_delRowBtn.addActionListener(new ActionListener() {
-     		 public void actionPerformed(ActionEvent e) {
-     	    		
-     	    		int i = providerTable.getSelectedRow();
-     	    		
-     	    		if (i >= 0){
-     	    			provTable.removeRow(i);
-     	    		}
-     	    		else{
-     	    			JOptionPane.showMessageDialog(null, "Unable to Delete");
-     	    		}
-     	  /*  		DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
-     	    		
+		JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
+		pro_delRowBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				int i = providerTable.getSelectedRow();
+
+				if (i >= 0){
+					provTable.removeRow(i);
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Unable to Delete");
+				}
+				/*  		DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
+
      	    		try{
      	    		int SelectedRowIndex = customerTable.getSelectedRow();
      	    		model.removeRow(SelectedRowIndex);
      	    		}catch (Exception ex){
      	    			JOptionPane.showMessageDialog(null,  ex);
      	    		} */
-     	    	}
-     	    });
-     	 pro_delRowBtn.setBounds(337, 371, 243, 31);
-     	 providerPanel.add(pro_delRowBtn);
-     	    		
-     	 JLabel labelItemsNeeded = new JLabel("Items needed from providers");
-     	 labelItemsNeeded.setFont(new Font("新細明體", Font.BOLD, 25));
-     	 labelItemsNeeded.setBounds(15, 0, 336, 38);
-     	 providerPanel.add(labelItemsNeeded);
-     	     		
-     	 JButton btnSaveInformation = new JButton("Save Information");
-     	 btnSaveInformation.setBounds(121, 545, 234, 31);
-     	 getContentPane().add(btnSaveInformation);
-     	 btnSaveInformation.addActionListener(this);
-     	     
-     	 JButton btnLoadInformation = new JButton("Load Information");
-     	 btnLoadInformation.setBounds(401, 545, 234, 31);
-     	 getContentPane().add(btnLoadInformation);
-     	 btnLoadInformation.addActionListener(this);
-     	     		
-     	 // tab to transfer between panels
-     	 JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-     	 tabbedPane.setBounds(0, 0, 1000, 500);
-     	 //JPanel panel = new JPanel();
-     	 tabbedPane.addTab("Company",companyPanel);
-     	 tabbedPane.addTab("Customer",customer_Panel);
-     	 
-     	 JTextArea txtarea_PressEnter = new JTextArea();
-     	 txtarea_PressEnter.setForeground(Color.BLUE);
-     	 txtarea_PressEnter.setBackground(Color.LIGHT_GRAY);
-     	 txtarea_PressEnter.setWrapStyleWord(true);
-     	 txtarea_PressEnter.setLineWrap(true);
-     	 txtarea_PressEnter.setFont(new Font("新細明體", Font.BOLD, 25));
-     	 txtarea_PressEnter.setEditable(false);
-     	 txtarea_PressEnter.setText("please press enter after finishing to edit info in table(make sure to leave the editting situation)");
-     	 txtarea_PressEnter.setBounds(603, 59, 357, 133);
-     	 customer_Panel.add(txtarea_PressEnter);
-     	 tabbedPane.addTab("Provider",providerPanel);
-     	 getContentPane().add(tabbedPane);
-     	     		
-     	     
-     	 customerAddRowBtn.addActionListener(new ActionListener() {		//custmerTable的Add a row Button
-     	   	public void actionPerformed(ActionEvent arg0) {
- 					 
-     	    		custTable.addRow(new Vector()); //新增空白一列
-     	    	}
-     	     			});     	     	
-             
-   			TableColumnModel cModel = customerTable.getColumnModel();//取得這個table的欄位模型 	
-			TableColumn columnName = cModel.getColumn(0);  //取得這個table某個欄位的資訊 
-			columnName.setPreferredWidth(200);  //個別設定偏好的寬度  			 
+			}
+		});
+		pro_delRowBtn.setBounds(337, 371, 243, 31);
+		providerPanel.add(pro_delRowBtn);
+
+		JLabel labelItemsNeeded = new JLabel("Items needed from providers");
+		labelItemsNeeded.setFont(new Font("新細明體", Font.BOLD, 25));
+		labelItemsNeeded.setBounds(15, 0, 336, 38);
+		providerPanel.add(labelItemsNeeded);
+
+		JButton btnSaveInformation = new JButton("Save Information");
+		btnSaveInformation.setBounds(121, 545, 234, 31);
+		getContentPane().add(btnSaveInformation);
+		btnSaveInformation.addActionListener(this);
+
+		JButton btnLoadInformation = new JButton("Load Information");
+		btnLoadInformation.setBounds(401, 545, 234, 31);
+		getContentPane().add(btnLoadInformation);
+		btnLoadInformation.addActionListener(this);
+
+		// tab to transfer between panels
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(0, 0, 1200, 500);
+		//JPanel panel = new JPanel();
+		tabbedPane.addTab("Company",companyPanel);
+		tabbedPane.addTab("Customer",customer_Panel);
+
+		JTextArea txtarea_PressEnter = new JTextArea();
+		txtarea_PressEnter.setForeground(Color.BLUE);
+		txtarea_PressEnter.setBackground(Color.LIGHT_GRAY);
+		txtarea_PressEnter.setWrapStyleWord(true);
+		txtarea_PressEnter.setLineWrap(true);
+		txtarea_PressEnter.setFont(new Font("新細明體", Font.BOLD, 25));
+		txtarea_PressEnter.setEditable(false);
+		txtarea_PressEnter.setText("please press enter after finishing to edit info in table(make sure to leave the editting situation)");
+		txtarea_PressEnter.setBounds(809, 59, 357, 133);
+		customer_Panel.add(txtarea_PressEnter);
+		tabbedPane.addTab("Provider",providerPanel);
+		getContentPane().add(tabbedPane);
+
+
+		customerAddRowBtn.addActionListener(new ActionListener() {		//custmerTable的Add a row Button
+			public void actionPerformed(ActionEvent arg0) {
+
+				custTable.addRow(new Vector()); //新增空白一列
+			}
+		});     	     	
+
+
 				 		
 	}
  
