@@ -362,12 +362,12 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        double price = 0;
 		        int count = 0;
 //		        System.out.println("col欄位數:"+col+"; row列數:"+row);
-		        
-		        
+		       
 		            
 		        for(int i = 0; row > i; i++){   //from first row to last row
 		        	for(int j = 0; col > j; j++){  //row1: from first column to last column
-//		        		if ((String) customerTable.getValueAt(i, j) != ""){		        			
+		        		System.out.println("col欄位數:"+j+"; row列數:"+i);
+		        		if ((String) customerTable.getValueAt(i, j) != ""){		        			
 		        			switch(j) {
 		        			case 0:
 		        				id = (String) customerTable.getValueAt(i, j);
@@ -406,7 +406,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 //		        				count = Integer.parseInt((String) customerTable.getValueAt(i, j));
 		        				break;
 		        			
-		        		}
+		        		}}
 /*		        			}else{
 		        				switch(j){
 		        				case 0:
@@ -463,13 +463,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 					}
 					
 					
-				} 
-				
-				
-				
-				
-				
-				
+				} 			
 				
 				
 				break;
