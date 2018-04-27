@@ -361,12 +361,14 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        String id="", name="", brand="";
 		        double price = 0;
 		        int count = 0;
-		        //System.out.println("col欄位數:"+col+"; row列數:"+row);
+//		        System.out.println("col欄位數:"+col+"; row列數:"+row);
+		        
+		        
 		            
 		        for(int i = 0; row > i; i++){   //from first row to last row
 		        	for(int j = 0; col > j; j++){  //row1: from first column to last column
-		        		
-		        		switch(j) {
+//		        		if ((String) customerTable.getValueAt(i, j) != ""){		        			
+		        			switch(j) {
 		        			case 0:
 		        				id = (String) customerTable.getValueAt(i, j);
 		        				break;
@@ -380,22 +382,58 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				break;
 		        			
 		        			case 3:
-		        				price  =  Double.parseDouble((String) customerTable.getValueAt(i, j));
+		        				try
+		        				{
+		        					String tempPrice = (String) customerTable.getValueAt(i, j);
+		        					price = Double.parseDouble(tempPrice); 		        					
+		        				}
+		        				catch (NumberFormatException ex)
+		        				{
+		        					JOptionPane.showMessageDialog(null, "價格輸入不正確，請輸入數字");		        					
+		        				}
 		        				break;
 		        			
 		        			case 4:
-		        				count = Integer.parseInt((String) customerTable.getValueAt(i, j));
+		        				try
+		        				{
+		        					String tempCount = (String) customerTable.getValueAt(i, j);
+		        					count = Integer.parseInt(tempCount);
+		        				}
+		        				catch (NumberFormatException ex)
+		        				{
+		        					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
+		        				}
+//		        				count = Integer.parseInt((String) customerTable.getValueAt(i, j));
 		        				break;
 		        			
 		        		}
-		        		
-		        		
+/*		        			}else{
+		        				switch(j){
+		        				case 0:
+			        				JOptionPane.showMessageDialog(null, "ID第"+ String.valueOf(i+1) +"行未填寫");
+		        					break;
+		        				case 1:
+			        				JOptionPane.showMessageDialog(null, "Name第"+ String.valueOf(i+1) +"行未填寫");        					
+		        					break;
+		        				case 2:
+			        				JOptionPane.showMessageDialog(null, "Brand第"+ String.valueOf(i+1) +"行未填寫");		        					
+		        					break;
+		        				case 3:
+			        				JOptionPane.showMessageDialog(null, "Price第"+ String.valueOf(i+1) +"行未填寫");
+		        					break;
+		        				case 4:
+			        				JOptionPane.showMessageDialog(null, "Count第"+ String.valueOf(i+1) +"行未填寫");
+		        					break;
+		        				}
+		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行第"+ String.valueOf(j+1) +"列空白");
+			        			break;
+		        			} */
+	        		
 		        	}
 		        	
 		        	// new SellSupply("12","coke","cosco",100,3);
 		        	SellSupply item = new SellSupply(id,name,brand,price,count);
-        			dist.addSellItem(item);   
-		        	
+        			dist.addSellItem(item);         	
 		        	
 		        }
 		        

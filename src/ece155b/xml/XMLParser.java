@@ -30,17 +30,7 @@ public class XMLParser extends DefaultHandler {
     	distributor = new Distributor(); // read in loaded info & write into new item list
       //this.distributor = dist; 
 
-//      SAXParserFactory sparserfactory = SAXParserFactory.newInstance();//Create a "parser factory" for creating SAX parsers
-//      SAXParser sparser = sparserfactory.newSAXParser(); //Now use the parser factory to create a SAXParser object
-//      XMLParser handler = new XMLParser(); //Create an instance of this class; it defines all the handler methods
 
-      //Finally, tell the parser to parse the input and notify the handler
-      
-      //String fileurl = System.getProperty("user.dir") + File.separator + "hello.xml";
-      
-//      sparser.parse(fileurl, handler);
-//     
-//      handler.readList();     
       
     }
     
