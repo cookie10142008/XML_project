@@ -40,7 +40,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
     
     String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to (under bin dir)
     // new two item lists(sellsupply &　needsupply)
-    Distributor dist = new Distributor();
+    public Distributor dist = new Distributor();
     //GUI
     Container content = getContentPane();
     private JTextField textField_companyName, textField_contactMe, textField_address;

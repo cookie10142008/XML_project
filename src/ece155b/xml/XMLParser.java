@@ -14,8 +14,8 @@ import org.xml.sax.helpers.*;
 
 public class XMLParser extends DefaultHandler {
     public Distributor distributor;
-    private SellSupply ssupply;
-    private NeedSupply nsupply;
+    private SellSupply sSupply;
+    private NeedSupply nSupply;
     private Supply supply;
     private StringBuffer accumulator = new StringBuffer();  
 
@@ -26,35 +26,36 @@ public class XMLParser extends DefaultHandler {
 /*		SAXParserFactory factory = SAXParserFactory.newInstance();
 		SAXParser saxParser = factory.newSAXParser();  */
     }
+    
+    
     public void characters(char[] buffer, int start, int length) {
         accumulator.append(buffer, start, length);
     }
     
-    // - - - - - - - - - - - - - - - - - - - - -
-    //	Each time a new tag is opened,
-    //		this method is called
+   
+    //	Each time a new tag is opened, this method is called
   	public void startElement(String uri,String lname, String name, Attributes attributes)
   	{
-  		// - - - - - - - - - - - - - - - - - - - - -
+  	
   		//	New SellSupply starts
   		if(name.equals ("SellSupply"))
   		{
-  			ssupply = new SellSupply();
+  			sSupply = new SellSupply();
 			supply = new Supply();
-			ssupply.supply = supply;
+			sSupply.supply = supply;
 			
 /*			String tag = name;
 			System.out.println(tag); */
 		}
-		// - - - - - - - - - - - - - - - - - - - - -
+
 		//	New NeedSupply starts
 		else if(name.equals ("NeedSupply"))
   		{
-  			nsupply = new NeedSupply();
+  			nSupply = new NeedSupply();
   			supply = new Supply();
-			nsupply.supply = supply;
+			nSupply.supply = supply;
   		}
-  		// - - - - - - - - - - - - - - - - - - - - -
+  	
   		// Reset accumulator
   		accumulator.setLength(0);
   	}
@@ -62,20 +63,20 @@ public class XMLParser extends DefaultHandler {
   	public void endElement(String uri,String lname,String name)
 	{
 		String value = accumulator.toString();
-		// - - - - - - - - - - - - - - - - - - - - -
+	
 		// 	Company informations
 		if(name.equals ("CompanyName"))
   			distributor.name = value;
   		else if(name.equals ("CompanyAddress"))
   			distributor.address = value;
-  		// - - - - - - - - - - - - - - - - - - - - -
+  
   		// 	Add sell supply and need supply objects
   		else if(name.equals ("SellSupply"))
-  			distributor.addSellItem(ssupply);
+  			distributor.addSellItem(sSupply);
   		else if(name.equals ("NeedSupply"))
-  			distributor.addNeedItem(nsupply);
-  		// - - - - - - - - - - - - - - - - - - - - -
-  		// 	Set parameters of Supply Object
+  			distributor.addNeedItem(nSupply);
+
+		// 	Set parameters of Supply Object
   		else if(name.equals ("SupplyID"))
   			supply.ID = value;
 	}
