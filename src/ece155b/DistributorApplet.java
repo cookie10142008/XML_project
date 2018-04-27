@@ -404,11 +404,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
 		        				}
 //		        				count = Integer.parseInt((String) customerTable.getValueAt(i, j));
-		        				break;
+//		        				break;
 		        			
-		        		}}
-/*		        			}else{
-		        				switch(j){
+		        		}
+		        			}else{
+		        				/*switch(j){
 		        				case 0:
 			        				JOptionPane.showMessageDialog(null, "ID第"+ String.valueOf(i+1) +"行未填寫");
 		        					break;
@@ -424,10 +424,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				case 4:
 			        				JOptionPane.showMessageDialog(null, "Count第"+ String.valueOf(i+1) +"行未填寫");
 		        					break;
-		        				}
+		        				} */
 		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行第"+ String.valueOf(j+1) +"列空白");
-			        			break;
-		        			} */
+//			        			break;
+		        			} 
 	        		
 		        	}
 		        	
