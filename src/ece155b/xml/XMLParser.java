@@ -6,7 +6,10 @@ import ece155b.data.NeedSupply;
 import ece155b.data.Supply;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.*;
@@ -17,14 +20,35 @@ public class XMLParser extends DefaultHandler {
     private SellSupply sSupply;
     private NeedSupply nSupply;
     private Supply supply;
-    private StringBuffer accumulator = new StringBuffer();  
-
+    private StringBuffer accumulator = new StringBuffer(); 
     
-    public XMLParser() /*throws ParserConfigurationException, SAXException*/{
+    private ArrayList<SellSupply> sellItems = new ArrayList<SellSupply>();
+    
+    public XMLParser() 
+    		throws SAXException, IOException, ParserConfigurationException{	
+
+    	
       distributor = new Distributor();
       
-/*		SAXParserFactory factory = SAXParserFactory.newInstance();
-		SAXParser saxParser = factory.newSAXParser();  */
+      //Create a "parser factory" for creating SAX parsers
+      SAXParserFactory sparserfactory = SAXParserFactory.newInstance();
+
+      //Now use the parser factory to create a SAXParser object
+      SAXParser sparser = sparserfactory.newSAXParser();
+
+      //Create an instance of this class; it defines all the handler methods
+      XMLParser handler = new XMLParser(); //原本是XMLParser()
+
+      //Finally, tell the parser to parse the input and notify the handler
+      String fileurl = System.getProperty("user.dir") + File.separator + "hello.xml";
+      sparser.parse(fileurl, handler);
+     
+      handler.readList();     
+      
+    }
+    
+    public XMLParser(Distributor dist){
+    	this.distributor = dist; 
     }
     
     
@@ -80,7 +104,13 @@ public class XMLParser extends DefaultHandler {
   		else if(name.equals ("SupplyID"))
   			supply.ID = value;
 	}
-	
-/*	File savefile = new File("hello.xml"); 
-	saxParser.parse(savefile, handler); */
+  	
+    private void readList() {
+/*        System.out.println("No of  the accounts in bank '" + accList.size()  + "'.");
+        Iterator<Account> it = accList.iterator();
+        while (it.hasNext()) {
+               System.out.println(it.next().toString()); 
+        } */
+ }
+
 }
