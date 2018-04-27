@@ -409,11 +409,12 @@ public class DistributorApplet extends JApplet implements ActionListener{
 					File selectedFile = fileChooser.getSelectedFile();//get file & assign to File 
 					
 					
-					System.out.println(selectedFile.getName()); //print file name 
-					
+					System.out.println(selectedFile.getName()); //print file name 				
 					
 					
 				} 
+				
+				XMLParser xmlParser = new XMLParser(dist);
 				
 				break;
 	                
