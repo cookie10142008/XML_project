@@ -258,18 +258,18 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	 providerPanel.add(labelItemsNeeded);
      	     		
      	 JButton btnSaveInformation = new JButton("Save Information");
-     	 btnSaveInformation.setBounds(126, 723, 234, 31);
+     	 btnSaveInformation.setBounds(121, 545, 234, 31);
      	 getContentPane().add(btnSaveInformation);
      	 btnSaveInformation.addActionListener(this);
      	     
      	 JButton btnLoadInformation = new JButton("Load Information");
-     	 btnLoadInformation.setBounds(426, 723, 234, 31);
+     	 btnLoadInformation.setBounds(401, 545, 234, 31);
      	 getContentPane().add(btnLoadInformation);
      	 btnLoadInformation.addActionListener(this);
      	     		
      	 // tab to transfer between panels
      	 JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-     	 tabbedPane.setBounds(0, 0, 1000, 700);
+     	 tabbedPane.setBounds(0, 0, 1000, 500);
      	 //JPanel panel = new JPanel();
      	 tabbedPane.addTab("Company",companyPanel);
      	 tabbedPane.addTab("Customer",customer_Panel);
@@ -282,7 +282,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
      	 txtarea_PressEnter.setFont(new Font("新細明體", Font.BOLD, 25));
      	 txtarea_PressEnter.setEditable(false);
      	 txtarea_PressEnter.setText("please press enter after finishing to edit info in table(make sure to leave the editting situation)");
-     	 txtarea_PressEnter.setBounds(101, 442, 471, 133);
+     	 txtarea_PressEnter.setBounds(603, 59, 357, 133);
      	 customer_Panel.add(txtarea_PressEnter);
      	 tabbedPane.addTab("Provider",providerPanel);
      	 getContentPane().add(tabbedPane);
