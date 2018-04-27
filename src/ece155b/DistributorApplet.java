@@ -203,11 +203,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		textField_address.setBounds(539, 55, 136, 29);
 		companyPanel.add(textField_address);
 
-		String [] headings1 = new String[] {"Item Type", "Required"}; //Item Needed
+		String [] headings1 = new String[] {"ID", "Name", "Item Type", "Price", "Available"}; //Item Needed
 		//providerTable的資料
 		Object[][] data1 = new Object[][]{
-			{"Item X", "250"},
-			{"Item Y", "300"}
+			{"Item X", "250", "", "", ""},
+			{"Item Y", "300", "", "", ""}
 		};
 
 
@@ -218,7 +218,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		//getContentPane().add(providerPanel);
 
 		JScrollPane providerScrollPane = new JScrollPane();
-		providerScrollPane.setBounds(101, 53, 452, 285);
+		providerScrollPane.setBounds(101, 53, 650, 285);
 		providerPanel.add(providerScrollPane);
 
 		//用DefaultTableModel建立providerTable
@@ -294,7 +294,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		txtarea_PressEnter.setLineWrap(true);
 		txtarea_PressEnter.setFont(new Font("新細明體", Font.BOLD, 25));
 		txtarea_PressEnter.setEditable(false);
-		txtarea_PressEnter.setText("please press enter after finishing to edit info in table(make sure to leave the editting situation)");
+		txtarea_PressEnter.setText("Please press enter after finishing editing info in table(make sure to leave the editting situation)");
 		txtarea_PressEnter.setBounds(809, 59, 357, 133);
 		customer_Panel.add(txtarea_PressEnter);
 		tabbedPane.addTab("Provider",providerPanel);
