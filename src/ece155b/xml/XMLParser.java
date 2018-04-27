@@ -103,8 +103,7 @@ public class XMLParser extends DefaultHandler {
   			distributor.addSellItem(sSupply);
   		else if(name.equals ("NeedSupply"))
   			distributor.addNeedItem(nSupply);
-
-		// 	Set parameters of Supply Object
+  		// 	Set parameters of Supply Object
   		else if(name.equals ("SupplyID"))
   			supply.ID = value;
 	}

@@ -13,7 +13,7 @@ public class NeedSupply extends Supply// item needed from providers (provider gi
 	{
 		this.ID = id;
 		this.name = name;
-		this.brand = brand;
+		this.brand = brand; 
 		this.price = price;
 		this.amountNeeded = amountNeeded;
 		

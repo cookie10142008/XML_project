@@ -29,7 +29,7 @@ public class DemoXML {
 
     	System.out.println (dist);
     	toXmlFile (dist,fileUrl);
-    	System.out.println (readXmlFile(fileUrl));
+    	//System.out.println (readXmlFile(fileUrl));
     }
 
 
@@ -50,21 +50,21 @@ public class DemoXML {
 	    }
     }
 
-    public Distributor readXmlFile(String url)
-    {
-    	XMLParser myparser = new XMLParser();
-		try
-	    {
-	    	SAXParserFactory factory = SAXParserFactory.newInstance(  );
-			SAXParser parser = factory.newSAXParser();
-			parser.parse(url,myparser);
-	    }
-	    catch (Exception ex)
-	    {
-	    	ex.printStackTrace();
-	    }
-	    return myparser.distributor;
-    }
+//    public Distributor readXmlFile(String url)
+//    {
+//    	XMLParser myparser = new XMLParser();
+//		try
+//	    {
+//	    	SAXParserFactory factory = SAXParserFactory.newInstance(  );
+//			SAXParser parser = factory.newSAXParser();
+//			parser.parse(url,myparser);
+//	    }
+//	    catch (Exception ex)
+//	    {
+//	    	ex.printStackTrace();
+//	    }
+//	    return myparser.distributor;
+//    }
 
     /**/
 }
