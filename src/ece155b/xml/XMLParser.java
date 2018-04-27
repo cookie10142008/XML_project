@@ -27,21 +27,25 @@ public class XMLParser extends DefaultHandler {
     public XMLParser() 
     		throws SAXException, IOException, ParserConfigurationException{	
 
+    	String r;
     	
       distributor = new Distributor();
+      
+      distributor.readXmlFile(r);
       
       //Create a "parser factory" for creating SAX parsers
       SAXParserFactory sparserfactory = SAXParserFactory.newInstance();
 
       //Now use the parser factory to create a SAXParser object
       SAXParser sparser = sparserfactory.newSAXParser();
+      sparser.parse(fileurl, handler);
 
       //Create an instance of this class; it defines all the handler methods
       XMLParser handler = new XMLParser(); //原本是XMLParser()
 
       //Finally, tell the parser to parse the input and notify the handler
       String fileurl = System.getProperty("user.dir") + File.separator + "hello.xml";
-      sparser.parse(fileurl, handler);
+ //     sparser.parse(fileurl, handler);
      
       handler.readList();     
       
