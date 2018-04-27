@@ -47,8 +47,12 @@ public class DistributorApplet extends JApplet implements ActionListener{
     //GUI
     Container content = getContentPane();
     public static JTextField textField_companyName, textField_contactMe, textField_address;
-    public JTable customerTable;
-    public JTable providerTable;
+
+
+    public static JTable providerTable;
+
+    public static JTable customerTable;
+
     
     public void init()
     {

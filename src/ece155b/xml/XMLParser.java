@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -93,27 +94,75 @@ public class XMLParser extends DefaultHandler {
   		accumulator.setLength(0);
   	}
     
-  	public void endElement(String uri,String lname,String name)
+  	public void endElement(String uri,String lname,String tagName)
 	{
 		
   	 	//Company informations
-		if(name.equals ("CompanyName")) {
+		if(tagName.equals ("CompanyName")) {
   			System.out.println(value);
 			DistributorApplet.textField_companyName.setText(value);
 		}	
-  		else if(name.equals ("CompanyAddress")) {
+  		else if(tagName.equals ("CompanyAddress")) {
   			System.out.println(value);
   			DistributorApplet.textField_contactMe.setText(value);
   		
   		}
-		else if(name.equals ("CompanyContact")) {
+		else if(tagName.equals ("CompanyContact")) {
 			System.out.println(value);
 			DistributorApplet.textField_address.setText(value);
 		
 		}
   			
-  		
-  		
+		String id="", name="", brand="";
+        double price = 0;
+        int count = 0;
+//        System.out.println("col欄位數:"+col+"; row列數:"+row);
+       
+        // !!! present info on gui !!!
+        for(int i = 0; 5 > i; i++){   //from first row to last row
+        	for(int j = 0; 5 > j; j++){  //row1: from first column to last column  		
+        		switch(j) {
+    			case 0:
+    				id = (String) DistributorApplet.customerTable.getValueAt(i, j);
+    				break;
+    				
+    			case 1:
+    				name = (String) DistributorApplet.customerTable.getValueAt(i, j);
+    				break;
+    				
+    			case 2:
+    				brand = (String) DistributorApplet.customerTable.getValueAt(i, j);
+    				break;
+    			
+    			case 3:
+    				try
+    				{
+    					String tempPrice = (String) DistributorApplet.customerTable.getValueAt(i, j);
+    					price = Double.parseDouble(tempPrice); 		        					
+    				}
+    				catch (NumberFormatException ex)
+    				{
+    					JOptionPane.showMessageDialog(null, "價格輸入不正確，請輸入數字");		        					
+    				}
+    				break;
+    			
+    			case 4:
+    				try
+    				{
+    					String tempCount = (String) DistributorApplet.customerTable.getValueAt(i, j);
+    					count = Integer.parseInt(tempCount);
+    				}
+    				catch (NumberFormatException ex)
+    				{
+    					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
+    				}
+//    				count = Integer.parseInt((String) customerTable.getValueAt(i, j));
+//    				break;
+    			
+        		}
+        	}
+        			
+        }
   		
     	//String value = accumulator.toString();
 //		// 	Company informations
