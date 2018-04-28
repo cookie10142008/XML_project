@@ -35,10 +35,8 @@ public class Distributor extends Company
 	}
 
 	public void addNeedItem(NeedSupply ns)
-	{
-		
-		
-		
+	{		
+		needItems.add(ns);     //新增	
 		
 	}
 

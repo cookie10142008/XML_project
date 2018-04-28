@@ -50,6 +50,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 
     public static JTable customerTable;
     public static JTable providerTable;
+    public static JTabbedPane tabbedPane;  //line 290
 
     
     public void init()
@@ -110,7 +111,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		String[] headings = new String[] { "ID", "Name", "Item Type", "Price", "Available" }; // Item Sold
 		// customerTable的資料
 		Object[][] data = new Object[][] { 
-			{ "", "", "", "", "" },
+			{ null, null, null, null, null},
 			// {"Item X","50.5","300"},
 			// {"Item Y","42.2","200"}
 		};
@@ -287,7 +288,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		btnLoadInformation.addActionListener(this);
 
 		// tab to transfer between panels
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+//		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 1200, 500);
 		//JPanel panel = new JPanel();
 		tabbedPane.addTab("Company",companyPanel);
@@ -367,25 +369,28 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        double price = 0;
 		        int count = 0;
 //		        System.out.println("col欄位數:"+col+"; row列數:"+row);
-		        		       
-		            
+		        int selectedIndex = tabbedPane.getSelectedIndex();        			
+    			
+		        if (selectedIndex == 1){ //customer 的 tabbedPane
 		        for(int i = 0; custRow > i; i++){   //from first row to last row
 		        	for(int j = 0; custCol > j; j++){  //row1: from first column to last column
-//		        		System.out.println("col欄位數:"+j+"; row列數:"+i);
 		        		System.out.println("col欄位數:"+j+"; row列數:"+i);
-		        		System.out.println("getrowcount:"+custRow+"; colcount:"+custCol);
+		        		System.out.println("colcount:"+custCol+"; getrowcount:"+custRow);
 		        		if ((String) customerTable.getValueAt(i, j) != null){		        			
 		        			switch(j) {
 			        			case 0:
 			        				id = (String) customerTable.getValueAt(i, j);
+			        				System.out.println("id="+id+"end");
 			        				break;
 			        				
 			        			case 1:
 			        				name = (String) customerTable.getValueAt(i, j);
+			        				System.out.println("name="+name+"end");
 			        				break;
 			        				
 			        			case 2:
 			        				brand = (String) customerTable.getValueAt(i, j);
+			        				System.out.println("brand="+brand+"end");
 			        				break;
 			        			
 			        			case 3:
@@ -413,7 +418,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				break;
 		        			}// end switch
 		        		}else {
-		        				/*switch(j){
+		        				switch(j){
 		        				case 0:
 			        				JOptionPane.showMessageDialog(null, "ID第"+ String.valueOf(i+1) +"行未填寫");
 		        					break;
@@ -429,10 +434,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				case 4:
 			        				JOptionPane.showMessageDialog(null, "Count第"+ String.valueOf(i+1) +"行未填寫");
 		        					break;
-		        				} */
-		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
-		        				System.out.println("col欄位數:"+j+"; row列數:"+i);
-//			        			break;
+		        				} 
+//		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
+//		        				System.out.println("col欄位數:"+j+"; row列數:"+i);
+			        			break;       			
 		        				
 		        			}//end if
 	        		
@@ -440,9 +445,78 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        	
 		        	// new SellSupply("12","coke","cosco",100,3);
 		        	SellSupply item = new SellSupply(id,name,brand,price,count);
-        			dist.addSellItem(item);         	
+        			dist.addSellItem(item);
+        			
+        			System.out.println("Default customer Index:" + selectedIndex);
+
 		        	
-		        } //end row
+		        } //end row (customerTable)
+		        
+		        }
+		        
+		        if (selectedIndex == 2){ //provider 的 tabbedPane
+		        int provRow = providerTable.getRowCount();
+		        int provCol = providerTable.getColumnCount();  //get Column Count = 5
+		        for(int i = 0; provRow > i; i++){
+		        	for(int j = 0; provCol > j; j++){
+		        		if ((String) providerTable.getValueAt(i, j) != null){
+		        			switch(j) {
+		        			case 0:
+		        				id = (String) providerTable.getValueAt(i, j);
+//		        				System.out.println("id="+id+"end");
+		        				break;
+		        				
+		        			case 1:
+		        				name = (String) providerTable.getValueAt(i, j);
+//		        				System.out.println("name="+name+"end");
+		        				break;
+		        				
+		        			case 2:
+		        				brand = (String) providerTable.getValueAt(i, j);
+//		        				System.out.println("brand="+brand+"end");
+		        				break;
+		        			
+		        			case 3:
+		        				try
+		        				{
+		        					String tempPrice = (String) providerTable.getValueAt(i, j);
+		        					price = Double.parseDouble(tempPrice); 		        					
+		        				}
+		        				catch (NumberFormatException ex)
+		        				{
+		        					JOptionPane.showMessageDialog(null, "價格輸入不正確，請輸入數字");		        					
+		        				}
+		        				break;
+		        			
+		        			case 4:
+		        				try
+		        				{
+		        					String tempCount = (String) providerTable.getValueAt(i, j);
+		        					count = Integer.parseInt(tempCount);
+		        				}
+		        				catch (NumberFormatException ex)
+		        				{
+		        					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
+		        				}
+		        				break;
+		        				}// end switch
+		        		}else{
+		        			JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
+		        			break;
+		        		} // end if
+		        		
+		        	} // end column
+		        	
+		        	// new NeedSupply
+		        	NeedSupply item = new NeedSupply(id, name, brand, price, count);
+		        	dist.addNeedItem(item);
+		        	
+		        	System.out.println("Default provider Index:" + selectedIndex);
+
+		        	
+		        } // end row (providerTable)
+		        
+		        }
 		        
 		        toXmlFile(dist,fileUrl);				
 				break;
