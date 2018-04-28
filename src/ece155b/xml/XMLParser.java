@@ -9,6 +9,7 @@ import ece155b.data.Supply;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,35 +20,26 @@ import org.xml.sax.helpers.*;
 
 public class XMLParser extends DefaultHandler {
     public Distributor distributor;
-    private SellSupply sSupply;
-    private NeedSupply nSupply;
-    private Supply supply;
+    private SellSupply sellSupply;
+    private NeedSupply needSupply;
+    //private Supply supply;
     private StringBuffer accumulator = new StringBuffer(); 
-    private String value;
-    
-    //private ArrayList<SellSupply> sellItems = new ArrayList<SellSupply>(); 
+    private String value,supplyType;
     
     public XMLParser(){	
     	distributor = new Distributor(); // read in loaded info & write into new item list
       //this.distributor = dist; 
 
-
-      
     }
     
 	  public void readXmlFile(String fileurl) throws SAXException, IOException, ParserConfigurationException
 	  {
-	  		XMLParser myparser = new XMLParser();
+	  		XMLParser handler = new XMLParser();
 			try
 		    {
 		    	SAXParserFactory factory = SAXParserFactory.newInstance( );
 				SAXParser parser = factory.newSAXParser();
-				
-				XMLParser handler = new XMLParser(); 
-				
-				
-				
-				parser.parse(fileurl,myparser);
+				parser.parse(fileurl,handler);
 				
 				
 		    }
@@ -68,26 +60,28 @@ public class XMLParser extends DefaultHandler {
     
    
     //	Each time a new tag is opened, this method is called
-  	public void startElement(String uri,String lname, String name, Attributes attributes)
+  	public void startElement(String uri,String lname, String tagName, Attributes attributes)
   	{
   		value = "";
   		//	New SellSupply starts
-  		if(name.equals ("SellSupply"))
+  		if(tagName.equals ("SellSupply"))
   		{
-  			sSupply = new SellSupply();
-			supply = new Supply();
-			sSupply.supply = supply;
+  			sellSupply = new SellSupply();// create sellSupply object & start to write in item info
+  			supplyType ="sell";
+//			supply = new Supply();
+//			sSupply.supply = supply;
 			
-/*			String tag = name;
-			System.out.println(tag); */
+			System.out.println(tagName); 
 		}
 
 		//	New NeedSupply starts
-		else if(name.equals ("NeedSupply"))
+		else if(tagName.equals ("NeedSupply"))
   		{
-  			nSupply = new NeedSupply();
-  			supply = new Supply();
-			nSupply.supply = supply;
+  			needSupply = new NeedSupply();
+  			supplyType ="need";
+  			
+//  			supply = new Supply();
+//			nSupply.supply = supply;
   		}
   	
   		// Reset accumulator
@@ -100,86 +94,107 @@ public class XMLParser extends DefaultHandler {
   	 	//Company informations
 		if(tagName.equals ("CompanyName")) {
   			System.out.println(value);
+  			distributor.name = value;
 			DistributorApplet.textField_companyName.setText(value);
 		}	
   		else if(tagName.equals ("CompanyAddress")) {
   			System.out.println(value);
+  			distributor.address = value;
   			DistributorApplet.textField_contactMe.setText(value);
   		
   		}
 		else if(tagName.equals ("CompanyContact")) {
 			System.out.println(value);
+			distributor.contact = value;
 			DistributorApplet.textField_address.setText(value);
 		
 		}
-  			
+		//	 	Set parameters of Supply Object
+		else if(tagName.equals ("SupplyID")) {
+		    
+			if(supplyType.equals("sell")) {  // judge item needed or sold
+				sellSupply.ID = value;
+				//System.out.println("add id:"+value);
+			}
+			else if(supplyType.equals("need")) {
+				needSupply.ID = value;
+				//System.out.println("add id:"+value);
+				
+			}
+			
+		}
+		// 	Add sell supply and need supply objects
+		else if(tagName.equals ("SellSupply")) {
+			distributor.addSellItem(sellSupply);
+		}
+		else if(tagName.equals ("NeedSupply")) {
+			distributor.addNeedItem(needSupply);
+		}
+		else if(tagName.equals ("Distributor")) {
+			
+  			System.out.println(tagName);
+  			presentInTable();
+		}
+		
+
+		
+    	//String value = accumulator.toString();
+
+	}
+  	
+  	private void presentInTable() //get item from sellSupply
+  	{
+  		
+  		//problem: can't print all items
+  		System.out.println(Distributor.sellItems.size() + "*items");
+  		 
+  		for(SellSupply item : Distributor.sellItems) {
+  	        System.out.println("ID:"+item.ID);
+  	        
+  	    }
+  		 
+//  		for (int i = 0; i < Distributor.sellItems.size(); i++) {
+//  			System.out.println(Distributor.sellItems.get(i).ID);
+//		    
+//		} 
+  		
+  		/*
+  		int custRow = DistributorApplet.customerTable.getRowCount(); //get Row Count = 5
+        int custCol = DistributorApplet.customerTable.getColumnCount();  //get Column Count = 5
 		String id="", name="", brand="";
-        double price = 0;
-        int count = 0;
-//        System.out.println("col欄位數:"+col+"; row列數:"+row);
        
-        // !!! present info on gui !!!
-        for(int i = 0; 5 > i; i++){   //from first row to last row
-        	for(int j = 0; 5 > j; j++){  //row1: from first column to last column  		
+  	// !!! present info on gui !!!
+        for(int i = 0; custRow > i; i++){   //from first row to last row
+        	for(int j = 0; custCol > j; j++){  //from first column to last column  		
         		switch(j) {
     			case 0:
-    				id = (String) DistributorApplet.customerTable.getValueAt(i, j);
+    				DistributorApplet.customerTable.setValueAt(id,i, j);
     				break;
     				
-    			case 1:
-    				name = (String) DistributorApplet.customerTable.getValueAt(i, j);
-    				break;
-    				
-    			case 2:
-    				brand = (String) DistributorApplet.customerTable.getValueAt(i, j);
-    				break;
-    			
-    			case 3:
-    				try
-    				{
-    					String tempPrice = (String) DistributorApplet.customerTable.getValueAt(i, j);
-    					price = Double.parseDouble(tempPrice); 		        					
-    				}
-    				catch (NumberFormatException ex)
-    				{
-    					JOptionPane.showMessageDialog(null, "價格輸入不正確，請輸入數字");		        					
-    				}
-    				break;
-    			
-    			case 4:
-    				try
-    				{
-    					String tempCount = (String) DistributorApplet.customerTable.getValueAt(i, j);
-    					count = Integer.parseInt(tempCount);
-    				}
-    				catch (NumberFormatException ex)
-    				{
-    					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
-    				}
-//    				count = Integer.parseInt((String) customerTable.getValueAt(i, j));
+//    			case 1:
+//    				name = (String) DistributorApplet.customerTable.getValueAt(i, j);
 //    				break;
+//    				
+//    			case 2:
+//    				brand = (String) DistributorApplet.customerTable.getValueAt(i, j);
+//    				break;
+//    			
+//    			
     			
         		}
         	}
         			
         }
   		
-    	//String value = accumulator.toString();
-//		// 	Company informations
-//		if(name.equals ("CompanyName"))
-//  			distributor.name = value;
-//  		else if(name.equals ("CompanyAddress"))
-//  			distributor.address = value;
-//  
-//  		// 	Add sell supply and need supply objects
-//  		else if(name.equals ("SellSupply"))
-//  			distributor.addSellItem(sSupply);
-//  		else if(name.equals ("NeedSupply"))
-//  			distributor.addNeedItem(nSupply);
-//  		// 	Set parameters of Supply Object
-//  		else if(name.equals ("SupplyID"))
-//  			supply.ID = value;
-	}
+  		
+  		
+  		*/
+  		
+  	}// end presentInTable function
+  	
+  	
+  	
+  	
   	
     private void readList() {
 /*        System.out.println("No of  the accounts in bank '" + accList.size()  + "'.");

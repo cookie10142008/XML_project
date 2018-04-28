@@ -23,6 +23,7 @@ public class NeedSupply extends Supply// item needed from providers (provider gi
 	{
 		String returnstr="";
 		
+		returnstr += "<NeedSupply>";
 		returnstr += "<Supply>";
 		returnstr += "<SupplyID>"+ID+"</SupplyID>";
 		returnstr += "<SupplyName>"+name+"</SupplyName>";
@@ -30,6 +31,7 @@ public class NeedSupply extends Supply// item needed from providers (provider gi
 		returnstr += "<SupplyPrice>"+price+"</SupplyPrice>";
 		returnstr += "<SupplyNeeded>"+amountNeeded+"</SupplyNeeded>";
 		returnstr += "</Supply>";
+		returnstr += "</NeedSupply>";
 		
 		return returnstr;
 	}

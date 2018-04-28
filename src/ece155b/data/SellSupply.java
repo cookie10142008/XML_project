@@ -23,6 +23,7 @@ public class SellSupply extends Supply// item sold to customers
 	{
 		String returnstr="";
 		
+		returnstr += "<SellSupply>";
 		returnstr += "<Supply>";
 		returnstr += "<SupplyID>"+ID+"</SupplyID>";
 		returnstr += "<SupplyName>"+name+"</SupplyName>";
@@ -36,7 +37,7 @@ public class SellSupply extends Supply// item sold to customers
 		
 		returnstr += "<SupplyAvailable>"+amountAvailable+"</SupplyAvailable>";
 		returnstr += "</Supply>";
-		
+		returnstr += "</SellSupply>";
 		
 		
 		return returnstr;
