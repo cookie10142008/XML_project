@@ -305,7 +305,19 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		txtarea_PressEnter.setText("Please press enter after finishing editing info in table(make sure to leave the editting situation)");
 		txtarea_PressEnter.setBounds(809, 59, 357, 133);
 		customer_Panel.add(txtarea_PressEnter);
+		
 		tabbedPane.addTab("Provider",providerPanel);
+		
+		JTextArea txtarea_PressEnter1 = new JTextArea();
+		txtarea_PressEnter1.setForeground(Color.BLUE);
+		txtarea_PressEnter1.setBackground(Color.LIGHT_GRAY);
+		txtarea_PressEnter1.setWrapStyleWord(true);
+		txtarea_PressEnter1.setLineWrap(true);
+		txtarea_PressEnter1.setFont(new Font("新細明體", Font.BOLD, 25));
+		txtarea_PressEnter1.setEditable(false);
+		txtarea_PressEnter1.setText("Please press enter after finishing editing info in table(make sure to leave the editting situation)");
+		txtarea_PressEnter1.setBounds(809, 59, 357, 133);
+		providerPanel.add(txtarea_PressEnter1);
 		getContentPane().add(tabbedPane);
 
 
@@ -376,71 +388,56 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        	for(int j = 0; custCol > j; j++){  //row1: from first column to last column
 		        		System.out.println("col欄位數:"+j+"; row列數:"+i);
 		        		System.out.println("colcount:"+custCol+"; getrowcount:"+custRow);
-		        		if ((String) customerTable.getValueAt(i, j) != null){		        			
+		        		if ((String) customerTable.getValueAt(i, j) != null){
+		        			if(j == 3 || j == 4){
+		        			switch(j){
+		        			case 3:
+		        				try
+		        				{
+		        					String tempPrice = (String) customerTable.getValueAt(i, j);
+		        					price = Double.parseDouble(tempPrice); 		        					
+		        				}
+		        				catch (NumberFormatException ex)
+		        				{
+		        					JOptionPane.showMessageDialog(null, "價格輸入不正確，請輸入數字");		        					
+		        				}
+		        				break;
+		        			case 4:
+		        				try
+		        				{
+		        					String tempCount = (String) customerTable.getValueAt(i, j);
+		        					count = Integer.parseInt(tempCount);
+		        				}
+		        				catch (NumberFormatException ex)
+		        				{
+		        					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
+		        				}
+		        				break;
+		        			} // end switch
+		        		}else{
 		        			switch(j) {
-			        			case 0:
-			        				id = (String) customerTable.getValueAt(i, j);
-			        				System.out.println("id="+id+"end");
-			        				break;
-			        				
-			        			case 1:
-			        				name = (String) customerTable.getValueAt(i, j);
-			        				System.out.println("name="+name+"end");
-			        				break;
-			        				
-			        			case 2:
-			        				brand = (String) customerTable.getValueAt(i, j);
-			        				System.out.println("brand="+brand+"end");
-			        				break;
-			        			
-			        			case 3:
-			        				try
-			        				{
-			        					String tempPrice = (String) customerTable.getValueAt(i, j);
-			        					price = Double.parseDouble(tempPrice); 		        					
-			        				}
-			        				catch (NumberFormatException ex)
-			        				{
-			        					JOptionPane.showMessageDialog(null, "價格輸入不正確，請輸入數字");		        					
-			        				}
-			        				break;
-			        			
-			        			case 4:
-			        				try
-			        				{
-			        					String tempCount = (String) customerTable.getValueAt(i, j);
-			        					count = Integer.parseInt(tempCount);
-			        				}
-			        				catch (NumberFormatException ex)
-			        				{
-			        					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
-			        				}
-			        				break;
-		        			}// end switch
-		        		}else {
-		        				switch(j){
-		        				case 0:
-			        				JOptionPane.showMessageDialog(null, "ID第"+ String.valueOf(i+1) +"行未填寫");
-		        					break;
-		        				case 1:
-			        				JOptionPane.showMessageDialog(null, "Name第"+ String.valueOf(i+1) +"行未填寫");        					
-		        					break;
-		        				case 2:
-			        				JOptionPane.showMessageDialog(null, "Brand第"+ String.valueOf(i+1) +"行未填寫");		        					
-		        					break;
-		        				case 3:
-			        				JOptionPane.showMessageDialog(null, "Price第"+ String.valueOf(i+1) +"行未填寫");
-		        					break;
-		        				case 4:
-			        				JOptionPane.showMessageDialog(null, "Count第"+ String.valueOf(i+1) +"行未填寫");
-		        					break;
-		        				} 
-//		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
-//		        				System.out.println("col欄位數:"+j+"; row列數:"+i);
-			        			break;       			
+		        			case 0:
+		        				id = (String) customerTable.getValueAt(i, j);
+		        				System.out.println("id="+id+"end");
+		        				break;
 		        				
-		        			}//end if
-	        		
+		        			case 1:
+		        				name = (String) customerTable.getValueAt(i, j);
+		        				System.out.println("name="+name+"end");
+		        				break;
+		        				
+		        			case 2:
+		        				brand = (String) customerTable.getValueAt(i, j);
+		        				System.out.println("brand="+brand+"end");
+		        				break;
+
+		        		} // end switch
+		        			} // end if j=3 or j=4
+		        		}else{
+		        			JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
+	        				System.out.println("col欄位數:"+j+"; row列數:"+i);
+	        				break;
+		        		}
 		        	}//end column
 		        	
 		        	// new SellSupply("12","coke","cosco",100,3);
@@ -453,6 +450,83 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        } //end row (customerTable)
 		        
 		        }
+//		        		if ((String) customerTable.getValueAt(i, j) != null){		        			
+//		        			switch(j) {
+//			        			case 0:
+//			        				id = (String) customerTable.getValueAt(i, j);
+//			        				System.out.println("id="+id+"end");
+//			        				break;
+//			        				
+//			        			case 1:
+//			        				name = (String) customerTable.getValueAt(i, j);
+//			        				System.out.println("name="+name+"end");
+//			        				break;
+//			        				
+//			        			case 2:
+//			        				brand = (String) customerTable.getValueAt(i, j);
+//			        				System.out.println("brand="+brand+"end");
+//			        				break;
+//			        			
+//			        			case 3:
+//			        				try
+//			        				{
+//			        					String tempPrice = (String) customerTable.getValueAt(i, j);
+//			        					price = Double.parseDouble(tempPrice); 		        					
+//			        				}
+//			        				catch (NumberFormatException ex)
+//			        				{
+//			        					JOptionPane.showMessageDialog(null, "價格輸入不正確，請輸入數字");		        					
+//			        				}
+//			        				break;
+//			        			
+//			        			case 4:
+//			        				try
+//			        				{
+//			        					String tempCount = (String) customerTable.getValueAt(i, j);
+//			        					count = Integer.parseInt(tempCount);
+//			        				}
+//			        				catch (NumberFormatException ex)
+//			        				{
+//			        					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
+//			        				}
+//			        				break;
+//		        			}// end switch
+//		        		}else {
+//		        				switch(j){
+//		        				case 0:
+//			        				JOptionPane.showMessageDialog(null, "ID第"+ String.valueOf(i+1) +"行未填寫");
+//		        					break;
+//		        				case 1:
+//			        				JOptionPane.showMessageDialog(null, "Name第"+ String.valueOf(i+1) +"行未填寫");        					
+//		        					break;
+//		        				case 2:
+//			        				JOptionPane.showMessageDialog(null, "Brand第"+ String.valueOf(i+1) +"行未填寫");		        					
+//		        					break;
+//		        				case 3:
+//			        				JOptionPane.showMessageDialog(null, "Price第"+ String.valueOf(i+1) +"行未填寫");
+//		        					break;
+//		        				case 4:
+//			        				JOptionPane.showMessageDialog(null, "Count第"+ String.valueOf(i+1) +"行未填寫");
+//		        					break;
+//		        				} 
+//		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
+//		        				System.out.println("col欄位數:"+j+"; row列數:"+i);
+//			        			break;       			
+//		        				
+//		        			}//end if
+//	        		
+//		        	}//end column
+//		        	
+//		        	// new SellSupply("12","coke","cosco",100,3);
+//		        	SellSupply item = new SellSupply(id,name,brand,price,count);
+//        			dist.addSellItem(item);
+//        			
+//        			System.out.println("Default customer Index:" + selectedIndex);
+//
+//		        	
+//		        } //end row (customerTable)
+//		        
+//		        }
 		        
 		        if (selectedIndex == 2){ //provider 的 tabbedPane
 		        int provRow = providerTable.getRowCount();
