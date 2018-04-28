@@ -39,12 +39,18 @@ public class Distributor extends Company
   	    }
 	}
 
+<<<<<<< HEAD
 	public void addNeedItem(NeedSupply item)
 	{
 		needItems.add(item);
 		//System.out.println("get id"+item.ID);
 		
 		
+=======
+	public void addNeedItem(NeedSupply ns)
+	{		
+		needItems.add(ns);     //新增	
+>>>>>>> 982d77cd9de633b15f6a1aa1bb8348edf4b71561
 		
 	}
 
