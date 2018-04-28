@@ -178,7 +178,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		companyPanel.setLayout(null);
 
 		textField_companyName = new JTextField();
-		textField_companyName.setBounds(229, 55, 136, 29);
+		textField_companyName.setBounds(218, 55, 263, 29);
 		companyPanel.add(textField_companyName);
 		textField_companyName.setColumns(10);
 
@@ -192,21 +192,21 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		companyPanel.add(labelCompanyName);
 
 		JLabel labelContactMe = new JLabel("Contact me:");
-		labelContactMe.setBounds(58, 102, 195, 23);
+		labelContactMe.setBounds(58, 120, 128, 23);
 		companyPanel.add(labelContactMe);
 
 		textField_contactMe = new JTextField();
 		textField_contactMe.setColumns(10);
-		textField_contactMe.setBounds(229, 99, 136, 29);
+		textField_contactMe.setBounds(218, 117, 263, 29);
 		companyPanel.add(textField_contactMe);
 
 		JLabel labelAddress = new JLabel("Address:");
-		labelAddress.setBounds(447, 58, 85, 23);
+		labelAddress.setBounds(58, 180, 85, 23);
 		companyPanel.add(labelAddress);
      	     		
 		textField_address = new JTextField();
 		textField_address.setColumns(10);
-		textField_address.setBounds(539, 55, 136, 29);
+		textField_address.setBounds(218, 177, 263, 29);
 		companyPanel.add(textField_address);
 
 		String [] headings1 = new String[] {"ID", "Name", "Item Type", "Price", "Available"}; //Item Needed
@@ -351,7 +351,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 //				SellSupply item1 = new SellSupply("12","coke","cosco",100,3);
 //    			dist.addSellItem(item1);
 				
-    			String fileUrl = "Distributor.xml";
+    			String fileUrl = "DistributorSample.xml";
 		        
 		    	dist.name = textField_companyName.getText();
 		    	dist.address = textField_contactMe.getText();
