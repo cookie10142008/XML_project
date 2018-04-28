@@ -365,7 +365,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 //				SellSupply item1 = new SellSupply("12","coke","cosco",100,3);
 //    			dist.addSellItem(item1);
 				
-    			String fileUrl = "DistributorSample.xml";
+    			String fileUrl = "Distributor.xml";
 		        
 		    	dist.name = textField_companyName.getText();
 		    	dist.address = textField_contactMe.getText();
