@@ -29,17 +29,15 @@ public class SellSupply extends Supply// item sold to customers
 		returnstr += "<SupplyName>"+name+"</SupplyName>";
 		returnstr += "<SupplyBrand>"+brand+"</SupplyBrand>";
 		returnstr += "<SupplyPrice>"+price+"</SupplyPrice>";
+		returnstr += "<SupplyAvailable>"+amountAvailable+"</SupplyAvailable>";
+		returnstr += "</Supply>";
+		returnstr += "</SellSupply>";
 		//returnstr += SellSupply.toXML();
 //		for (int i = 0; i < amountAvaiList.size(); i++) {
 //			returnstr += amountAvaiList.get(i).toXML();
 //		    
 //		}
-		
-		returnstr += "<SupplyAvailable>"+amountAvailable+"</SupplyAvailable>";
-		returnstr += "</Supply>";
-		returnstr += "</SellSupply>";
-		
-		
+	
 		return returnstr;
 	}
 
