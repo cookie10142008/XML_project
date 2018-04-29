@@ -32,7 +32,7 @@ public class Distributor extends Company
 	{
 		sellItems.add(item);
 //		System.out.println("get id"+item.ID);
-//		
+
 //		for(SellSupply Item : sellItems) {
 //  	        System.out.println("ID:"+Item.ID);
 //  	        

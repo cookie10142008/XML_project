@@ -51,7 +51,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
     public static JTable customerTable;
     public static JTable providerTable;
     public static JTabbedPane tabbedPane;  //line 290
-    public static DefaultTableModel custTable;
+    public static DefaultTableModel custTable, provTable;
     
     public void init()
     {
@@ -105,15 +105,13 @@ public class DistributorApplet extends JApplet implements ActionListener{
 
 
 	public void makeGUI(){
-		
-		
+	
 		//
 		String[] headings = new String[] { "ID", "Name", "Item Type", "Price", "Available" }; // Item Sold
 		// customerTable的資料
 		Object[][] data = new Object[][] { 
-			{ null, null, null, null, null},
-			// {"Item X","50.5","300"},
-			// {"Item Y","42.2","200"}
+			{ null, null, null, null, null}
+		
 		};
 
 		JPanel customer_Panel = new JPanel();
@@ -214,8 +212,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		String [] headings1 = new String[] {"ID", "Name", "Item Type", "Price", "Available"}; //Item Needed
 		//providerTable的資料
 		Object[][] data1 = new Object[][]{
-			{"Item X", "250", null, null, null},
-			{"Item Y", "300", null, null, null}
+			{ null, null, null, null, null}
+			
 		};
 
 
@@ -230,7 +228,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		providerPanel.add(providerScrollPane);
 
 		//用DefaultTableModel建立providerTable
-		DefaultTableModel provTable;  
+		
 		provTable = new DefaultTableModel(data1, headings1); 
 		providerTable = new JTable(provTable);     	    
 		customerScrollPane.setViewportView(customerTable);
