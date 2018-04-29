@@ -51,7 +51,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
     public static JTable customerTable;
     public static JTable providerTable;
     public static JTabbedPane tabbedPane;  //line 290
-
+    public static DefaultTableModel custTable;
     
     public void init()
     {
@@ -127,7 +127,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		customer_Panel.add(customerScrollPane);
 		//用DefaultTableModel建立customerTable
 
-		DefaultTableModel custTable = new DefaultTableModel(data, headings); 
+		//DefaultTableModel custTable = new DefaultTableModel(data, headings); 
+		custTable = new DefaultTableModel(data, headings); 
 		customerTable = new JTable(custTable);
 		customerTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		customerScrollPane.setViewportView(customerTable);
