@@ -373,8 +373,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		    	dist.contact = textField_address.getText();
 //		    	toXmlFile(dist,fileUrl);
 			    
-//		    	int provRow = providerTable.getRowCount(); //get Row Count = 5
-//		    	int provCol = providerTable.getColumnCount();  //get Column Count = 5;
 		    	
 		    	int custRow = customerTable.getRowCount(); //get Row Count = 5
 		        int custCol = customerTable.getColumnCount();  //get Column Count = 5
@@ -433,11 +431,12 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        			} // end if
 		        		} // end column
 		        		
+		        		// new SellSupply		        		
 		              	SellSupply item = new SellSupply(id,name,brand,price,count);
 	        			dist.addSellItem(item);
 		              	
 		        	} // end row
-		        }
+		        };
 //		        		if ((String) customerTable.getValueAt(i, j) != null){		        			
 //		        			switch(j) {
 //			        			case 0:
@@ -508,69 +507,73 @@ public class DistributorApplet extends JApplet implements ActionListener{
 //		        	// new SellSupply("12","coke","cosco",100,3);
 //		        	SellSupply item = new SellSupply(id,name,brand,price,count);
 //        			dist.addSellItem(item);
-//        			
-//        			System.out.println("Default customer Index:" + selectedIndex);
-//
-//		        	
+		        	
 //		        } //end row (customerTable)
 //		        
 //		        }
 		        
-		        int provRow = providerTable.getRowCount();
-		        int provCol = providerTable.getColumnCount();  //get Column Count = 5
-		        if (selectedIndex == 1){ //customer tabberPane
+		       
+		        if (selectedIndex == 2){ //provider tabberPane
+		        	int provRow = providerTable.getRowCount();
+				    int provCol = providerTable.getColumnCount();  //get Column Count = 5
+		        	System.out.println("provider table");
 		        	providerOuterLoop:
 		        	for(int i = 0; provRow > i; i++){
-//		        		customerInnerLoop:
 		        		for(int j = 0; provCol > j; j++){
-		        			if ((String) customerTable.getValueAt(i, j) != null){
+		        			if ((String) providerTable.getValueAt(i, j) != null){
 		        				switch(j){
 		        				case 0:
 		        					id = (String) providerTable.getValueAt(i, j);
+		        					System.out.println("id="+id+" "+i+","+j);
 		        					break;
 		        				case 1:
 		        					name = (String) providerTable.getValueAt(i, j);
+		          					System.out.println("name="+name+" "+i+","+j);
 		        					break;
 		        				case 2:
 		        					brand = (String) providerTable.getValueAt(i, j);
+		          					System.out.println("brand="+brand+" "+i+","+j);
 		        					break;
-		        				case 3:	
+		        				case 3:
 		        					try
 			        				{
 			        					String tempPrice = (String) providerTable.getValueAt(i, j);
-			        					price = Double.parseDouble(tempPrice); 		        					
+			        					price = Double.parseDouble(tempPrice);
+			         					System.out.println("price="+price+" "+i+","+j);
+
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
 			        					JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
 			        					break providerOuterLoop;
 			        				}
-//		        					break customerOuterLoop;
-//		        					break;
-		        				case 4:	       
-			        				try
+		        				case 4:
+		        					try
 			        				{
 			        					String tempCount = (String) providerTable.getValueAt(i, j);
 			        					count = Integer.parseInt(tempCount);
+			          					System.out.println("count="+count+" "+i+","+j);
+
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
 			        					JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
 			        					break providerOuterLoop;
 			        				}
-//		        					break customerOuterLoop;
-//			        				break;
-		        				} // end switch
+		        				
+		        				}// end switch
 		        			}else{
 		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
-		        				break providerOuterLoop;	        				
-		        			} // end if
-		        		} // end column
+		        				break providerOuterLoop;		        				
+		        			}// end if
+		        		}// end column
 		        		
-		              	NeedSupply item = new NeedSupply(id,name,brand,price,count);
-	        			dist.addNeedItem(item);
-		              	
-		        	} // end row
+		        		//new NeedSupply
+		        		NeedSupply item = new NeedSupply(id,name,brand,price,count);
+	        			dist.addNeedItem(item); 
+	        			
+		        	}// end row
+
 		        }		        
 		        
 //		        if (selectedIndex == 2){ //provider 的 tabbedPane

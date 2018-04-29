@@ -20,9 +20,9 @@ public class Distributor extends Company
 		//sellItems.add(item1);
 //		sellItems.add(item2);
 		
-		NeedSupply item3 = new NeedSupply("12","cookie","7-11",100,3000);
+//		NeedSupply item3 = new NeedSupply("12","cookie","7-11",100,3000);
 //		NeedSupply item4 = new NeedSupply("11","chocolate","7-11",20,5000);
-		needItems.add(item3);
+//		needItems.add(item3);
 //		needItems.add(item4);
 		
 		
@@ -31,12 +31,12 @@ public class Distributor extends Company
 	public void addSellItem(SellSupply item)
 	{
 		sellItems.add(item);
-		System.out.println("get id"+item.ID);
-		
-		for(SellSupply Item : sellItems) {
-  	        System.out.println("ID:"+Item.ID);
-  	        
-  	    }
+//		System.out.println("get id"+item.ID);
+//		
+//		for(SellSupply Item : sellItems) {
+//  	        System.out.println("ID:"+Item.ID);
+//  	        
+//  	    }
 	}
 
 
