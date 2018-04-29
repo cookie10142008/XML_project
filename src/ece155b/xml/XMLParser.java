@@ -151,14 +151,10 @@ public class XMLParser extends DefaultHandler {
 			
 		}
 		else if(tagName.equals ("SupplyAvailable")) {
-		    
-			if(supplyType.equals("sell")) {  // judge item needed or sold
-				sellSupply.amountAvailable = Integer.parseInt(value);
-			}
-			else if(supplyType.equals("need")) {
-				needSupply.amountNeeded = Integer.parseInt(value);
-			}
-			
+		    sellSupply.amountAvailable = Integer.parseInt(value);
+		}
+		else if(tagName.equals ("SupplyNeeded")) {
+			needSupply.amountNeeded = Integer.parseInt(value);
 		}
 		// 	Add sell supply and need supply objects
 		else if(tagName.equals ("SellSupply")) {
@@ -166,11 +162,13 @@ public class XMLParser extends DefaultHandler {
 		}
 		else if(tagName.equals ("NeedSupply")) {
 			distributor.addNeedItem(needSupply);
+			System.out.println("need");
 		}
 		else if(tagName.equals ("Distributor")) {
 			
   			System.out.println(tagName);
-  			presentInTable();
+  			presentInCustomerTable();
+  			presentInProviderTable();
 		}
 		
 
@@ -179,7 +177,7 @@ public class XMLParser extends DefaultHandler {
 
 	}
   	
-  	private void presentInTable() //get item from sellSupply
+	private void presentInCustomerTable() //get item from sellSupply
   	{
   		
   		//problem: can't print all items
@@ -220,25 +218,65 @@ public class XMLParser extends DefaultHandler {
 		    				DistributorApplet.customerTable.setValueAt(Distributor.sellItems.get(index).amountAvailable,i, j);
 		    				break;
 		    				
-	    			
 	        		} //end switch
         		}// end if
-        		
         	}//end column
         	index++;
         }//end row
         
-  		 
-//  		for (int i = 0; i < Distributor.sellItems.size(); i++) {
-//  			System.out.println(Distributor.sellItems.get(i).ID);
-//		    
-//		} 
-  		
-  		
-  		
-  	}// end presentInTable function
+        
+        
+  	}// end presentInCustomerTable function
   	
-  	
+	private void presentInProviderTable() //get item from needSupply
+	{
+		System.out.println(Distributor.needItems.size() + "*need items");
+  		int itemCount = Distributor.sellItems.size();
+  		int index = 0;
+  		
+  		for(NeedSupply item : Distributor.needItems) {
+  	        System.out.println("ID:"+item.ID);
+  	        DistributorApplet.provTable.addRow(new Vector()); // new a blank row
+  	    }
+  		DistributorApplet.provTable.removeRow(0); // remove the original first row 
+//  		
+  		int provRow = DistributorApplet.provTable.getRowCount(); //get Row Count = 5
+        int provCol = DistributorApplet.provTable.getColumnCount();  //get Column Count = 5
+//  		
+        for(int i = 0; provRow > i; i++){   //from first row to last row
+        	for(int j = 0; provCol > j; j++){  //from first column to last column  		
+        		if(index < itemCount) {
+	        		switch(j) {
+		    			case 0:
+		    				DistributorApplet.providerTable.setValueAt(Distributor.needItems.get(index).ID,i, j);
+		    				break;
+		    				
+		    			case 1:
+		    				DistributorApplet.providerTable.setValueAt(Distributor.needItems.get(index).name,i, j);
+		    				break;
+		    				
+		    			case 2:
+		    				DistributorApplet.providerTable.setValueAt(Distributor.needItems.get(index).brand,i, j);
+		    				break;
+		    				
+		    			case 3:
+		    				DistributorApplet.providerTable.setValueAt(Distributor.needItems.get(index).price,i, j);
+		    				break;
+		    				
+		    			case 4:
+		    				DistributorApplet.providerTable.setValueAt(Distributor.needItems.get(index).amountNeeded,i, j);
+		    				break;
+		    				
+	        		} //end switch
+        		}// end if
+        	}//end column
+        	index++;
+        }//end row
+		
+		
+		
+		
+	}// end presentInProviderTable function
   	
   	
   	
