@@ -360,12 +360,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
         	// !!! problem: no blank row + row can't be in typing situation 
 			case "Save Information":
 				System.out.println("save info");
-				dist.sellItems.removeAllElements(); // remove all items in vector sellItems
-//				SellSupply item1 = new SellSupply("12","coke","cosco",100,3);
-//    			dist.addSellItem(item1);
+				dist.sellItems.removeAllElements(); // remove all items in vector sellItems	, needItems		
+				dist.needItems.removeAllElements();
 				
     			String fileUrl = "Distributor.xml";
-		        
+		        // get company info
 		    	dist.name = textField_companyName.getText();
 		    	dist.address = textField_contactMe.getText();
 		    	dist.contact = textField_address.getText();
@@ -380,8 +379,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 //		        System.out.println("col欄位數:"+col+"; row列數:"+row);
 		        int selectedIndex = tabbedPane.getSelectedIndex();        			
     					        
-		        if (selectedIndex == 1){ //customer tabberPane
-		        	customerOuterLoop:
+		      //  if (selectedIndex == 1){ //customer tabberPane   !!! can't add index selected !!!
+ 		        	customerOuterLoop:
 		        	for(int i = 0; custRow > i; i++){
 //		        		customerInnerLoop:
 		        		for(int j = 0; custCol > j; j++){
@@ -424,7 +423,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 //			        				break;
 		        				} // end switch
 		        			}else{
-		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
+		        				JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
 		        				break customerOuterLoop;	        				
 		        			} // end if
 		        		} // end column
@@ -434,7 +433,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	        			dist.addSellItem(item);
 		              	
 		        	} // end row
-		        };
+		//        }; can't add index selected
 //		        		if ((String) customerTable.getValueAt(i, j) != null){		        			
 //		        			switch(j) {
 //			        			case 0:
@@ -511,7 +510,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 //		        }
 		        
 		       
-		        if (selectedIndex == 2){ //provider tabberPane
+		    //    if (selectedIndex == 2){ //provider tabberPane                         // not add !!!
 		        	int provRow = providerTable.getRowCount();
 				    int provCol = providerTable.getColumnCount();  //get Column Count = 5
 		        	System.out.println("provider table");
@@ -561,7 +560,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				
 		        				}// end switch
 		        			}else{
-		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
+		        				JOptionPane.showMessageDialog(null, "Provider的第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
 		        				break providerOuterLoop;		        				
 		        			}// end if
 		        		}// end column
@@ -572,7 +571,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	        			
 		        	}// end row
 
-		        }		        
+		    //    } //end selectedIndex
 		        
 //		        if (selectedIndex == 2){ //provider 的 tabbedPane
 //		        int provRow = providerTable.getRowCount();
@@ -637,7 +636,9 @@ public class DistributorApplet extends JApplet implements ActionListener{
 //		        
 //		        }
 		        
-		        toXmlFile(dist,fileUrl);				
+		        toXmlFile(dist,fileUrl);		
+				JOptionPane.showMessageDialog(null, "存檔成功");
+
 				break;
 				
 			case "Load Information":
