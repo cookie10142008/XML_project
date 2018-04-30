@@ -152,14 +152,15 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		JButton customerDelRowBtn = new JButton("Delete selected rows"); //custermoTable刪除列
 		customerDelRowBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int i = customerTable.getSelectedRow();
-
-				if (i >= 0){
-					custTable.removeRow(i);
-				}
-				else{
+				
+				int count[] = customerTable.getSelectedRows(); //刪除多行
+				if(count.length <= 0){
 					JOptionPane.showMessageDialog(null, "Unable to Delete");
-				}     	    		
+				}else{
+					for(int i = 0; i < count.length; i++){
+						custTable.removeRow(customerTable.getSelectedRow());
+					}
+				} 	    		
 			}
 		});
 		customerDelRowBtn.setBounds(337, 371, 243, 31);
@@ -249,23 +250,15 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
 		pro_delRowBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				int i = providerTable.getSelectedRow();
-
-				if (i >= 0){
-					provTable.removeRow(i);
+				
+				int count[] = providerTable.getSelectedRows(); //刪除多行
+				if(count.length <= 0){
+					JOptionPane.showMessageDialog(null, "Unable to delete");
+				}else{
+					for(int i = 0; i < count.length; i++){
+						provTable.removeRow(providerTable.getSelectedRow());
+					}
 				}
-				else{
-					JOptionPane.showMessageDialog(null, "Unable to Delete");
-				}
-				/*  		DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
-
-     	    		try{
-     	    		int SelectedRowIndex = customerTable.getSelectedRow();
-     	    		model.removeRow(SelectedRowIndex);
-     	    		}catch (Exception ex){
-     	    			JOptionPane.showMessageDialog(null,  ex);
-     	    		} */
 			}
 		});
 		pro_delRowBtn.setBounds(337, 371, 243, 31);
@@ -507,8 +500,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        	JOptionPane.showMessageDialog(null, "存檔成功");
 		        	toXmlFile(dist,fileUrl);	
 		        }
-		        	
-		        
+		        			        
 				break;
 				
 			case "Load Information":
