@@ -364,7 +364,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 				dist.needItems.removeAllElements();
 				
     			String fileUrl = "Distributor.xml";
-    			boolean customerSave = false, providerSave = false;
+    			boolean customerSave = false;
+    			boolean providerSave = false;
 		        // get company info
 		    	dist.name = textField_companyName.getText();
 		    	dist.address = textField_contactMe.getText();
@@ -378,7 +379,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        double price = 0;
 		        int count = 0;
 //		        System.out.println("col欄位數:"+col+"; row列數:"+row);
-		        int selectedIndex = tabbedPane.getSelectedIndex();        			
+		        int selectedIndex = tabbedPane.getSelectedIndex(); 
     					        
 		      //  if (selectedIndex == 1){ //customer tabberPane   !!! can't add index selected !!!
  		        	customerOuterLoop:
@@ -404,7 +405,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
-			        					JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
+			        					JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
+			        					customerSave = false;
 			        					break customerOuterLoop;
 			        				}
 //		        					break customerOuterLoop;
@@ -418,7 +420,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
-			        					JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
+			        					JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
+			        					customerSave = false;
 			        					break customerOuterLoop;
 			        				}
 //		        					break customerOuterLoop;
@@ -426,6 +429,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				} // end switch
 		        			}else{
 		        				JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
+	        					customerSave = false;
 		        				break customerOuterLoop;	        				
 		        			} // end if
 		        		} // end column
@@ -543,7 +547,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
-			        					JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
+			        					JOptionPane.showMessageDialog(null, "Provider的第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
+			        					providerSave = false;
 			        					break providerOuterLoop;
 			        				}
 		        				case 4:
@@ -551,19 +556,21 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				{
 			        					String tempCount = (String) providerTable.getValueAt(i, j);
 			        					count = Integer.parseInt(tempCount);
-			          					System.out.println("count="+count+" "+i+","+j);
+//			          					System.out.println("count="+count+" "+i+","+j);
 			          					providerSave = true;
 
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
-			        					JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
+			        					JOptionPane.showMessageDialog(null, "Provider的第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
+			        					providerSave = false;
 			        					break providerOuterLoop;
 			        				}
 		        				
 		        				}// end switch
 		        			}else{
 		        				JOptionPane.showMessageDialog(null, "Provider的第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
+		        				providerSave = false;
 		        				break providerOuterLoop;		        				
 		        			}// end if
 		        		}// end column
@@ -638,6 +645,9 @@ public class DistributorApplet extends JApplet implements ActionListener{
 //		        } // end row (providerTable)
 //		        
 //		        }
+		        
+		        System.out.println("providerSave: "+providerSave +" "+"customerSave: " + customerSave);
+		        
 		        if(providerSave && customerSave) {
 		        	JOptionPane.showMessageDialog(null, "存檔成功");
 		        	toXmlFile(dist,fileUrl);	
