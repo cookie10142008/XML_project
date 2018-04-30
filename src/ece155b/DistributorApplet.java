@@ -364,6 +364,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 				dist.needItems.removeAllElements();
 				
     			String fileUrl = "Distributor.xml";
+    			boolean customerSave = false, providerSave = false;
 		        // get company info
 		    	dist.name = textField_companyName.getText();
 		    	dist.address = textField_contactMe.getText();
@@ -413,6 +414,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				{
 			        					String tempCount = (String) customerTable.getValueAt(i, j);
 			        					count = Integer.parseInt(tempCount);
+			        					customerSave = true;
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
@@ -550,6 +552,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        					String tempCount = (String) providerTable.getValueAt(i, j);
 			        					count = Integer.parseInt(tempCount);
 			          					System.out.println("count="+count+" "+i+","+j);
+			          					providerSave = true;
 
 			        				}
 			        				catch (NumberFormatException ex)
@@ -635,10 +638,12 @@ public class DistributorApplet extends JApplet implements ActionListener{
 //		        } // end row (providerTable)
 //		        
 //		        }
+		        if(providerSave && customerSave) {
+		        	JOptionPane.showMessageDialog(null, "存檔成功");
+		        	toXmlFile(dist,fileUrl);	
+		        }
+		        	
 		        
-		        toXmlFile(dist,fileUrl);		
-				JOptionPane.showMessageDialog(null, "存檔成功");
-
 				break;
 				
 			case "Load Information":
