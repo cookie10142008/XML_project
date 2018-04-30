@@ -211,13 +211,13 @@ public class XMLParser extends DefaultHandler {
 		    				break;
 		    				
 		    			case 3:
-		    				//DistributorApplet.customerTable.setValueAt(Distributor.sellItems.get(index).price,i, j);
-		    				DistributorApplet.customerTable.setValueAt(String.valueOf(Distributor.sellItems.get(index).price),i, j);
+		    				DistributorApplet.customerTable.setValueAt(Distributor.sellItems.get(index).price,i, j);
+		    				//DistributorApplet.customerTable.setValueAt(String.valueOf(Distributor.sellItems.get(index).price),i, j);
 		    				break;
 		    				
 		    			case 4:
-		    				//DistributorApplet.customerTable.setValueAt(Distributor.sellItems.get(index).amountAvailable,i, j);
-		    				DistributorApplet.customerTable.setValueAt(String.valueOf(Distributor.sellItems.get(index).amountAvailable),i, j);
+		    				DistributorApplet.customerTable.setValueAt(Distributor.sellItems.get(index).amountAvailable,i, j);
+		    				//DistributorApplet.customerTable.setValueAt(String.valueOf(Distributor.sellItems.get(index).amountAvailable),i, j);
 		    				break;
 		    				
 	        		} //end switch
@@ -263,11 +263,15 @@ public class XMLParser extends DefaultHandler {
 		    				break;
 		    				
 		    			case 3:
+		    				//DistributorApplet.providerTable.setValueAt(String.valueOf(Distributor.needItems.get(index).price),i, j);
 		    				DistributorApplet.providerTable.setValueAt(Distributor.needItems.get(index).price,i, j);
+		    				
 		    				break;
 		    				
 		    			case 4:
+		    				//DistributorApplet.providerTable.setValueAt(String.valueOf(Distributor.needItems.get(index).amountNeeded),i, j);
 		    				DistributorApplet.providerTable.setValueAt(Distributor.needItems.get(index).amountNeeded,i, j);
+		    				
 		    				break;
 		    				
 	        		} //end switch

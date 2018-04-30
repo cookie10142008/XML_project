@@ -391,7 +391,9 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        					try
 			        				{
 			        					String tempPrice = String.valueOf( customerTable.getValueAt(i, j) ) ;
-			        					price = Double.parseDouble(tempPrice); 		        					
+			        					price = Double.parseDouble(tempPrice); 		 
+			        					System.out.println("test:"+String.valueOf(i+1)+"行"+price);
+			        					
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
@@ -404,8 +406,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				case 4:	       
 			        				try
 			        				{
+
 			        					String tempCount = String.valueOf( customerTable.getValueAt(i, j) );
-			        					count = Integer.parseInt(tempCount);
+			        					System.out.println("test1:"+String.valueOf(i+1)+"行"+customerTable.getValueAt(i, j));
+			        					count = (int)Double.parseDouble(tempCount);//  ???
+			        					System.out.println("test2:"+String.valueOf(i+1)+"行"+count);
 			        					customerSave = true;
 			        				}
 			        				catch (NumberFormatException ex)
@@ -453,7 +458,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				case 3:
 		        					try
 			        				{
-			        					String tempPrice = (String) providerTable.getValueAt(i, j);
+			        					String tempPrice = String.valueOf( providerTable.getValueAt(i, j) ); //String.valueOf = (string) ??
 			        					price = Double.parseDouble(tempPrice);
 			         					System.out.println("price="+price+" "+i+","+j);
 
@@ -467,9 +472,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				case 4:
 		        					try
 			        				{
-			        					String tempCount = (String) providerTable.getValueAt(i, j);
-			        					count = Integer.parseInt(tempCount);
-//			          					System.out.println("count="+count+" "+i+","+j);
+			        					String tempCount = String.valueOf( providerTable.getValueAt(i, j) );
+			        					//count = Integer.parseInt(tempCount);
+			          					count = (int)Double.parseDouble(tempCount);
+			        					System.out.println("count="+count+" "+i+","+j);
 			          					providerSave = true;
 
 			        				}
