@@ -152,14 +152,15 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		JButton customerDelRowBtn = new JButton("Delete selected rows"); //custermoTable刪除列
 		customerDelRowBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int i = customerTable.getSelectedRow();
-
-				if (i >= 0){
-					custTable.removeRow(i);
-				}
-				else{
+				
+				int count[] = customerTable.getSelectedRows(); //刪除多行
+				if(count.length <= 0){
 					JOptionPane.showMessageDialog(null, "Unable to Delete");
-				}     	    		
+				}else{
+					for(int i = 0; i < count.length; i++){
+						custTable.removeRow(customerTable.getSelectedRow());
+					}
+				} 	    		
 			}
 		});
 		customerDelRowBtn.setBounds(337, 371, 243, 31);
@@ -249,23 +250,15 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
 		pro_delRowBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				int i = providerTable.getSelectedRow();
-
-				if (i >= 0){
-					provTable.removeRow(i);
+				
+				int count[] = providerTable.getSelectedRows(); //刪除多行
+				if(count.length <= 0){
+					JOptionPane.showMessageDialog(null, "Unable to delete");
+				}else{
+					for(int i = 0; i < count.length; i++){
+						provTable.removeRow(providerTable.getSelectedRow());
+					}
 				}
-				else{
-					JOptionPane.showMessageDialog(null, "Unable to Delete");
-				}
-				/*  		DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
-
-     	    		try{
-     	    		int SelectedRowIndex = customerTable.getSelectedRow();
-     	    		model.removeRow(SelectedRowIndex);
-     	    		}catch (Exception ex){
-     	    			JOptionPane.showMessageDialog(null,  ex);
-     	    		} */
 			}
 		});
 		pro_delRowBtn.setBounds(337, 371, 243, 31);
@@ -364,12 +357,12 @@ public class DistributorApplet extends JApplet implements ActionListener{
 				dist.needItems.removeAllElements();
 				
     			String fileUrl = "Distributor.xml";
-    			boolean customerSave = false, providerSave = false;
+    			boolean customerSave = false;
+    			boolean providerSave = false;
 		        // get company info
 		    	dist.name = textField_companyName.getText();
 		    	dist.address = textField_contactMe.getText();
 		    	dist.contact = textField_address.getText();
-//		    	toXmlFile(dist,fileUrl);
 			    
 		    	
 		    	int custRow = customerTable.getRowCount(); //get Row Count = 5
@@ -378,9 +371,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        double price = 0;
 		        int count = 0;
 //		        System.out.println("col欄位數:"+col+"; row列數:"+row);
-		        int selectedIndex = tabbedPane.getSelectedIndex();        			
     					        
-		      //  if (selectedIndex == 1){ //customer tabberPane   !!! can't add index selected !!!
  		        	customerOuterLoop:
 		        	for(int i = 0; custRow > i; i++){
 //		        		customerInnerLoop:
@@ -405,6 +396,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				catch (NumberFormatException ex)
 			        				{
 			        					JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
+<<<<<<< HEAD
+=======
+			        					customerSave = false;
+>>>>>>> 2427c28c5236a691a4c6a76acd8c2007f83c8831
 			        					break customerOuterLoop;
 			        				}
 //		        					break customerOuterLoop;
@@ -419,6 +414,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				catch (NumberFormatException ex)
 			        				{
 			        					JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
+<<<<<<< HEAD
+=======
+			        					customerSave = false;
+>>>>>>> 2427c28c5236a691a4c6a76acd8c2007f83c8831
 			        					break customerOuterLoop;
 			        				}
 //		        					break customerOuterLoop;
@@ -426,6 +425,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				} // end switch
 		        			}else{
 		        				JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
+	        					customerSave = false;
 		        				break customerOuterLoop;	        				
 		        			} // end if
 		        		} // end column
@@ -435,84 +435,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	        			dist.addSellItem(item);
 		              	
 		        	} // end row
-		//        }; can't add index selected
-//		        		if ((String) customerTable.getValueAt(i, j) != null){		        			
-//		        			switch(j) {
-//			        			case 0:
-//			        				id = (String) customerTable.getValueAt(i, j);
-//			        				System.out.println("id="+id+"end");
-//			        				break;
-//			        				
-//			        			case 1:
-//			        				name = (String) customerTable.getValueAt(i, j);
-//			        				System.out.println("name="+name+"end");
-//			        				break;
-//			        				
-//			        			case 2:
-//			        				brand = (String) customerTable.getValueAt(i, j);
-//			        				System.out.println("brand="+brand+"end");
-//			        				break;
-//			        			
-//			        			case 3:
-//			        				try
-//			        				{
-//			        					String tempPrice = (String) customerTable.getValueAt(i, j);
-//			        					price = Double.parseDouble(tempPrice); 		        					
-//			        				}
-//			        				catch (NumberFormatException ex)
-//			        				{
-//			        					JOptionPane.showMessageDialog(null, "價格輸入不正確，請輸入數字");		        					
-//			        				}
-//			        				break;
-//			        			
-//			        			case 4:
-//			        				try
-//			        				{
-//			        					String tempCount = (String) customerTable.getValueAt(i, j);
-//			        					count = Integer.parseInt(tempCount);
-//			        				}
-//			        				catch (NumberFormatException ex)
-//			        				{
-//			        					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
-//			        				}
-//			        				break;
-//		        			}// end switch
-//		        		}else {
-//		        				switch(j){
-//		        				case 0:
-//			        				JOptionPane.showMessageDialog(null, "ID第"+ String.valueOf(i+1) +"行未填寫");
-//		        					break;
-//		        				case 1:
-//			        				JOptionPane.showMessageDialog(null, "Name第"+ String.valueOf(i+1) +"行未填寫");        					
-//		        					break;
-//		        				case 2:
-//			        				JOptionPane.showMessageDialog(null, "Brand第"+ String.valueOf(i+1) +"行未填寫");		        					
-//		        					break;
-//		        				case 3:
-//			        				JOptionPane.showMessageDialog(null, "Price第"+ String.valueOf(i+1) +"行未填寫");
-//		        					break;
-//		        				case 4:
-//			        				JOptionPane.showMessageDialog(null, "Count第"+ String.valueOf(i+1) +"行未填寫");
-//		        					break;
-//		        				} 
-//		        				JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
-//		        				System.out.println("col欄位數:"+j+"; row列數:"+i);
-//			        			break;       			
-//		        				
-//		        			}//end if
-//	        		
-//		        	}//end column
-//		        	
-//		        	// new SellSupply("12","coke","cosco",100,3);
-//		        	SellSupply item = new SellSupply(id,name,brand,price,count);
-//        			dist.addSellItem(item);
-		        	
-//		        } //end row (customerTable)
-//		        
-//		        }
-		        
-		       
-		    //    if (selectedIndex == 2){ //provider tabberPane                         // not add !!!
+		       		       
 		        	int provRow = providerTable.getRowCount();
 				    int provCol = providerTable.getColumnCount();  //get Column Count = 5
 		        	System.out.println("provider table");
@@ -543,7 +466,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
-			        					JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
+			        					JOptionPane.showMessageDialog(null, "Provider的第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
+			        					providerSave = false;
 			        					break providerOuterLoop;
 			        				}
 		        				case 4:
@@ -551,19 +475,21 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				{
 			        					String tempCount = (String) providerTable.getValueAt(i, j);
 			        					count = Integer.parseInt(tempCount);
-			          					System.out.println("count="+count+" "+i+","+j);
+//			          					System.out.println("count="+count+" "+i+","+j);
 			          					providerSave = true;
 
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
-			        					JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
+			        					JOptionPane.showMessageDialog(null, "Provider的第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
+			        					providerSave = false;
 			        					break providerOuterLoop;
 			        				}
 		        				
 		        				}// end switch
 		        			}else{
 		        				JOptionPane.showMessageDialog(null, "Provider的第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
+		        				providerSave = false;
 		        				break providerOuterLoop;		        				
 		        			}// end if
 		        		}// end column
@@ -573,77 +499,14 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	        			dist.addNeedItem(item); 
 	        			
 		        	}// end row
-
-		    //    } //end selectedIndex
 		        
-//		        if (selectedIndex == 2){ //provider 的 tabbedPane
-//		        int provRow = providerTable.getRowCount();
-//		        int provCol = providerTable.getColumnCount();  //get Column Count = 5
-//		        for(int i = 0; provRow > i; i++){
-//		        	for(int j = 0; provCol > j; j++){
-//		        		if ((String) providerTable.getValueAt(i, j) != null){
-//		        			switch(j) {
-//		        			case 0:
-//		        				id = (String) providerTable.getValueAt(i, j);
-////		        				System.out.println("id="+id+"end");
-//		        				break;
-//		        				
-//		        			case 1:
-//		        				name = (String) providerTable.getValueAt(i, j);
-////		        				System.out.println("name="+name+"end");
-//		        				break;
-//		        				
-//		        			case 2:
-//		        				brand = (String) providerTable.getValueAt(i, j);
-////		        				System.out.println("brand="+brand+"end");
-//		        				break;
-//		        			
-//		        			case 3:
-//		        				try
-//		        				{
-//		        					String tempPrice = (String) providerTable.getValueAt(i, j);
-//		        					price = Double.parseDouble(tempPrice); 		        					
-//		        				}
-//		        				catch (NumberFormatException ex)
-//		        				{
-//		        					JOptionPane.showMessageDialog(null, "價格輸入不正確，請輸入數字");		        					
-//		        				}
-//		        				break;
-//		        			
-//		        			case 4:
-//		        				try
-//		        				{
-//		        					String tempCount = (String) providerTable.getValueAt(i, j);
-//		        					count = Integer.parseInt(tempCount);
-//		        				}
-//		        				catch (NumberFormatException ex)
-//		        				{
-//		        					JOptionPane.showMessageDialog(null, "數量輸入不正確，請輸入數字");
-//		        				}
-//		        				break;
-//		        				}// end switch
-//		        		}else{
-//		        			JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
-//		        			break;
-//		        		} // end if
-//		        		
-//		        	} // end column
-//		        	
-//		        	// new NeedSupply
-//		        	NeedSupply item = new NeedSupply(id, name, brand, price, count);
-//		        	dist.addNeedItem(item);
-//		        	
-//		        	System.out.println("Default provider Index:" + selectedIndex);
-//		        	
-//		        } // end row (providerTable)
-//		        
-//		        }
+		        System.out.println("providerSave: "+providerSave +" "+"customerSave: " + customerSave);
+		        
 		        if(providerSave && customerSave) {
 		        	JOptionPane.showMessageDialog(null, "存檔成功");
 		        	toXmlFile(dist,fileUrl);	
 		        }
-		        	
-		        
+		        			        
 				break;
 				
 			case "Load Information":
