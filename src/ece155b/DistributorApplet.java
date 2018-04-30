@@ -396,10 +396,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				catch (NumberFormatException ex)
 			        				{
 			        					JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
-<<<<<<< HEAD
-=======
 			        					customerSave = false;
->>>>>>> 2427c28c5236a691a4c6a76acd8c2007f83c8831
 			        					break customerOuterLoop;
 			        				}
 //		        					break customerOuterLoop;
@@ -414,10 +411,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			        				catch (NumberFormatException ex)
 			        				{
 			        					JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
-<<<<<<< HEAD
-=======
 			        					customerSave = false;
->>>>>>> 2427c28c5236a691a4c6a76acd8c2007f83c8831
 			        					break customerOuterLoop;
 			        				}
 //		        					break customerOuterLoop;
