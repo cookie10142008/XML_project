@@ -385,7 +385,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        	for(int i = 0; custRow > i; i++){
 //		        		customerInnerLoop:
 		        		for(int j = 0; custCol > j; j++){
-		        			if ((String) customerTable.getValueAt(i, j) != null){
+		        			if ( customerTable.getValueAt(i, j) != null){
 		        				switch(j){
 		        				case 0:
 		        					id = (String) customerTable.getValueAt(i, j);
@@ -399,12 +399,12 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				case 3:	
 		        					try
 			        				{
-			        					String tempPrice = (String) customerTable.getValueAt(i, j);
+			        					String tempPrice = String.valueOf( customerTable.getValueAt(i, j) ) ;
 			        					price = Double.parseDouble(tempPrice); 		        					
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
-			        					JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
+			        					JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
 			        					break customerOuterLoop;
 			        				}
 //		        					break customerOuterLoop;
@@ -412,13 +412,13 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        				case 4:	       
 			        				try
 			        				{
-			        					String tempCount = (String) customerTable.getValueAt(i, j);
+			        					String tempCount = String.valueOf( customerTable.getValueAt(i, j) );
 			        					count = Integer.parseInt(tempCount);
 			        					customerSave = true;
 			        				}
 			        				catch (NumberFormatException ex)
 			        				{
-			        					JOptionPane.showMessageDialog(null, "第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
+			        					JOptionPane.showMessageDialog(null, "Customer的第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
 			        					break customerOuterLoop;
 			        				}
 //		        					break customerOuterLoop;
@@ -519,7 +519,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        	providerOuterLoop:
 		        	for(int i = 0; provRow > i; i++){
 		        		for(int j = 0; provCol > j; j++){
-		        			if ((String) providerTable.getValueAt(i, j) != null){
+		        			if ( providerTable.getValueAt(i, j) != null){
 		        				switch(j){
 		        				case 0:
 		        					id = (String) providerTable.getValueAt(i, j);
