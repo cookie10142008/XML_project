@@ -179,7 +179,7 @@ public class XMLParser extends DefaultHandler {
   	
 	private void presentInCustomerTable() //get item from sellSupply
   	{
-  		
+		DistributorApplet.custTable.setRowCount(0);  //set original 0 row 
   		//problem: can't print all items
   		System.out.println(Distributor.sellItems.size() + "*items");
   		int itemCount = Distributor.sellItems.size();
@@ -189,7 +189,7 @@ public class XMLParser extends DefaultHandler {
   	        System.out.println("ID:"+item.ID);
   	        DistributorApplet.custTable.addRow(new Vector()); // new a blank row
   	    }
-  		DistributorApplet.custTable.removeRow(0); // remove the original first row 
+  		//DistributorApplet.custTable.removeRow(0); // remove the original first row 
   		
   		int custRow = DistributorApplet.customerTable.getRowCount(); //get Row Count = 5
         int custCol = DistributorApplet.customerTable.getColumnCount();  //get Column Count = 5
@@ -211,11 +211,13 @@ public class XMLParser extends DefaultHandler {
 		    				break;
 		    				
 		    			case 3:
-		    				DistributorApplet.customerTable.setValueAt(Distributor.sellItems.get(index).price,i, j);
+		    				//DistributorApplet.customerTable.setValueAt(Distributor.sellItems.get(index).price,i, j);
+		    				DistributorApplet.customerTable.setValueAt(String.valueOf(Distributor.sellItems.get(index).price),i, j);
 		    				break;
 		    				
 		    			case 4:
-		    				DistributorApplet.customerTable.setValueAt(Distributor.sellItems.get(index).amountAvailable,i, j);
+		    				//DistributorApplet.customerTable.setValueAt(Distributor.sellItems.get(index).amountAvailable,i, j);
+		    				DistributorApplet.customerTable.setValueAt(String.valueOf(Distributor.sellItems.get(index).amountAvailable),i, j);
 		    				break;
 		    				
 	        		} //end switch
@@ -230,6 +232,7 @@ public class XMLParser extends DefaultHandler {
   	
 	private void presentInProviderTable() //get item from needSupply
 	{
+		DistributorApplet.provTable.setRowCount(0); //set original 0 row 
 		System.out.println(Distributor.needItems.size() + "*need items");
   		int itemCount = Distributor.sellItems.size();
   		int index = 0;
@@ -238,11 +241,11 @@ public class XMLParser extends DefaultHandler {
   	        System.out.println("ID:"+item.ID);
   	        DistributorApplet.provTable.addRow(new Vector()); // new a blank row
   	    }
-  		DistributorApplet.provTable.removeRow(0); // remove the original first row 
-//  		
+  	
+  		
   		int provRow = DistributorApplet.provTable.getRowCount(); //get Row Count = 5
         int provCol = DistributorApplet.provTable.getColumnCount();  //get Column Count = 5
-//  		
+  		
         for(int i = 0; provRow > i; i++){   //from first row to last row
         	for(int j = 0; provCol > j; j++){  //from first column to last column  		
         		if(index < itemCount) {
