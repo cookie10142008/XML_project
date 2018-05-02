@@ -46,8 +46,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
     public Distributor dist = new Distributor();
     //GUI
     Container content = getContentPane();
-    public static JTextField textField_companyName, textField_contactMe, textField_address;
-
+    public static JTextField textField_companyName;
+    public static JTextArea textArea_address, textArea_contactMe;
     public static JTable customerTable;
     public static JTable providerTable;
     public static JTabbedPane tabbedPane;  //line 290
@@ -179,7 +179,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		companyPanel.setLayout(null);
 
 		textField_companyName = new JTextField();
-		textField_companyName.setBounds(218, 55, 263, 29);
+		textField_companyName.setBounds(218, 55, 384, 29);
 		companyPanel.add(textField_companyName);
 		textField_companyName.setColumns(10);
 
@@ -193,22 +193,17 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		companyPanel.add(labelCompanyName);
 
 		JLabel labelContactMe = new JLabel("Contact me:");
-		labelContactMe.setBounds(58, 120, 128, 23);
+		labelContactMe.setBounds(58, 253, 128, 23);
 		companyPanel.add(labelContactMe);
 
-		textField_contactMe = new JTextField();
-		textField_contactMe.setColumns(10);
-		textField_contactMe.setBounds(218, 117, 263, 29);
-		companyPanel.add(textField_contactMe);
-
 		JLabel labelAddress = new JLabel("Address:");
-		labelAddress.setBounds(58, 180, 85, 23);
+		labelAddress.setBounds(59, 149, 85, 23);
 		companyPanel.add(labelAddress);
      	     		
-		textField_address = new JTextField();
-		textField_address.setColumns(10);
-		textField_address.setBounds(218, 177, 263, 29);
-		companyPanel.add(textField_address);
+//		textField_address = new JTextField();
+//		textField_address.setColumns(10);
+//		textField_address.setBounds(560, 149, 263, 29);
+//		companyPanel.add(textField_address);
 
 		String [] headings1 = new String[] {"ID", "Name", "Item Type", "Price", "Available"}; //Item Needed
 		//providerTable的資料
@@ -285,6 +280,38 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		tabbedPane.setBounds(0, 0, 1200, 500);
 		//JPanel panel = new JPanel();
 		tabbedPane.addTab("Company",companyPanel);
+		
+		
+		LineBorder textArea_address_border=new LineBorder(Color.BLACK);
+		textArea_address = new JTextArea();
+		textArea_address.setBorder(textArea_address_border); 
+		textArea_address.setLineWrap(true);
+		textArea_address.setWrapStyleWord(true);
+		textArea_address.setBounds(218, 269, 289, 69);
+		JScrollPane scrollPane = new JScrollPane(textArea_address);
+		scrollPane.setBounds(217, 127, 289, 69);
+		companyPanel.add(scrollPane);
+		
+//		LineBorder textArea_contact_border=new LineBorder(Color.BLACK);
+//		JTextArea textArea = new JTextArea();
+//		textArea.setBorder(textArea_contact_border); 
+//		textArea.setWrapStyleWord(true);
+//		textArea.setLineWrap(true);
+//		textArea.setBounds(218, 236, 287, 67);
+//		JScrollPane scrollPane_contact = new JScrollPane(textArea);
+//		scrollPane_contact.setBounds(500, 300, 289, 69);
+//		companyPanel.add(scrollPane_contact);
+//		tabbedPane.addTab("Customer",customer_Panel);
+		
+		LineBorder textArea_contact_border=new LineBorder(Color.BLACK);
+		textArea_contactMe = new JTextArea();
+		textArea_contactMe.setBorder(textArea_contact_border); 
+		textArea_contactMe.setLineWrap(true);
+		textArea_contactMe.setWrapStyleWord(true);
+		textArea_contactMe.setBounds(218, 269, 289, 69);
+		JScrollPane scrollPane_contact = new JScrollPane(textArea_contactMe);
+		scrollPane_contact.setBounds(218, 235, 289, 69);
+		companyPanel.add(scrollPane_contact);
 		tabbedPane.addTab("Customer",customer_Panel);
 
 		JTextArea txtarea_PressEnter = new JTextArea();
@@ -361,9 +388,13 @@ public class DistributorApplet extends JApplet implements ActionListener{
     			boolean providerSave = false;
 		        // get company info
 		    	dist.name = textField_companyName.getText();
-		    	dist.address = textField_contactMe.getText();
-		    	dist.contact = textField_address.getText();
+		    	//dist.address = textField_address.getText();
+		    	//dist.contact = textField_contactMe.getText();
 			    
+		    	dist.contact = textArea_contactMe.getText();
+		    	dist.address = textArea_address.getText();
+		    	
+		    	
 		    	
 		    	int custRow = customerTable.getRowCount(); //get Row Count = 5
 		        int custCol = customerTable.getColumnCount();  //get Column Count = 5

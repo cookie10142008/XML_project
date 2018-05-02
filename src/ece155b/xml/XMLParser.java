@@ -100,14 +100,16 @@ public class XMLParser extends DefaultHandler {
   		else if(tagName.equals ("CompanyAddress")) {
   			System.out.println(value);
   			distributor.address = value;
-  			DistributorApplet.textField_contactMe.setText(value);
+			DistributorApplet.textArea_address.setText(value);
+
   		
   		}
 		else if(tagName.equals ("CompanyContact")) {
 			System.out.println(value);
 			distributor.contact = value;
-			DistributorApplet.textField_address.setText(value);
-		
+			//DistributorApplet.textField_address.setText(value);
+  			DistributorApplet.textArea_contactMe.setText(value);
+			
 		}
 		//	 	Set parameters of Supply Object
 		else if(tagName.equals ("SupplyID")) {
