@@ -501,6 +501,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        	}// end row
 		        
 		        System.out.println("providerSave: "+providerSave +" "+"customerSave: " + customerSave);
+		        if(!providerSave || !customerSave){
+		        	if (custRow == 0 && provRow == 0){
+		             	JOptionPane.showMessageDialog(null, "未輸入資訊");
+		        	}
+		        }
 		        
 		        if(providerSave && customerSave) {
 		        	JOptionPane.showMessageDialog(null, "存檔成功");
