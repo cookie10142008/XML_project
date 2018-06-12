@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package ece155b;
+package ece155b.distributor;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
@@ -11,13 +11,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import ece155b.data.Company;
-import ece155b.data.Distributor;
-import ece155b.data.Supply;
-import ece155b.test.DemoXML;
-import ece155b.data.SellSupply;
-import ece155b.data.NeedSupply;
-import ece155b.xml.XMLParser;
+import ece155b.distributor.data.Company;
+import ece155b.distributor.data.Distributor;
+import ece155b.distributor.data.Supply;
+import ece155b.distributor.data.SellSupply;
+import ece155b.distributor.data.NeedSupply;
+import ece155b.distributor.xml.XMLParser;
 import javax.xml.parsers.*;
 
 import org.xml.sax.SAXException;
@@ -292,16 +291,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		scrollPane.setBounds(217, 127, 289, 69);
 		companyPanel.add(scrollPane);
 		
-//		LineBorder textArea_contact_border=new LineBorder(Color.BLACK);
-//		JTextArea textArea = new JTextArea();
-//		textArea.setBorder(textArea_contact_border); 
-//		textArea.setWrapStyleWord(true);
-//		textArea.setLineWrap(true);
-//		textArea.setBounds(218, 236, 287, 67);
-//		JScrollPane scrollPane_contact = new JScrollPane(textArea);
-//		scrollPane_contact.setBounds(500, 300, 289, 69);
-//		companyPanel.add(scrollPane_contact);
-//		tabbedPane.addTab("Customer",customer_Panel);
 		
 		LineBorder textArea_contact_border=new LineBorder(Color.BLACK);
 		textArea_contactMe = new JTextArea();

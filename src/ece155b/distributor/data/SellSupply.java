@@ -1,4 +1,4 @@
-package ece155b.data;
+package ece155b.distributor.data;
 
 public class SellSupply extends Supply// item sold to customers
 {

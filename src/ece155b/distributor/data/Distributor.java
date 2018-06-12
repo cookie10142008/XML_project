@@ -1,4 +1,4 @@
-package ece155b.data;
+package ece155b.distributor.data;
 
 import java.util.Vector;
 

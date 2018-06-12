@@ -1,10 +1,10 @@
-package ece155b.xml;
+package ece155b.distributor.xml;
 
-import ece155b.DistributorApplet;
-import ece155b.data.Distributor;
-import ece155b.data.SellSupply;
-import ece155b.data.NeedSupply;
-import ece155b.data.Supply;
+import ece155b.distributor.DistributorApplet;
+import ece155b.distributor.data.Distributor;
+import ece155b.distributor.data.SellSupply;
+import ece155b.distributor.data.NeedSupply;
+import ece155b.distributor.data.Supply;
 
 import java.io.File;
 import java.io.IOException;

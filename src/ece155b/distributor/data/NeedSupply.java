@@ -1,4 +1,4 @@
-package ece155b.data;
+package ece155b.distributor.data;
 
 public class NeedSupply extends Supply// item needed from providers (provider give us)
 {
