@@ -5,6 +5,7 @@
 
 package ece155b.distributor;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
@@ -32,14 +33,14 @@ import javax.swing.border.LineBorder;
  * @author 林瑋鴻、鍾昀倫
  */
 public class DistributorApplet extends JApplet implements ActionListener{
+	
 	public DistributorApplet() {
+		
+		new DistributorApp();
+		
+        
 	}
-
-  /* You will definitely have more functions below,
-   * such as reading/writing XML files, GUI parts,
-   * mouse/action event listeners...
-   */
-    
+	
     String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to (under bin dir)
     // new two item lists(sellsupply &　needsupply)
     public Distributor dist = new Distributor();
@@ -54,6 +55,9 @@ public class DistributorApplet extends JApplet implements ActionListener{
     
     public void init()
     {
+    	Frame title = (Frame)this.getParent().getParent();
+    	title.setTitle("Distributor");
+    	
     	setUIFont(new FontUIResource("微軟正黑體",Font.PLAIN,20));
     	setSize(1300,800); // set JApplet window size
 	    content.setBackground(Color.LIGHT_GRAY);
@@ -68,12 +72,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	        
 	    }
     
-    
 	    makeGUI();
 	    
-	    
-	     
-    
     }
     // set component font
     private void setUIFont(FontUIResource fontUIResource) {
@@ -101,7 +101,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
     	//System.out.println(textField_companyName.getText());
         //Company company = new Company();
     }
-
 
 	public void makeGUI(){
 	
@@ -198,11 +197,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		JLabel labelAddress = new JLabel("Address:");
 		labelAddress.setBounds(59, 149, 85, 23);
 		companyPanel.add(labelAddress);
-     	     		
-//		textField_address = new JTextField();
-//		textField_address.setColumns(10);
-//		textField_address.setBounds(560, 149, 263, 29);
-//		companyPanel.add(textField_address);
 
 		String [] headings1 = new String[] {"ID", "Name", "Item Type", "Price", "Available"}; //Item Needed
 		//providerTable的資料
@@ -382,8 +376,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 			    
 		    	dist.contact = textArea_contactMe.getText();
 		    	dist.address = textArea_address.getText();
-		    	
-		    	
 		    	
 		    	int custRow = customerTable.getRowCount(); //get Row Count = 5
 		        int custCol = customerTable.getColumnCount();  //get Column Count = 5
@@ -567,4 +559,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		 
 		
 	}
+
+
 }// end class DistributorApplet

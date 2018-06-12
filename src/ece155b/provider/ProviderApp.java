@@ -36,7 +36,7 @@ public class ProviderApp extends JFrame {
     JTextArea texta;
     
     public void GUI() {
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
         
         texta = new JTextArea();
         JScrollPane scroll = new JScrollPane(texta);
@@ -44,6 +44,7 @@ public class ProviderApp extends JFrame {
         texta.setWrapStyleWord(true);
         
         JButton testme = new JButton("Broadcast message");
+        testme.setFont(new Font("新細明體", Font.BOLD, 23));
         testme.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 

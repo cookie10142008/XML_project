@@ -3,6 +3,7 @@ package ece155b.distributor.comm;
 import ece155b.common.Common;
 import ece155b.common.Message;
 import ece155b.distributor.DistributorApp;
+import ece155b.distributor.DistributorApplet;
 import ece155b.distributor.data.ProviderContact;
 
 import java.net.*;
@@ -12,9 +13,9 @@ public class ConnHandler {
     Vector<ConnListener> providers;   // vector that keeps track of connected clients
     DistributorApp pApp;
     
-    public ConnHandler(DistributorApp Appl) {
+    public ConnHandler(DistributorApp distributorApp) {
         providers = new Vector <ConnListener>();
-        pApp = Appl;
+        pApp = distributorApp;
     }
     
     public void connectToProvider(ProviderContact pro) {
