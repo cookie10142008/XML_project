@@ -92,7 +92,6 @@ public class ProviderApplet extends JApplet implements ActionListener{
 
 	public void makeGUI(){
 	
-		//
 		String[] headings = new String[] { "ID", "Name", "Item Type", "Price", "Available" }; // Item Sold
 		// customerTable的資料
 		Object[][] data = new Object[][] { 
@@ -504,12 +503,12 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		             	JOptionPane.showMessageDialog(null, "未輸入資訊");
 		        	}
 		        }
-		        
-		        if(providerSave && customerSave) {
+*/		        
+		        if(customerSave) {
 		        	JOptionPane.showMessageDialog(null, "存檔成功");
 		        	toXmlFile(prov,fileUrl);	
 		        }
-*/		        			        
+		        			        
 				break;
 				
 			case "Load Information":
@@ -529,7 +528,7 @@ public class ProviderApplet extends JApplet implements ActionListener{
 					ProParser proParser = new ProParser();
 					
 					try {
-						xmlParser.readXmlFile(selectedFile.getAbsolutePath()); // transfer file to parse
+						proParser.readXmlFile(selectedFile.getAbsolutePath()); // transfer file to parse
 						
 					} catch (SAXException | IOException | ParserConfigurationException e1) {
 						
