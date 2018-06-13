@@ -34,7 +34,7 @@ public class Provider {
     {
         String xml = "<Provider>";
         
-	xml += "</Provider>";
+        xml += "</Provider>";
         
         return xml;
     }

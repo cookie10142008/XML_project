@@ -36,9 +36,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	
 	public DistributorApplet() {
 		
-		new DistributorApp();
-		
-        
 	}
 	
     String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to (under bin dir)
@@ -64,8 +61,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 	    content.setLayout(null);
 	
 	    try {       //try to read the xml file if present
-	        
-	        
 	        
 	    } catch(Exception e) { //if xml file does not exist create new blank doctor object
 	        content.add(new JLabel("XML file not found"));
@@ -104,8 +99,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 
 	public void makeGUI(){
 	
-		//
-		String[] headings = new String[] { "ID", "Name", "Item Type", "Price", "Available" }; // Item Sold
+		// Item Sold
+		String[] headings = new String[] { "ID", "Name", "Item Type", "Price", "Available" }; 
 		// customerTable的資料
 		Object[][] data = new Object[][] { 
 			{ null, null, null, null, null}
@@ -146,6 +141,12 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		JButton customerAddRowBtn = new JButton("Add a row");
 		customerAddRowBtn.setBounds(114, 371, 140, 31);
 		customer_Panel.add(customerAddRowBtn);
+		customerAddRowBtn.addActionListener(new ActionListener() {		//custmerTable的Add a row Button
+			public void actionPerformed(ActionEvent arg0) {
+
+				custTable.addRow(new Vector()); //新增空白一列
+			}
+		});     	  
 
 		JButton customerDelRowBtn = new JButton("Delete selected rows"); //custermoTable刪除列
 		customerDelRowBtn.addActionListener(new ActionListener() {
@@ -295,7 +296,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		JScrollPane scrollPane_contact = new JScrollPane(textArea_contactMe);
 		scrollPane_contact.setBounds(218, 235, 289, 69);
 		companyPanel.add(scrollPane_contact);
-		tabbedPane.addTab("Customer",customer_Panel);
+		tabbedPane.addTab("Customer_Sell Items",customer_Panel);
 
 		JTextArea txtarea_PressEnter = new JTextArea();
 		txtarea_PressEnter.setForeground(Color.BLUE);
@@ -308,7 +309,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		txtarea_PressEnter.setBounds(809, 59, 357, 133);
 		customer_Panel.add(txtarea_PressEnter);
 		
-		tabbedPane.addTab("Provider",providerPanel);
+		tabbedPane.addTab("Provider_Need Items",providerPanel);
 		
 		JTextArea txtarea_PressEnter1 = new JTextArea();
 		txtarea_PressEnter1.setForeground(Color.BLUE);
@@ -320,16 +321,27 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		txtarea_PressEnter1.setText("Please press enter after finishing editing info in table(make sure to leave the editting situation)");
 		txtarea_PressEnter1.setBounds(809, 59, 357, 133);
 		providerPanel.add(txtarea_PressEnter1);
-		getContentPane().add(tabbedPane);
-
-
-		customerAddRowBtn.addActionListener(new ActionListener() {		//custmerTable的Add a row Button
-			public void actionPerformed(ActionEvent arg0) {
-
-				custTable.addRow(new Vector()); //新增空白一列
+		
+		// Provider Connection tab
+		JPanel connectPanel = new JPanel();
+		connectPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		connectPanel.setBounds(341, 39, 974, 187);
+		tabbedPane.addTab("Provider Connection",connectPanel);
+		connectPanel.setLayout(null);
+		
+		JButton btnConnProv = new JButton("Connect to provider!");
+		btnConnProv.setFont(new Font("新細明體", Font.BOLD, 23));
+		btnConnProv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				new DistributorApp();
+				
 			}
-		});     	     	
+		});
+		btnConnProv.setBounds(85, 64, 245, 57);
+		connectPanel.add(btnConnProv);
 
+		getContentPane().add(tabbedPane);// add all tab to contentPane
 
 				 		
 	}
@@ -366,7 +378,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 				dist.sellItems.removeAllElements(); // remove all items in vector sellItems	, needItems		
 				dist.needItems.removeAllElements();
 				
-    			String fileUrl = "Distributor.xml";
+    			String fileUrl = "Distributor.xml"; // set xml file name
     			boolean customerSave = false;
     			boolean providerSave = false;
 		        // get company info
@@ -559,6 +571,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		 
 		
 	}
-
-
 }// end class DistributorApplet
+
+
+
+

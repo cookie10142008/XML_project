@@ -12,7 +12,7 @@ class ConnListener extends Thread{
     private ConnHandler PARENT;
     private ProviderContact contact;
     
-    public Distributor distributor; // Once patient is authenticated, set this value
+    public Distributor distributor; // Once distributor is authenticated, set this value
     
     ConnListener(ConnHandler p, Socket socket, ProviderContact pro) {
         PARENT 	= p;
