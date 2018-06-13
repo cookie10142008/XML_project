@@ -7,7 +7,11 @@ import java.util.Date;
 import java.util.Vector;
 import javax.swing.JFileChooser;
 
+import ece155b.distributor.data.SellSupply;
+
 public class Provider {
+	
+	public static Vector <SellSupply> sellItems;	// Vector of sell items (store many items' info)
     
     public String name = "MyName";
     public String lastname = "MyLastName";
@@ -17,6 +21,7 @@ public class Provider {
     
     public Provider()
     {
+    	sellItems = new Vector<SellSupply>();
         distributors = new Vector<Distributor>();
     }
     
