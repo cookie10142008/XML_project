@@ -9,7 +9,7 @@ import ece155b.distributor.data.Distributor;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Scanner;
+
 
 import javax.swing.*;
 
@@ -35,16 +35,16 @@ public class DistributorApp extends JFrame {
     	
     	// choose which provider to connect
         // you will read this information from XML file
-    	
+    	   	
 //        ProviderContact contact = new ProviderContact();
 //        contact.URL = "localhost";
-//        contact.PORT = 5944;
+//        contact.PORT = port;
 //        contact.Name = "Yung-Ting Chuang"; //change to your name...
 //        handler.connectToProvider(contact);
-        
+    	
         //GUI();
     }
-    
+
     
     public void GUI() {
     	
