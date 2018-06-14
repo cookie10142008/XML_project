@@ -28,11 +28,12 @@ public class ProviderApp extends JFrame {
             System.out.println("Error reading file");
         }
         
-        int PortNo  = 1111;
+//        int PortNo  = 1111;
+        PortNo = 5000 + (int)(Math.random()*1001);
         connh 	= new ConnHandler(this, PortNo);
         GUI();
     }
-    
+
     JTextArea texta;
     
     public void GUI() {
@@ -43,11 +44,14 @@ public class ProviderApp extends JFrame {
         texta.setLineWrap(true);
         texta.setWrapStyleWord(true);
         
+        String showPort = "the port number is:" + PortNo + "\n\n";
+        texta.setText(showPort);
+        
         JButton testme = new JButton("Broadcast message");
         testme.setFont(new Font("新細明體", Font.BOLD, 23));
         testme.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                
+            public void actionPerformed(ActionEvent ae) {        
+            	                
                 Message msg = new Message();
                 msg.type = Common.BROADCAST;
                 msg.from = "The provider";
