@@ -35,7 +35,6 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		
 		new ProviderApp();
 		
-        
 	}
 	
     String fileurl = System.getProperty("user.dir") + File.separator + "test.xml";  //XML file to read/write to (under bin dir)
