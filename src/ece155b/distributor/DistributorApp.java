@@ -66,10 +66,17 @@ public class DistributorApp extends JFrame {
 	            	ProviderContact contact = new ProviderContact();
 	            	contact.URL = "localhost";
 	            	//contact.PORT = 5944;
-	            	contact.PORT = Integer.parseInt(texta.getText().substring(5));
-	            	contact.Name = "Yung-Ting Chuang"; //change to your name...
-	            	handler.connectToProvider(contact);
-	            	connect = true;
+	            	try {
+	            		contact.PORT = Integer.parseInt(texta.getText().substring(5));
+	            		contact.Name = "Yung-Ting Chuang"; //change to your name...
+		            	handler.connectToProvider(contact);
+		            	connect = true;
+	            		
+	            	} catch(NumberFormatException e) {
+	            		JOptionPane.showMessageDialog(new JFrame("error"),"input error with non-integer");
+	            		
+	            	}
+	            		
             	}
             	
                 Message m = new Message();
