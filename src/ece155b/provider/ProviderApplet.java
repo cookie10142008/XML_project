@@ -282,7 +282,7 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		JScrollPane scrollPane_contact = new JScrollPane(textArea_contactMe);
 		scrollPane_contact.setBounds(218, 235, 289, 69);
 		companyPanel.add(scrollPane_contact);
-		tabbedPane.addTab("Customer",customer_Panel);
+		tabbedPane.addTab("Distributor",customer_Panel);
 
 		JTextArea txtarea_PressEnter = new JTextArea();
 		txtarea_PressEnter.setForeground(Color.BLUE);
