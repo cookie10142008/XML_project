@@ -9,6 +9,8 @@ import ece155b.distributor.data.Distributor;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Scanner;
+
 import javax.swing.*;
 
 public class DistributorApp extends JFrame {
@@ -46,7 +48,7 @@ public class DistributorApp extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 Message m = new Message();
                 m.type = Common.BROADCAST;
-                m.type = Common.TERMINATE;
+//                m.type = Common.TERMINATE;
                 m.content = "Test broadcast from Distributor";
                 m.from = "The Distributor";
                 
