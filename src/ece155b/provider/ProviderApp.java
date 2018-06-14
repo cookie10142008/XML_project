@@ -40,6 +40,7 @@ public class ProviderApp extends JFrame {
         getContentPane().setLayout(new BorderLayout());
         
         texta = new JTextArea();
+        texta.setFont(new Font("Monospaced", Font.BOLD, 22));
         JScrollPane scroll = new JScrollPane(texta);
         texta.setLineWrap(true);
         texta.setWrapStyleWord(true);
