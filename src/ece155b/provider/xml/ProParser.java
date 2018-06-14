@@ -3,13 +3,15 @@ package ece155b.provider.xml;
 import ece155b.provider.data.Purchase;
 import ece155b.provider.data.Provider;
 import ece155b.distributor.DistributorApplet;
-import ece155b.distributor.data.NeedSupply;
+//import ece155b.distributor.data.NeedSupply;
 import ece155b.distributor.data.SellSupply;
 import ece155b.distributor.xml.XMLParser;
+import ece155b.provider.ProviderApplet;
 import ece155b.provider.data.Distributor;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -160,7 +162,54 @@ public class ProParser extends DefaultHandler
         
     }
     
-    private void presentInCustomerTable(){
+    private void presentInCustomerTable() //get item from sellSupply
+    {
+    	ProviderApplet.provTable.setRowCount(0);  //set original 0 row 
+  		//problem: can't print all items
+  		System.out.println(Provider.sellItems.size() + "*items");
+  		int itemCount = Provider.sellItems.size();
+  		int index = 0;
+  		
+  		for(SellSupply item : Provider.sellItems) {
+  	        System.out.println("ID:"+item.ID);
+  	        DistributorApplet.custTable.addRow(new Vector()); // new a blank row
+  	    }
+  		//DistributorApplet.custTable.removeRow(0); // remove the original first row 
+  		
+  		int custRow = DistributorApplet.customerTable.getRowCount(); //get Row Count = 5
+        int custCol = DistributorApplet.customerTable.getColumnCount();  //get Column Count = 5
+  		
+        for(int i = 0; custRow > i; i++){   //from first row to last row
+        	for(int j = 0; custCol > j; j++){  //from first column to last column  		
+        		if(index < itemCount) {
+	        		switch(j) {
+		    			case 0:
+		    				DistributorApplet.customerTable.setValueAt(Provider.sellItems.get(index).ID,i, j);
+		    				break;
+		    				
+		    			case 1:
+		    				DistributorApplet.customerTable.setValueAt(Provider.sellItems.get(index).name,i, j);
+		    				break;
+		    				
+		    			case 2:
+		    				DistributorApplet.customerTable.setValueAt(Provider.sellItems.get(index).brand,i, j);
+		    				break;
+		    				
+		    			case 3:
+		    				DistributorApplet.customerTable.setValueAt(Provider.sellItems.get(index).price,i, j);
+		    				//DistributorApplet.customerTable.setValueAt(String.valueOf(Distributor.sellItems.get(index).price),i, j);
+		    				break;
+		    				
+		    			case 4:
+		    				DistributorApplet.customerTable.setValueAt(Provider.sellItems.get(index).amountAvailable,i, j);
+		    				//DistributorApplet.customerTable.setValueAt(String.valueOf(Distributor.sellItems.get(index).amountAvailable),i, j);
+		    				break;
+		    				
+	        		} //end switch
+        		}// end if
+        	}//end column
+        	index++;
+        }//end row
     	
     }
     
