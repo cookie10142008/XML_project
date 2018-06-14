@@ -334,7 +334,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		btnConnProv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new DistributorApp();
+				new DistributorApp(textField_companyName.getText());
 				
 			}
 		});

@@ -14,14 +14,17 @@ import javax.swing.*;
 public class DistributorApp extends JFrame {
     public Distributor distributor;
     private ConnHandler handler;
+    private String distributor_Name;
     
-    public static void main(String [] args) {
-        new DistributorApp();
-    }
+//    public static void main(String [] args) {
+//        new DistributorApp();
+//    }
     
-    public DistributorApp() {
-        handler = new ConnHandler(this);// pass DistributorApp object
+    public DistributorApp(String distName) {
+    	distributor_Name = distName;
+    	handler = new ConnHandler(this);// pass DistributorApp object
         
+        // choose which provider to connect
         // you will read this information from XML file
         ProviderContact contact = new ProviderContact();
         contact.URL = "localhost";
@@ -46,9 +49,11 @@ public class DistributorApp extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 Message m = new Message();
                 m.type = Common.BROADCAST;
-                m.type = Common.TERMINATE;
+                //m.type = Common.TERMINATE;
                 m.content = "Test broadcast from Distributor";
-                m.from = "The Distributor";
+                //m.from = "The Distributor A";
+                m.from = distributor_Name;
+                
                 
                 handler.broadcast(m);
             }
@@ -57,7 +62,7 @@ public class DistributorApp extends JFrame {
         getContentPane().add(scroll, BorderLayout.CENTER);
         getContentPane().add(testme, BorderLayout.SOUTH);
         
-        setTitle("Distributor");
+        setTitle("Distributor Application: " + distributor_Name);
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         

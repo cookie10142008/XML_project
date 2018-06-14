@@ -10,34 +10,34 @@ import java.net.*;
 import java.util.Vector;
 
 public class ConnHandler {			  //providers(template) 改成 distributors
-    Vector<ConnListener> distributors;   // vector that keeps track of connected clients
+    Vector<ConnListener> providers;   // vector that keeps track of connected "clients" -> providers?
     DistributorApp dApp;
     
     public ConnHandler(DistributorApp distributorApp) {
-        distributors = new Vector <ConnListener>();
+        providers = new Vector <ConnListener>();
         dApp = distributorApp;
     }
     
     public void connectToProvider(ProviderContact pro) {
         try {
             Socket socket = new Socket(pro.URL, pro.PORT);
-            distributors.addElement(new ConnListener(this, socket, pro));
+            providers.addElement(new ConnListener(this, socket, pro));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
     
     protected void removeProConn(ConnListener cl) {
-        distributors.remove(cl);
+        providers.remove(cl);
     }
     
     public void broadcast(Message m) {
-        System.out.println("BCAST #"+ distributors.size());
+        System.out.println("BCAST #"+ providers.size());
         
-        if(distributors.size() == 0)
+        if(providers.size() == 0)
             System.out.println("No peer to broadcast");
-        else for (int i = 0; i<distributors.size(); i++) {
-            ConnListener cl = (ConnListener) distributors.elementAt(i);
+        else for (int i = 0; i<providers.size(); i++) {
+            ConnListener cl = (ConnListener) providers.elementAt(i);
             cl.sendMessage(m);
         }
     }

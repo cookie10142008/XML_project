@@ -22,7 +22,6 @@ public class Supply // an item with id, name, price, brand
 		this.brand = brand;
 		this.price = price;
 		
-		//System.out.println("track");
 		
 	}
 	
