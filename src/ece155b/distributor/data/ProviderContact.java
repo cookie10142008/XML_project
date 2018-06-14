@@ -5,7 +5,7 @@ public class ProviderContact {
     public int PORT;
     public String Name;
     
-    /** Creates a new instance of DistributorContact */
+    /** Creates a new instance of DistributorContact */ // ProviderContact??
     public ProviderContact() {
     }
     

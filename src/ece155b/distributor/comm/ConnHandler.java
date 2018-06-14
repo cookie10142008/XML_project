@@ -11,11 +11,11 @@ import java.util.Vector;
 
 public class ConnHandler {			  //providers(template) 改成 distributors
     Vector<ConnListener> distributors;   // vector that keeps track of connected clients
-    DistributorApp pApp;
+    DistributorApp dApp;
     
     public ConnHandler(DistributorApp distributorApp) {
         distributors = new Vector <ConnListener>();
-        pApp = distributorApp;
+        dApp = distributorApp;
     }
     
     public void connectToProvider(ProviderContact pro) {
@@ -32,7 +32,7 @@ public class ConnHandler {			  //providers(template) 改成 distributors
     }
     
     public void broadcast(Message m) {
-        System.out.println("BCAST #"+distributors.size());
+        System.out.println("BCAST #"+ distributors.size());
         
         if(distributors.size() == 0)
             System.out.println("No peer to broadcast");
@@ -46,7 +46,7 @@ public class ConnHandler {			  //providers(template) 改成 distributors
         Message msg = new Message(xml);
         
         if(msg.type.equals(Common.BROADCAST)) {
-            pApp.append(msg.toString());
+            dApp.append(msg.toString());
         } else if(msg.type.equals(Common.AUTHENTICATE_DISTRIBUTOR_REPLY)) {
             // Patient is logged in, can request time
         } else if(msg.type.equals(Common.REQUEST_SUPPLY_LIST_REPLY)) {

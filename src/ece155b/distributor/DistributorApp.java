@@ -20,7 +20,7 @@ public class DistributorApp extends JFrame {
     }
     
     public DistributorApp() {
-        handler = new ConnHandler(this);
+        handler = new ConnHandler(this);// pass DistributorApp object
         
         // you will read this information from XML file
         ProviderContact contact = new ProviderContact();
@@ -46,6 +46,7 @@ public class DistributorApp extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 Message m = new Message();
                 m.type = Common.BROADCAST;
+                m.type = Common.TERMINATE;
                 m.content = "Test broadcast from Distributor";
                 m.from = "The Distributor";
                 
