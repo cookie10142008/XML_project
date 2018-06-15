@@ -323,6 +323,20 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		providerPanel.add(txtarea_PressEnter1);
 		
 		JButton pro_purchaseBtn = new JButton("Purchase");
+		pro_purchaseBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//new 出needSupply 選取的東西
+				
+//				int count[] = customerTable.getSelectedRows(); //刪除多行
+//				if(count.length <= 0){
+//					JOptionPane.showMessageDialog(null, "Unable to Delete");
+//				}else{
+//					for(int i = 0; i < count.length; i++){
+//						custTable.removeRow(customerTable.getSelectedRow());
+//					}
+//				} 
+			}
+		});
 		pro_purchaseBtn.setBounds(577, 371, 140, 31);
 		providerPanel.add(pro_purchaseBtn);
 		
