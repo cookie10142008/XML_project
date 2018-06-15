@@ -11,10 +11,6 @@ import javax.swing.table.TableColumnModel;
 import ece155b.distributor.data.SellSupply;
 import ece155b.provider.data.*;
 import ece155b.provider.xml.ProParser;
-//import ece155b.distributor.data.Distributor;
-//import ece155b.distributor.data.Supply;
-//import ece155b.distributor.data.SellSupply;
-//import ece155b.distributor.xml.XMLParser;
 import javax.xml.parsers.*;
 
 import org.xml.sax.SAXException;
@@ -33,7 +29,7 @@ public class ProviderApplet extends JApplet implements ActionListener{
 	
 	public ProviderApplet() {
 		
-		new ProviderApp();
+//		new ProviderApp("aaa");
 		
 	}
 	
@@ -294,18 +290,25 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		txtarea_PressEnter.setBounds(809, 59, 357, 133);
 		customer_Panel.add(txtarea_PressEnter);
 		
-//		tabbedPane.addTab("Provider",providerPanel);
+		//distributor connection tabbedPane
+		JPanel connectPanel = new JPanel();
+		connectPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		connectPanel.setBounds(341, 39, 974, 187);
+		tabbedPane.addTab("Distributor Connection",connectPanel);
+		connectPanel.setLayout(null);
 		
-//		JTextArea txtarea_PressEnter1 = new JTextArea();
-//		txtarea_PressEnter1.setForeground(Color.BLUE);
-//		txtarea_PressEnter1.setBackground(Color.LIGHT_GRAY);
-//		txtarea_PressEnter1.setWrapStyleWord(true);
-//		txtarea_PressEnter1.setLineWrap(true);
-//		txtarea_PressEnter1.setFont(new Font("新細明體", Font.BOLD, 25));
-//		txtarea_PressEnter1.setEditable(false);
-//		txtarea_PressEnter1.setText("Please press enter after finishing editing info in table(make sure to leave the editting situation)");
-//		txtarea_PressEnter1.setBounds(809, 59, 357, 133);
-//		providerPanel.add(txtarea_PressEnter1);
+		JButton btnConnProv = new JButton("Connect to distributor!");
+		btnConnProv.setFont(new Font("新細明體", Font.BOLD, 23));
+		btnConnProv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				new ProviderApp(textField_companyName.getText());
+				
+			}
+		});
+		btnConnProv.setBounds(85, 64, 269, 57);
+		connectPanel.add(btnConnProv);
+		
 		getContentPane().add(tabbedPane);
 
 

@@ -14,14 +14,16 @@ public class ProviderApp extends JFrame {
     
     public Provider provider;
     private int PortNo;
-    
+    private String provider_Name;
     private ConnHandler connh;
     
     public static void main(String [] args) {
-        new ProviderApp();
+        new ProviderApp("provTest");
     }
     
-    public ProviderApp() {
+    public ProviderApp(String provName) {
+    	provider_Name = provName;
+    	
         try {
             provider = new ProParser(new File("distributors.xml")).provider;
         } catch (Exception ex){
@@ -55,9 +57,10 @@ public class ProviderApp extends JFrame {
             	                
                 Message msg = new Message();
                 msg.type = Common.BROADCAST;
-                msg.from = "The provider";
-                
+                //msg.from = "The provider";                
                 msg.content = "Test broadcast from provider";
+                msg.from = provider_Name;
+
                 
                 connh.broadcast(msg);
             }

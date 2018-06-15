@@ -250,7 +250,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 				}
 			}
 		});
-		pro_delRowBtn.setBounds(337, 371, 243, 31);
+		pro_delRowBtn.setBounds(292, 371, 243, 31);
 		providerPanel.add(pro_delRowBtn);
 
 		JLabel labelItemsNeeded = new JLabel("Items needed from providers");
@@ -321,6 +321,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		txtarea_PressEnter1.setText("Please press enter after finishing editing info in table(make sure to leave the editting situation)");
 		txtarea_PressEnter1.setBounds(809, 59, 357, 133);
 		providerPanel.add(txtarea_PressEnter1);
+		
+		JButton pro_purchaseBtn = new JButton("Purchase");
+		pro_purchaseBtn.setBounds(577, 371, 140, 31);
+		providerPanel.add(pro_purchaseBtn);
 		
 		// Provider Connection tab
 		JPanel connectPanel = new JPanel();
