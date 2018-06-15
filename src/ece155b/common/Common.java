@@ -7,7 +7,7 @@ package ece155b.common;
  *  necesary values to Message object
  */
 public class Common {
-    public static String
+    public static String //message type
             BROADCAST                   = "Broadcast",
             AUTHENTICATE_DISTRIBUTOR        = "Authenticate",
             AUTHENTICATE_DISTRIBUTOR_REPLY  = "AuthenticateR",
