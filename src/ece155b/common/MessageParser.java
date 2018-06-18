@@ -14,7 +14,8 @@ public class MessageParser extends DefaultHandler
     private StringBuffer accumulator = new StringBuffer();
     
     /** Creates a new instance of MessageParser */
-    public MessageParser(String xml, Message msg) {
+    // extract info from xml into message(Message object contain type, from, content)
+    public MessageParser(String xml, Message msg) { 
         try {
             message = msg;
             SAXParserFactory factory = SAXParserFactory.newInstance(  );

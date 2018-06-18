@@ -9,19 +9,20 @@ import ece155b.distributor.data.ProviderContact;
 import java.net.*;
 import java.util.Vector;
 
-public class ConnHandler {			  //providers(template) 改成 distributors
+public class ConnHandler {			  
     Vector<ConnListener> providers;   // vector that keeps track of connected "clients" -> providers?
-    DistributorApp dApp;
+    DistributorApp distApp;
     
     public ConnHandler(DistributorApp distributorApp) {
         providers = new Vector <ConnListener>();
-        dApp = distributorApp;
+        distApp = distributorApp;
     }
     
     public void connectToProvider(ProviderContact pro) {
         try {
             Socket socket = new Socket(pro.URL, pro.PORT);
-            providers.addElement(new ConnListener(this, socket, pro));
+            providers.addElement(new ConnListener(this, socket, pro)); //ConnListener: deal w/ 
+            														   //getInputStream, getOutputStream
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -33,27 +34,43 @@ public class ConnHandler {			  //providers(template) 改成 distributors
     
     public void broadcast(Message m) {
         System.out.println("BCAST #"+ providers.size());
+        distApp.append("BCAST #"+ providers.size());
         
-        if(providers.size() == 0)
+        if(providers.size() == 0) {
             System.out.println("No peer to broadcast");
-        else for (int i = 0; i<providers.size(); i++) {
-            ConnListener cl = (ConnListener) providers.elementAt(i);
-            cl.sendMessage(m);
+        	distApp.append("BCAST #"+ providers.size());
         }
+        else { 
+        	for (int i = 0; i < providers.size(); i++) {
+	            ConnListener cl = (ConnListener) providers.elementAt(i);
+	            cl.sendMessage(m);
+        	}
+        	
+        }
+        
     }
     
+    // process message from provider
     protected synchronized void processMessage(String xml, ConnListener listener) {
         Message msg = new Message(xml);
         
-        if(msg.type.equals(Common.BROADCAST)) {
-            dApp.append(msg.toString());
+        if(msg.type.equals(Common.BROADCAST)) { // receive broadcast message from provider
+            distApp.append(msg.toString());
         } else if(msg.type.equals(Common.AUTHENTICATE_DISTRIBUTOR_REPLY)) {
-            // Patient is logged in, can request time
+        	// distributor receive agreement of auth. and log in, time to request 
+        	distApp.append(msg.toString());
+        	
+        	
         } else if(msg.type.equals(Common.REQUEST_SUPPLY_LIST_REPLY)) {
-            // Action to take..
+        	distApp.append(msg.toString());
+        	
+        	
+        	
+        	
         } else if(msg.type.equals(Common.REQUEST_PURCHASE_REPLY)) {
             // Action to take..
         } else
-            System.out.println("Unknown message type");
+            System.out.println("Unknown message type from provider");
+        	distApp.append("Unknown message type from provider");
     }
 }

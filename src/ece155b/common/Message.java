@@ -30,8 +30,8 @@ public class Message {
     
     public String toString()
     {
-        return "Message:\nType:\t"+type+
-                "\nFrom:\t"+from+
-                "\nContent:\t"+content;
+        return "Message:\nType: "+type+
+                "\nFrom: "+from+
+                "\nContent: "+content;
     }
 }

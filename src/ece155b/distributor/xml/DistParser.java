@@ -18,39 +18,38 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
-public class XMLParser extends DefaultHandler {
+public class DistParser extends DefaultHandler {
     public Distributor distributor;
     private SellSupply sellSupply;
     private NeedSupply needSupply;
-    //private Supply supply;
-    private StringBuffer accumulator = new StringBuffer(); 
+    //private StringBuffer accumulator = new StringBuffer(); 
     private String value,supplyType;
     
-    public XMLParser(){	
+    public DistParser(){	
     	distributor = new Distributor(); // read in loaded info & write into new item list
-      //this.distributor = dist; 
+      
 
     }
-    
-	  public void readXmlFile(String fileurl) throws SAXException, IOException, ParserConfigurationException
-	  {
-	  		XMLParser handler = new XMLParser();
-			try
-		    {
-		    	SAXParserFactory factory = SAXParserFactory.newInstance( );
-				SAXParser parser = factory.newSAXParser();
-				parser.parse(fileurl,handler);
-				
-				
-		    }
-		    catch (Exception ex)
-		    {
-		    	ex.printStackTrace();
-		    }
-		    //return myparser.distributor;
-	  }
-    
-    
+
+    public void readXmlFile(String fileurl) throws SAXException, IOException, ParserConfigurationException
+    {
+    	DistParser handler = new DistParser();
+    	try
+    	{
+    		SAXParserFactory factory = SAXParserFactory.newInstance( );
+    		SAXParser parser = factory.newSAXParser();
+    		parser.parse(fileurl,handler);
+
+
+    	}
+    	catch (Exception ex)
+    	{
+    		ex.printStackTrace();
+    	}
+    	//return myparser.distributor;
+    }
+
+
     public void characters(char[] buffer, int start, int length) {
         //accumulator.append(buffer, start, length);
         
@@ -85,7 +84,7 @@ public class XMLParser extends DefaultHandler {
   		}
   	
   		// Reset accumulator
-  		accumulator.setLength(0);
+  		//accumulator.setLength(0);
   	}
     
   	public void endElement(String uri,String lname,String tagName)

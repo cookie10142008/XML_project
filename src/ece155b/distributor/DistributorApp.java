@@ -19,9 +19,10 @@ public class DistributorApp extends JFrame {
     private String distributor_Name;
     JTextArea texta;
     boolean connect = false;
+    Message message = new Message();
     
     public static void main(String [] args) {
-        new DistributorApp("test");
+        new DistributorApp("dist name: MAIN()");
     	
     }
     
@@ -54,25 +55,29 @@ public class DistributorApp extends JFrame {
         texta.setWrapStyleWord(true);
         texta.setText("port:");
         
-        
+        //Send message button
         JButton testme = new JButton("Send message");
         testme.setBounds(0, 387, 578, 35);
         testme.setFont(new Font("新細明體", Font.BOLD, 22));
         testme.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-            	if(!connect)
+            	if(!connect)	// if first connect, extract port from textarea
             	{
-            		// choose which provider to connect
-                    // you will read this information from XML file
-	            	ProviderContact contact = new ProviderContact();
-	            	contact.URL = "localhost";
-	            	
 	            	try {
+	            		// choose which provider to connect
+	                    // you will read this information from XML file
+		            	ProviderContact contact = new ProviderContact();
+		            	contact.URL = "localhost";	            		
 	            		contact.PORT = Integer.parseInt(texta.getText().substring(5).trim());
-	            		contact.Name = "Yung-Ting Chuang"; //change to your name...
-		            	handler.connectToProvider(contact);
-		            	connect = true;
+	            		contact.Name = "Provider"; //change to your name...
 	            		
+		            	handler.connectToProvider(contact); // build client socket
+		            	connect = true;
+		            	// default combobox: AUTHENTICATE
+		            	message.type = Common.AUTHENTICATE_DISTRIBUTOR;            	
+	            		message.content = "Ask for authentication of connection : test";            		
+	            		message.from = distributor_Name;
+		            	
 	            	} catch(NumberFormatException e) {
 	            		JOptionPane.showMessageDialog(new JFrame("error"),"input error with non-integer");
 	            		
@@ -80,32 +85,56 @@ public class DistributorApp extends JFrame {
 	            		
             	}
             	
-                Message m = new Message();
-                m.type = Common.BROADCAST;
-                //m.type = Common.TERMINATE;
-                m.content = "Test broadcast from Distributor";
-                //m.from = "The Distributor A";
-                m.from = distributor_Name;
+                handler.broadcast(message);
                 
-                handler.broadcast(m);
             }
         });
         getContentPane().setLayout(null);
         getContentPane().add(scroll);
         getContentPane().add(testme);
+        
         // message type
         String[] messageType = { 
-        		"BROADCAST",
-        		"AUTHENTICATE_DISTRIBUTOR", 
+        		"AUTHENTICATE_DISTRIBUTOR",
+        		"BROADCAST",        		 
         		"REQUEST_SUPPLY_LIST", 
-        		"REQUEST_PURCHASE",
+        		//"REQUEST_PURCHASE", //send from purchase btn
         		"TERMINATE"
         		};
-        JComboBox comboBox = new JComboBox(messageType);
-        comboBox.setFont(new Font("新細明體", Font.BOLD, 22));
-        comboBox.setBounds(63, 307, 515, 77);
-        
-        getContentPane().add(comboBox);
+        JComboBox message_comboBox = new JComboBox(messageType);
+        message_comboBox.setFont(new Font("新細明體", Font.BOLD, 22));
+        message_comboBox.setBounds(63, 307, 515, 77);
+        getContentPane().add(message_comboBox);
+        message_comboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println(e.getActionCommand());
+            	
+            	System.out.println(message_comboBox.getSelectedItem());
+            	
+            	if(message_comboBox.getSelectedItem() == "BROADCAST") {
+
+            		message.type = Common.BROADCAST;            		
+            		message.content = "Test broadcast from Distributor";
+            		message.from = distributor_Name;
+            		
+            	}else if(message_comboBox.getSelectedItem() == "AUTHENTICATE_DISTRIBUTOR") {
+            		
+            		message.type = Common.AUTHENTICATE_DISTRIBUTOR;            	
+            		message.content = "Ask for authentication of connection";            		
+            		message.from = distributor_Name;
+            		
+            	}
+            		
+            		
+            		
+
+            		
+            		
+            		
+            		
+            	
+            }
+        });
         
         JLabel lblNewLabel = new JLabel("Type:");
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -120,6 +149,7 @@ public class DistributorApp extends JFrame {
     }
     
     public void append(String str) {
-        texta.append("\n"+str);
+    	
+        texta.append("\n\n"+str);
     }
 }

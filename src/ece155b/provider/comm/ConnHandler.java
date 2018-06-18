@@ -3,6 +3,9 @@ package ece155b.provider.comm;
 import ece155b.common.Common;
 import ece155b.common.Message;
 import ece155b.provider.ProviderApp;
+import ece155b.provider.data.Provider;
+import ece155b.provider.xml.ProParser;
+
 import java.io.IOException;
 import java.net.*;
 import java.util.Vector;
@@ -43,7 +46,7 @@ public class ConnHandler extends Thread {
      * Here you might assign unique session id to client listener
      */
     public void addUser(Socket socket) {
-        handles.addElement(new ConnListener(this, socket));
+        handles.addElement(new ConnListener(this, socket)); // ConnListener: process socket inputStream, ouputStream
     }
     
     /*
@@ -93,7 +96,7 @@ public class ConnHandler extends Thread {
      * This method is synchronized for the following reasons:
      * 1. Two clients might send message at the same time, we want to process
      * one of the client and then process second. Otherwise, this might cause
-     * data incosistencies
+     * data inconsistencies
      *
      * When you make a method synchronized, only one execution of the
      * method exists, since all client handlers calls this method to
@@ -105,10 +108,11 @@ public class ConnHandler extends Thread {
      * with inconsistent data.
      *
      * Wow.. so long :) take it serious.
-     * /**/
-    public synchronized void processMessage(String xml, ConnListener listener) {
-        
-        Message msg = new Message(xml);
+     * /**/		// only one thread can access synchronized method
+    public synchronized boolean processMessage(String xml, ConnListener listener) {
+        boolean authenticate = false;
+    	// msg: distributor's message
+        Message msg = new Message(xml); // transform xml into message object
         
         /*
             You will need to define message types,
@@ -124,19 +128,60 @@ public class ConnHandler extends Thread {
             First parse the received message, which is in XML format.
             Having message properties, like type, etc.
          */
-            if(msg.type.equals(Common.BROADCAST))
+            if(msg.type.equals(Common.BROADCAST)) //receive broadcast message from dist.
             {
                 server.append(msg.toString());
+                return true;// continue to receive msg from dist. 
             }
-            else if(msg.type.equals(Common.AUTHENTICATE_DISTRIBUTOR))
+            else if(msg.type.equals(Common.AUTHENTICATE_DISTRIBUTOR)) //receive authenticate message from dist.
             {
-                // Access patients information, and see if patient exists
+                // Access distributors information, and see if distributor exists
+            	server.append(msg.toString());
+            	
+            	for(String distname: ProParser.distributorList) {
+            		if(distname.equals(msg.from)) {
+            			authenticate = true;
+            			break;
+            		}
+            	}
+            	
+            	if(authenticate) {
+            		server.append(msg.from + " found!");
+            		
+            		Message reply_msg = new Message();
+        			reply_msg.type = "Authenticate_Reply";
+        			reply_msg.from = server.company_Name;
+        			reply_msg.content = "Authorize! You can start to purchase!";
+        			
+        			listener.sendMessage(reply_msg);
+        			
+        			return true;// continue to receive msg from dist. 
+            	}else {
+            		server.append("Not found in distributors list!");
+            		
+        			Message reply_msg = new Message();
+        			reply_msg.type = "Authenticate_Reply";
+        			reply_msg.from = server.company_Name;
+        			reply_msg.content = "Sorry, you are not authorized! Socket closed!";
+        			
+        			listener.sendMessage(reply_msg);
+            		
+        			return false;// stop to receive msg from dist. 
+            	}
+            		
             }
             else if(msg.type.equals(Common.REQUEST_SUPPLY_LIST))
             {
                 // Action to take..
+            	
+            	
+            	return true;// continue to receive msg from dist. 
             }
-            else
-                System.out.println("Unknown message type");
+            else {
+                System.out.println("Provider: Unknown message type from distributor");
+                return true;// continue to receive msg from dist. 
+            }
+            
+            
     }
 }
