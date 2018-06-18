@@ -41,9 +41,9 @@ public class ProviderApplet extends JApplet implements ActionListener{
     public static JTextField textField_companyName;
     public static JTextArea textArea_address, textArea_contactMe;
     public static JTable customerTable;
-    public static JTable providerTable;
+    public static JTable distributorNameTable;
     public static JTabbedPane tabbedPane; 
-    public static DefaultTableModel custTable, provTable;
+    public static DefaultTableModel custTable, distNameTable;
     
     public void init()
     {
@@ -97,15 +97,12 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		JPanel customer_Panel = new JPanel();
 		customer_Panel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		customer_Panel.setBounds(15, 229, 685, 600);
-		//content.add(customer_Panel);
 		customer_Panel.setLayout(null);
      	    
 		JScrollPane customerScrollPane = new JScrollPane();
 		customerScrollPane.setBounds(101, 53, 650, 285);
 		customer_Panel.add(customerScrollPane);
-		//用DefaultTableModel建立customerTable
-
-		//DefaultTableModel custTable = new DefaultTableModel(data, headings); 
+		
 		custTable = new DefaultTableModel(data, headings); 
 		customerTable = new JTable(custTable);
 		customerTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -128,7 +125,14 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		JButton customerAddRowBtn = new JButton("Add a row");
 		customerAddRowBtn.setBounds(114, 371, 140, 31);
 		customer_Panel.add(customerAddRowBtn);
+		
+		customerAddRowBtn.addActionListener(new ActionListener() {  //custmerTable的Add a row Button
+			public void actionPerformed(ActionEvent arg0) {
 
+				custTable.addRow(new Vector()); //新增空白一列
+			}
+		});     	     	
+		
 		JButton customerDelRowBtn = new JButton("Delete selected rows"); //custermoTable刪除列
 		customerDelRowBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -155,7 +159,6 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		JPanel companyPanel = new JPanel();
 		companyPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		companyPanel.setBounds(341, 39, 974, 187);
-		//getContentPane().add(companyPanel);
 		companyPanel.setLayout(null);
 
 		textField_companyName = new JTextField();
@@ -180,64 +183,64 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		labelAddress.setBounds(59, 149, 85, 23);
 		companyPanel.add(labelAddress);
 
-		String [] headings1 = new String[] {"ID", "Name", "Item Type", "Price", "Available"}; //Item Needed
-		//providerTable的資料
-		Object[][] data1 = new Object[][]{
-			{ null, null, null, null, null}
-			
-		};
+//		String [] headings1 = new String[] {"ID", "Name", "Item Type", "Price", "Available"}; //Item Needed
+//		//providerTable的資料
+//		Object[][] data1 = new Object[][]{
+//			{ null, null, null, null, null}
+//			
+//		};
 
-
-		JPanel providerPanel = new JPanel();
-		providerPanel.setLayout(null);
-		providerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-		providerPanel.setBounds(765, 229, 685, 450);
-		//getContentPane().add(providerPanel);
-
-		JScrollPane providerScrollPane = new JScrollPane();
-		providerScrollPane.setBounds(101, 53, 650, 285);
-		providerPanel.add(providerScrollPane);
+//
+//		JPanel providerPanel = new JPanel();
+//		providerPanel.setLayout(null);
+//		providerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+//		providerPanel.setBounds(765, 229, 685, 450);
+//		//getContentPane().add(providerPanel);
+//
+//		JScrollPane providerScrollPane = new JScrollPane();
+//		providerScrollPane.setBounds(101, 53, 650, 285);
+//		providerPanel.add(providerScrollPane);
 
 		//用DefaultTableModel建立providerTable
-		
-		provTable = new DefaultTableModel(data1, headings1); 
-		providerTable = new JTable(provTable);     	    
+//		
+//		provTable = new DefaultTableModel(data1, headings1); 
+//		providerTable = new JTable(provTable);     	    
 		customerScrollPane.setViewportView(customerTable);
-		providerScrollPane.setViewportView(providerTable);
+//		providerScrollPane.setViewportView(providerTable);
 
-		providerTable.setRowHeight(50); //設定列高度為50
+//		providerTable.setRowHeight(50); //設定列高度為50
 
 
-		JButton pro_addRowBtn = new JButton("Add a row"); //providerTable的Add a row按鈕 
-		pro_addRowBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				provTable.addRow(new Vector()); //新增空白一列    
-			}
-		});
-		pro_addRowBtn.setBounds(114, 371, 140, 31);
-		providerPanel.add(pro_addRowBtn);
-     	     		
-		JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
-		pro_delRowBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				int count[] = providerTable.getSelectedRows(); //刪除多行
-				if(count.length <= 0){
-					JOptionPane.showMessageDialog(null, "Unable to delete");
-				}else{
-					for(int i = 0; i < count.length; i++){
-						provTable.removeRow(providerTable.getSelectedRow());
-					}
-				}
-			}
-		});
-		pro_delRowBtn.setBounds(337, 371, 243, 31);
-		providerPanel.add(pro_delRowBtn);
+//		JButton pro_addRowBtn = new JButton("Add a row"); //providerTable的Add a row按鈕 
+//		pro_addRowBtn.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				provTable.addRow(new Vector()); //新增空白一列    
+//			}
+//		});
+//		pro_addRowBtn.setBounds(114, 371, 140, 31);
+//		providerPanel.add(pro_addRowBtn);
+//     	     		
+//		JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
+//		pro_delRowBtn.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				int count[] = providerTable.getSelectedRows(); //刪除多行
+//				if(count.length <= 0){
+//					JOptionPane.showMessageDialog(null, "Unable to delete");
+//				}else{
+//					for(int i = 0; i < count.length; i++){
+//						provTable.removeRow(providerTable.getSelectedRow());
+//					}
+//				}
+//			}
+//		});
+//		pro_delRowBtn.setBounds(337, 371, 243, 31);
+//		providerPanel.add(pro_delRowBtn);
 
-		JLabel labelItemsNeeded = new JLabel("Items needed from providers");
-		labelItemsNeeded.setFont(new Font("新細明體", Font.BOLD, 25));
-		labelItemsNeeded.setBounds(15, 0, 336, 38);
-		providerPanel.add(labelItemsNeeded);
+//		JLabel labelItemsNeeded = new JLabel("Items needed from providers");
+//		labelItemsNeeded.setFont(new Font("新細明體", Font.BOLD, 25));
+//		labelItemsNeeded.setBounds(15, 0, 336, 38);
+//		providerPanel.add(labelItemsNeeded);
 
 		JButton btnSaveInformation = new JButton("Save Information");
 		btnSaveInformation.setBounds(121, 545, 234, 31);
@@ -248,12 +251,16 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		btnLoadInformation.setBounds(401, 545, 234, 31);
 		getContentPane().add(btnLoadInformation);
 		btnLoadInformation.addActionListener(this);
+		
+		// Load Distributor List button
+		JButton btnLoadDistributorList = new JButton("Load Distributor List");
+		btnLoadDistributorList.setBounds(699, 545, 234, 31);
+		getContentPane().add(btnLoadDistributorList);
+		btnLoadDistributorList.addActionListener(this);
 
 		// tab to transfer between panels
-//		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 1200, 500);
-		//JPanel panel = new JPanel();
 		tabbedPane.addTab("Company",companyPanel);
 		
 		
@@ -306,21 +313,62 @@ public class ProviderApplet extends JApplet implements ActionListener{
 				
 			}
 		});
-		btnConnProv.setBounds(85, 64, 269, 57);
+		btnConnProv.setBounds(416, 189, 269, 57);
 		connectPanel.add(btnConnProv);
 		
-		getContentPane().add(tabbedPane);
+		//distributors' Name table
+		String [] heading_distName = new String[] {"Distributor Name"}; 
+		//Table的資料
+		Object[][] data_distName = new Object[][]{
+			{ null}
+		};
+		
+		JScrollPane distributorNameScrollPane = new JScrollPane();
+		distributorNameScrollPane.setBounds(101, 53, 269, 285);
+		connectPanel.add(distributorNameScrollPane);
+		
+		distNameTable = new DefaultTableModel(data_distName, heading_distName); 
+		distributorNameTable = new JTable(distNameTable);
+		distributorNameTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		distributorNameScrollPane.setViewportView(distributorNameTable);
 
+		distributorNameTable.setRowHeight(50); //設定列高度為50		
+		TableColumnModel distributorNameModel = distributorNameTable.getColumnModel();//取得這個table的欄位模型 	
+		TableColumn columnID1 = distributorNameModel.getColumn(0);  //取得這個table某個欄位的資訊 
+		columnID1.setPreferredWidth(150);  //個別設定偏好的寬度  		
+		
 
-		customerAddRowBtn.addActionListener(new ActionListener() {		//custmerTable的Add a row Button
+		JButton distributorNameAddRowBtn = new JButton("Add a row");
+		distributorNameAddRowBtn.setBounds(114, 371, 140, 31);
+		connectPanel.add(distributorNameAddRowBtn);
+		
+		distributorNameAddRowBtn.addActionListener(new ActionListener() {  //custmerTable的Add a row Button
 			public void actionPerformed(ActionEvent arg0) {
 
-				custTable.addRow(new Vector()); //新增空白一列
+				distNameTable.addRow(new Vector()); //新增空白一列
 			}
 		});     	     	
-
-
-				 		
+		
+		JButton distributorNameDelRowBtn = new JButton("Delete selected rows"); //custermoTable刪除列
+		distributorNameDelRowBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				int count[] = distributorNameTable.getSelectedRows(); //刪除多行
+				if(count.length <= 0){
+					JOptionPane.showMessageDialog(null, "Unable to Delete");
+				}else{
+					for(int i = 0; i < count.length; i++){
+						distNameTable.removeRow(distributorNameTable.getSelectedRow());
+					}
+				} 	    		
+			}
+		});
+		distributorNameDelRowBtn.setBounds(337, 371, 243, 31);
+		connectPanel.add(distributorNameDelRowBtn);
+		
+		
+		getContentPane().add(tabbedPane);// last line
+		
 	}
  
 	public void toXmlFile(Provider prov, String url)
@@ -338,6 +386,7 @@ public class ProviderApplet extends JApplet implements ActionListener{
 	    	System.out.println ("Exception:"+ex);
 	    }
     }
+	
 
 	class SupplyTab extends JTabbedPane implements ActionListener{
 	    public SupplyTab(SellSupply viewsellsupply, int index){}
@@ -346,6 +395,7 @@ public class ProviderApplet extends JApplet implements ActionListener{
 	 
 	}
 
+	
 	@Override
 	public void actionPerformed(ActionEvent e){
 		switch(e.getActionCommand()){
@@ -353,11 +403,9 @@ public class ProviderApplet extends JApplet implements ActionListener{
 			case "Save Information":
 				System.out.println("save info");
 				prov.sellItems.removeAllElements(); // remove all items in vector sellItems	, needItems		
-//				prov.needItems.removeAllElements();
 				
     			String fileUrl = "Provider.xml";
     			boolean customerSave = false;
-//    			boolean providerSave = false;
 		        // get company info
 		    	prov.name = textField_companyName.getText();
 		    	//dist.address = textField_address.getText();
@@ -435,84 +483,14 @@ public class ProviderApplet extends JApplet implements ActionListener{
 	        			prov.addSellItem(item);
 		              	
 		        	} // end row
-		       		       
-/*		        	int provRow = providerTable.getRowCount();
-				    int provCol = providerTable.getColumnCount();  //get Column Count = 5
-		        	System.out.println("provider table");
-		        	providerOuterLoop:
-		        	for(int i = 0; provRow > i; i++){
-		        		for(int j = 0; provCol > j; j++){
-		        			if ( providerTable.getValueAt(i, j) != null){
-		        				switch(j){
-		        				case 0:
-		        					id = (String) providerTable.getValueAt(i, j);
-		        					System.out.println("id="+id+" "+i+","+j);
-		        					break;
-		        				case 1:
-		        					name = (String) providerTable.getValueAt(i, j);
-		          					System.out.println("name="+name+" "+i+","+j);
-		        					break;
-		        				case 2:
-		        					brand = (String) providerTable.getValueAt(i, j);
-		          					System.out.println("brand="+brand+" "+i+","+j);
-		        					break;
-		        				case 3:
-		        					try
-			        				{
-			        					String tempPrice = String.valueOf( providerTable.getValueAt(i, j) ); //String.valueOf = (string) ??
-			        					price = Double.parseDouble(tempPrice);
-			         					System.out.println("price="+price+" "+i+","+j);
-
-			        				}
-			        				catch (NumberFormatException ex)
-			        				{
-			        					JOptionPane.showMessageDialog(null, "Provider的第"+ String.valueOf(i+1) +"行價格輸入不正確，請輸入數字");	
-			        					providerSave = false;
-			        					break providerOuterLoop;
-			        				}
-		        				case 4:
-		        					try
-			        				{
-			        					String tempCount = String.valueOf( providerTable.getValueAt(i, j) );
-			        					//count = Integer.parseInt(tempCount);
-			          					count = (int)Double.parseDouble(tempCount);
-			        					System.out.println("count="+count+" "+i+","+j);
-			          					providerSave = true;
-
-			        				}
-			        				catch (NumberFormatException ex)
-			        				{
-			        					JOptionPane.showMessageDialog(null, "Provider的第"+ String.valueOf(i+1) +"行數量輸入不正確，請輸入數字");
-			        					providerSave = false;
-			        					break providerOuterLoop;
-			        				}
-		        				
-		        				}// end switch
-		        			}else{
-		        				JOptionPane.showMessageDialog(null, "Provider的第"+ String.valueOf(i+1) +"列第"+ String.valueOf(j+1) +"行空白");
-		        				providerSave = false;
-		        				break providerOuterLoop;		        				
-		        			}// end if
-		        		}// end column
-		        		
-		        		//new NeedSupply 
-	        			
-		        	}// end row
-		        
-		        System.out.println("providerSave: "+providerSave +" "+"customerSave: " + customerSave);
-		        if(!providerSave || !customerSave){
-		        	if (custRow == 0 && provRow == 0){
-		             	JOptionPane.showMessageDialog(null, "未輸入資訊");
-		        	}
-		        }
-*/		        
+	        
 		        if(customerSave) {
 		        	JOptionPane.showMessageDialog(null, "存檔成功");
 		        	toXmlFile(prov,fileUrl);	
 		        }
 		        			        
 				break;
-				
+			//"Load Information" button
 			case "Load Information":
 				System.out.println("load info");
 				
@@ -524,9 +502,7 @@ public class ProviderApplet extends JApplet implements ActionListener{
 					
 					
 					System.out.println(selectedFile.getName() +"  " + selectedFile.getAbsolutePath()); //print file name & path				
-					//XMLParser xmlParser = new XMLParser(dist,selectedFile);
-
-//					XMLParser xmlParser = new XMLParser();
+					
 					ProParser proParser = new ProParser();
 					
 					try {
@@ -542,10 +518,14 @@ public class ProviderApplet extends JApplet implements ActionListener{
 				
 				
 				break;
+				
+				
+			case "Load Distributor List":
+				//System.out.println(Provider.dist_list.get(1));
+				
+				break;
 	                
 		}
-		
-		 
 		
 	}
 

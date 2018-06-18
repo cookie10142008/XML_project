@@ -18,9 +18,9 @@ import ece155b.distributor.data.Distributor;
 import ece155b.distributor.data.Supply;
 import ece155b.distributor.data.SellSupply;
 import ece155b.distributor.data.NeedSupply;
-import ece155b.distributor.xml.XMLParser;
-import ece155b.provider.data.Purchase;
 
+import ece155b.distributor.xml.DistParser;
+import ece155b.provider.data.Purchase;
 import javax.xml.parsers.*;
 
 import org.xml.sax.SAXException;
@@ -388,11 +388,11 @@ public class DistributorApplet extends JApplet implements ActionListener{
 				 		
 	}
  
-	public void toXmlFile(Distributor dist, String url)
+	public void toXmlFile(Distributor dist, String fileurl)
     {
     	try
 	    {
-	    	File xmlfile = new File(url);
+	    	File xmlfile = new File(fileurl);
     		BufferedWriter br = new BufferedWriter(new FileWriter(xmlfile));
     		br.write("<?xml version='1.0' ?>"); // start to write XML into file
     		br.write(dist.toXML());
@@ -591,8 +591,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 					
 					
 					System.out.println(selectedFile.getName() +"  " + selectedFile.getAbsolutePath()); //print file name & path				
-					//XMLParser xmlParser = new XMLParser(dist,selectedFile);
-					XMLParser xmlParser = new XMLParser();
+					
+					DistParser xmlParser = new DistParser();
 					
 					try {
 						xmlParser.readXmlFile(selectedFile.getAbsolutePath()); // transfer file to parse
