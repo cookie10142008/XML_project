@@ -58,7 +58,12 @@ public class Purchase{
 		frmPurchaseList.getContentPane().setLayout(null);
 		frmPurchaseList.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //讓關閉(x)按鈕沒反應
 		
-		btnOkButton = new JButton("OK");
+		btnOkButton = new JButton("OK"); //檢查provider有沒有supply request list裡的資訊
+		btnOkButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnOkButton.setBounds(123, 34, 106, 32);
 		frmPurchaseList.getContentPane().add(btnOkButton);
 		
