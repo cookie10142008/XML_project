@@ -325,7 +325,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		txtarea_PressEnter1.setBounds(809, 59, 357, 133);
 		providerPanel.add(txtarea_PressEnter1);
 		
-		JButton pro_purchaseBtn = new JButton("Purchase");
+		JButton pro_purchaseBtn = new JButton("Purchase");  //把providerTable選取的資料放到purchase裡
 		pro_purchaseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 							
@@ -346,19 +346,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
 
 					model2.addRow(row);
 				}
-				purchase.frame.setVisible(true);
 				
-				
-				
-				//new 出needSupply 選取的東西				
-//				int count[] = customerTable.getSelectedRows(); //刪除多行
-//				if(count.length <= 0){
-//					JOptionPane.showMessageDialog(null, "Unable to Delete");
-//				}else{
-//					for(int i = 0; i < count.length; i++){
-//						custTable.removeRow(customerTable.getSelectedRow());
-//					}
-//				} 
+				purchase.frame.setVisible(true);				
 			}
 		});
 		pro_purchaseBtn.setBounds(577, 371, 140, 31);
