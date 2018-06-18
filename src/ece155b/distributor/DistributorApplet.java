@@ -294,21 +294,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		pro_delRowBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-<<<<<<< HEAD
-				DefaultTableModel model2 = (DefaultTableModel) purchase.purchaseTable.getModel();
-				for(int i = 0; i < indexs.length; i++)
-				{
-					row[0] = model1.getValueAt(indexs [i], 0);
-					row[1] = model1.getValueAt(indexs [i], 1);
-					row[2] = model1.getValueAt(indexs [i], 2);
-					row[3] = model1.getValueAt(indexs [i], 3);	
-					row[4] = null;	//Provider方要檢查是否in stock
-
-					model2.addRow(row);
-				}	
-				
-				purchase.frmPurchaseList.setVisible(true);				
-=======
 				int count[] = providerTable.getSelectedRows(); //刪除多行
 				if(count.length <= 0){
 					JOptionPane.showMessageDialog(null, "Unable to delete");
@@ -317,7 +302,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 						provTable.removeRow(providerTable.getSelectedRow());
 					}
 				}
->>>>>>> 1fbc39501c34b4486ba65eff6666a837874ea238
 			}
 		});
 		pro_delRowBtn.setBounds(292, 371, 243, 31);
