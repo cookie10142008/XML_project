@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 
 public class Purchase{
 
-	public JFrame frame;
+	public JFrame frmPurchaseList;
 	private JScrollPane purchaseScrollPane;
 	public JTable purchaseTable;
 	private DefaultTableModel purTable;
@@ -32,7 +32,7 @@ public class Purchase{
 			public void run() {
 				try {
 					Purchase window = new Purchase();
-					window.frame.setVisible(true);
+					window.frmPurchaseList.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,28 +51,30 @@ public class Purchase{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 550, 400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmPurchaseList = new JFrame();
+		frmPurchaseList.setTitle("Purchase List");
+		frmPurchaseList.setBounds(100, 100, 550, 400);
+		frmPurchaseList.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPurchaseList.getContentPane().setLayout(null);
+		frmPurchaseList.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //讓關閉(x)按鈕沒反應
 		
 		btnOkButton = new JButton("OK");
 		btnOkButton.setBounds(123, 34, 106, 32);
-		frame.getContentPane().add(btnOkButton);
+		frmPurchaseList.getContentPane().add(btnOkButton);
 		
 		btnNoButton = new JButton("Cancel");
 		btnNoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frame.dispose();
+				frmPurchaseList.dispose();
 
 			}
 		});
 		btnNoButton.setBounds(267, 34, 106, 32);
-		frame.getContentPane().add(btnNoButton);
+		frmPurchaseList.getContentPane().add(btnNoButton);
 		
 		purchaseScrollPane = new JScrollPane();
 		purchaseScrollPane.setBounds(36, 94, 440, 233);
-		frame.getContentPane().add(purchaseScrollPane);
+		frmPurchaseList.getContentPane().add(purchaseScrollPane);
 		
 		
 		// Item Sold
