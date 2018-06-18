@@ -342,10 +342,10 @@ public class DistributorApplet extends JApplet implements ActionListener{
 					row[1] = model1.getValueAt(indexs [i], 1);
 					row[2] = model1.getValueAt(indexs [i], 2);
 					row[3] = model1.getValueAt(indexs [i], 3);	
-//					row[4] = model1.getValueAt(indexs [i], 4);	//Provider方要檢查是否in stock
+					row[4] = null;	//Provider方要檢查是否in stock
 
 					model2.addRow(row);
-				}
+				}	
 				
 				purchase.frmPurchaseList.setVisible(true);				
 			}

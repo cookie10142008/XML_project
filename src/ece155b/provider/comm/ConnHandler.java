@@ -177,6 +177,11 @@ public class ConnHandler extends Thread {
             	
             	return true;// continue to receive msg from dist. 
             }
+            else if(msg.type.equals(Common.TERMINATE))
+            {
+                
+            	return false;// continue to receive msg from dist. 
+            }
             else {
                 System.out.println("Provider: Unknown message type from distributor");
                 return true;// continue to receive msg from dist. 

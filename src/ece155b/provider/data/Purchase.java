@@ -78,7 +78,7 @@ public class Purchase{
 		
 		
 		// Item Sold
-		headings = new String[] { "ID", "Name", "Brand", "Price", "In Stock" }; 
+		headings = new String[] { "ID", "Name", "Brand", "Price", "Needed amount" }; 
 		// customerTable的資料
 //		data = new Object[][] {
 //			{ null, null, null, null, null}

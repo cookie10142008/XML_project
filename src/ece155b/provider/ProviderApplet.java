@@ -183,64 +183,7 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		labelAddress.setBounds(59, 149, 85, 23);
 		companyPanel.add(labelAddress);
 
-//		String [] headings1 = new String[] {"ID", "Name", "Item Type", "Price", "Available"}; //Item Needed
-//		//providerTable的資料
-//		Object[][] data1 = new Object[][]{
-//			{ null, null, null, null, null}
-//			
-//		};
-
-//
-//		JPanel providerPanel = new JPanel();
-//		providerPanel.setLayout(null);
-//		providerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-//		providerPanel.setBounds(765, 229, 685, 450);
-//		//getContentPane().add(providerPanel);
-//
-//		JScrollPane providerScrollPane = new JScrollPane();
-//		providerScrollPane.setBounds(101, 53, 650, 285);
-//		providerPanel.add(providerScrollPane);
-
-		//用DefaultTableModel建立providerTable
-//		
-//		provTable = new DefaultTableModel(data1, headings1); 
-//		providerTable = new JTable(provTable);     	    
 		customerScrollPane.setViewportView(customerTable);
-//		providerScrollPane.setViewportView(providerTable);
-
-//		providerTable.setRowHeight(50); //設定列高度為50
-
-
-//		JButton pro_addRowBtn = new JButton("Add a row"); //providerTable的Add a row按鈕 
-//		pro_addRowBtn.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				provTable.addRow(new Vector()); //新增空白一列    
-//			}
-//		});
-//		pro_addRowBtn.setBounds(114, 371, 140, 31);
-//		providerPanel.add(pro_addRowBtn);
-//     	     		
-//		JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
-//		pro_delRowBtn.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				int count[] = providerTable.getSelectedRows(); //刪除多行
-//				if(count.length <= 0){
-//					JOptionPane.showMessageDialog(null, "Unable to delete");
-//				}else{
-//					for(int i = 0; i < count.length; i++){
-//						provTable.removeRow(providerTable.getSelectedRow());
-//					}
-//				}
-//			}
-//		});
-//		pro_delRowBtn.setBounds(337, 371, 243, 31);
-//		providerPanel.add(pro_delRowBtn);
-
-//		JLabel labelItemsNeeded = new JLabel("Items needed from providers");
-//		labelItemsNeeded.setFont(new Font("新細明體", Font.BOLD, 25));
-//		labelItemsNeeded.setBounds(15, 0, 336, 38);
-//		providerPanel.add(labelItemsNeeded);
 
 		JButton btnSaveInformation = new JButton("Save Information");
 		btnSaveInformation.setBounds(121, 545, 234, 31);
@@ -402,6 +345,14 @@ public class ProviderApplet extends JApplet implements ActionListener{
         	// !!! problem: no blank row + row can't be in typing situation 
 			case "Save Information":
 				System.out.println("save info");
+				
+//				//add distname from applet gui
+//				for(int i=0; i < distributorNameTable.getRowCount(); i++)
+//				{
+//					ProParser.distributorList.add((String)distributorNameTable.getValueAt(i,0));
+//				
+//				}
+					
 				prov.sellItems.removeAllElements(); // remove all items in vector sellItems	, needItems		
 				
     			String fileUrl = "Provider.xml";
@@ -490,6 +441,8 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		        }
 		        			        
 				break;
+				
+				
 			//"Load Information" button
 			case "Load Information":
 				System.out.println("load info");

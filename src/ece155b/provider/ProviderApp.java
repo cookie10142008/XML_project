@@ -66,7 +66,7 @@ public class ProviderApp extends JFrame {
         texta.setLineWrap(true);
         texta.setWrapStyleWord(true);
         
-        String showPort = "the port number is:" + PortNo + "\n\n";
+        String showPort = "the port number is:" + PortNo;
         texta.setText(showPort);
         
         JButton testme = new JButton("Broadcast message");
