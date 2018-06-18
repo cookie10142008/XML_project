@@ -10,14 +10,18 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Purchase{
 
-	private JFrame frame;
+	public JFrame frame;
 	private JScrollPane purchaseScrollPane;
-	private JTable purchaseTable;
+	public JTable purchaseTable;
 	private DefaultTableModel purTable;
 	private JButton btnOkButton, btnNoButton;
+	public String[] headings;
+	public Object[][] data;
 	
 
 	/**
@@ -48,31 +52,39 @@ public class Purchase{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 550, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		btnOkButton = new JButton("OK");
-		btnOkButton.setBounds(94, 31, 87, 23);
+		btnOkButton.setBounds(123, 34, 106, 32);
 		frame.getContentPane().add(btnOkButton);
 		
 		btnNoButton = new JButton("Cancel");
-		btnNoButton.setBounds(270, 31, 87, 23);
+		btnNoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+
+			}
+		});
+		btnNoButton.setBounds(267, 34, 106, 32);
 		frame.getContentPane().add(btnNoButton);
 		
 		purchaseScrollPane = new JScrollPane();
-		purchaseScrollPane.setBounds(92, 94, 266, 130);
+		purchaseScrollPane.setBounds(36, 94, 440, 233);
 		frame.getContentPane().add(purchaseScrollPane);
 		
 		
 		// Item Sold
-		String[] headings = new String[] { "ID", "Name", "Brand", "Price", "In Stock" }; 
+		headings = new String[] { "ID", "Name", "Brand", "Price", "In Stock" }; 
 		// customerTable的資料
-		Object[][] data = new Object[][] {
-			{ null, null, null, null, null}
-				};
+//		data = new Object[][] {
+//			{ null, null, null, null, null}
+//				};
 		
-		purTable = new DefaultTableModel(data, headings);
+//		purTable = new DefaultTableModel(data, headings);
+		purTable = new DefaultTableModel(null, headings);
+
 		purchaseTable = new JTable(purTable);
 		purchaseTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		purchaseScrollPane.setViewportView(purchaseTable);

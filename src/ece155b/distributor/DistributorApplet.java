@@ -11,6 +11,7 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 import ece155b.distributor.data.Company;
 import ece155b.distributor.data.Distributor;
@@ -18,6 +19,8 @@ import ece155b.distributor.data.Supply;
 import ece155b.distributor.data.SellSupply;
 import ece155b.distributor.data.NeedSupply;
 import ece155b.distributor.xml.XMLParser;
+import ece155b.provider.data.Purchase;
+
 import javax.xml.parsers.*;
 
 import org.xml.sax.SAXException;
@@ -325,8 +328,29 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		JButton pro_purchaseBtn = new JButton("Purchase");
 		pro_purchaseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//new 出needSupply 選取的東西
+							
+				TableModel model1 = providerTable.getModel();
+				int indexs[] = providerTable.getSelectedRows();
 				
+				Object[] row = new Object[5];
+				Purchase purchase = new Purchase();
+				
+				DefaultTableModel model2 = (DefaultTableModel) purchase.purchaseTable.getModel();
+				for(int i = 0; i < indexs.length; i++)
+				{
+					row[0] = model1.getValueAt(indexs [i], 0);
+					row[1] = model1.getValueAt(indexs [i], 1);
+					row[2] = model1.getValueAt(indexs [i], 2);
+					row[3] = model1.getValueAt(indexs [i], 3);	
+					row[4] = model1.getValueAt(indexs [i], 4);	
+
+					model2.addRow(row);
+				}
+				purchase.frame.setVisible(true);
+				
+				
+				
+				//new 出needSupply 選取的東西				
 //				int count[] = customerTable.getSelectedRows(); //刪除多行
 //				if(count.length <= 0){
 //					JOptionPane.showMessageDialog(null, "Unable to Delete");
