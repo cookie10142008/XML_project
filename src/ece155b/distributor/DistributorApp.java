@@ -98,7 +98,7 @@ public class DistributorApp extends JFrame {
         		"AUTHENTICATE_DISTRIBUTOR",
         		"BROADCAST",        		 
         		"REQUEST_SUPPLY_LIST", 
-        		//"REQUEST_PURCHASE", //send from purchase btn
+        		"REQUEST_PURCHASE", 
         		"TERMINATE"
         		};
         JComboBox message_comboBox = new JComboBox(messageType);

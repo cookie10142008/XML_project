@@ -165,7 +165,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 				} 	    		
 			}
 		});
-		customerDelRowBtn.setBounds(337, 371, 243, 31);
+		customerDelRowBtn.setBounds(279, 371, 243, 31);
 		customer_Panel.add(customerDelRowBtn);
 
 
@@ -265,30 +265,30 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		txtarea_PressEnter.setBounds(809, 59, 357, 133);
 		customer_Panel.add(txtarea_PressEnter);
 		
-		
-				JPanel providerPanel = new JPanel();
-				providerPanel.setLayout(null);
-				providerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-				providerPanel.setBounds(765, 229, 685, 450);
-				//getContentPane().add(providerPanel);
 
-				JScrollPane providerScrollPane = new JScrollPane();
-				providerScrollPane.setBounds(101, 53, 650, 285);
-				providerPanel.add(providerScrollPane);
-				providerTable = new JTable(provTable);     	    
-				providerScrollPane.setViewportView(providerTable);
-				
-						providerTable.setRowHeight(50); //設定列高度為50
-						
-						
-								JButton pro_addRowBtn = new JButton("Add a row"); //providerTable的Add a row按鈕 
-								pro_addRowBtn.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-										provTable.addRow(new Vector()); //新增空白一列    
-									}
-								});
-								pro_addRowBtn.setBounds(114, 371, 140, 31);
-								providerPanel.add(pro_addRowBtn);
+		JPanel providerPanel = new JPanel();
+		providerPanel.setLayout(null);
+		providerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		providerPanel.setBounds(765, 229, 685, 450);
+		//getContentPane().add(providerPanel);
+
+		JScrollPane providerScrollPane = new JScrollPane();
+		providerScrollPane.setBounds(101, 53, 650, 285);
+		providerPanel.add(providerScrollPane);
+		providerTable = new JTable(provTable);     	    
+		providerScrollPane.setViewportView(providerTable);
+
+		providerTable.setRowHeight(50); //設定列高度為50
+
+
+		JButton pro_addRowBtn = new JButton("Add a row"); //providerTable的Add a row按鈕 
+		pro_addRowBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				provTable.addRow(new Vector()); //新增空白一列    
+			}
+		});
+		pro_addRowBtn.setBounds(114, 371, 140, 31);
+		providerPanel.add(pro_addRowBtn);
 								
 		JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
 		pro_delRowBtn.addActionListener(new ActionListener() {
@@ -304,55 +304,83 @@ public class DistributorApplet extends JApplet implements ActionListener{
 				}
 			}
 		});
-		pro_delRowBtn.setBounds(292, 371, 243, 31);
+		pro_delRowBtn.setBounds(279, 371, 243, 31);
 		providerPanel.add(pro_delRowBtn);
-		
-				JLabel labelItemsNeeded = new JLabel("Items needed from providers");
-				labelItemsNeeded.setFont(new Font("新細明體", Font.BOLD, 25));
-				labelItemsNeeded.setBounds(15, 0, 336, 38);
-				providerPanel.add(labelItemsNeeded);
-				
-				tabbedPane.addTab("Provider_Need Items",providerPanel);
-				
-				JTextArea txtarea_PressEnter1 = new JTextArea();
-				txtarea_PressEnter1.setForeground(Color.BLUE);
-				txtarea_PressEnter1.setBackground(Color.LIGHT_GRAY);
-				txtarea_PressEnter1.setWrapStyleWord(true);
-				txtarea_PressEnter1.setLineWrap(true);
-				txtarea_PressEnter1.setFont(new Font("新細明體", Font.BOLD, 25));
-				txtarea_PressEnter1.setEditable(false);
-				txtarea_PressEnter1.setText("Please press enter after finishing editing info in table(make sure to leave the editting situation)");
-				txtarea_PressEnter1.setBounds(809, 59, 357, 133);
-				providerPanel.add(txtarea_PressEnter1);
-				
-				JButton pro_purchaseBtn = new JButton("Supply List Request");  //把providerTable選取的資料放到purchase裡
-				pro_purchaseBtn.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-									
-						TableModel provModel = providerTable.getModel();
-						int indexs[] = providerTable.getSelectedRows();
-						
-						Object[] row = new Object[5];
-						Purchase purchase = new Purchase();
-						
-						DefaultTableModel pchModel = (DefaultTableModel) purchase.purchaseTable.getModel();
-						for(int i = 0; i < indexs.length; i++)
-						{
-							row[0] = provModel.getValueAt(indexs [i], 0);
-							row[1] = provModel.getValueAt(indexs [i], 1);
-							row[2] = provModel.getValueAt(indexs [i], 2);
-							row[3] = provModel.getValueAt(indexs [i], 3);	
-							row[4] = null;	//Provider方要檢查是否in stock
 
-							pchModel.addRow(row);
-						}
-						
-						purchase.frmPurchaseList.setVisible(true);				
-					}
-				});
-				pro_purchaseBtn.setBounds(577, 371, 174, 31);
-				providerPanel.add(pro_purchaseBtn);
+		JLabel labelItemsNeeded = new JLabel("Items needed from providers");
+		labelItemsNeeded.setFont(new Font("新細明體", Font.BOLD, 25));
+		labelItemsNeeded.setBounds(15, 0, 336, 38);
+		providerPanel.add(labelItemsNeeded);
+
+		tabbedPane.addTab("Provider_Need Items",providerPanel);
+
+		JTextArea txtarea_PressEnter1 = new JTextArea();
+		txtarea_PressEnter1.setForeground(Color.BLUE);
+		txtarea_PressEnter1.setBackground(Color.LIGHT_GRAY);
+		txtarea_PressEnter1.setWrapStyleWord(true);
+		txtarea_PressEnter1.setLineWrap(true);
+		txtarea_PressEnter1.setFont(new Font("新細明體", Font.BOLD, 25));
+		txtarea_PressEnter1.setEditable(false);
+		txtarea_PressEnter1.setText("Please press enter after finishing editing info in table(make sure to leave the editting situation)");
+		txtarea_PressEnter1.setBounds(809, 59, 357, 133);
+		providerPanel.add(txtarea_PressEnter1);
+
+		JButton pro_purchaseBtn = new JButton("Supply List Request");  //把providerTable選取的資料放到purchase裡
+		pro_purchaseBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				TableModel provModel = providerTable.getModel();
+				int indexs[] = providerTable.getSelectedRows();
+
+				Object[] row = new Object[5];
+				Purchase purchase = new Purchase();
+
+				DefaultTableModel pchModel = (DefaultTableModel) purchase.purchaseTable.getModel();
+				for(int i = 0; i < indexs.length; i++)
+				{
+					row[0] = provModel.getValueAt(indexs [i], 0);
+					row[1] = provModel.getValueAt(indexs [i], 1);
+					row[2] = provModel.getValueAt(indexs [i], 2);
+					row[3] = provModel.getValueAt(indexs [i], 3);	
+					row[4] = null;	//Provider方要檢查是否in stock
+
+					pchModel.addRow(row);
+				}
+
+				purchase.frmPurchaseList.setVisible(true);				
+			}
+		});
+		pro_purchaseBtn.setBounds(547, 371, 232, 31);
+		providerPanel.add(pro_purchaseBtn);
 		
+		JButton btnNewButton = new JButton("Purchase"); //從provider那邊購買
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				TableModel provModel = providerTable.getModel();
+				int indexs[] = providerTable.getSelectedRows();
+
+				Object[] row = new Object[5];
+				Purchase purchase = new Purchase();
+
+				DefaultTableModel pchModel = (DefaultTableModel) purchase.purchaseTable.getModel();
+				for(int i = 0; i < indexs.length; i++)
+				{
+					row[0] = provModel.getValueAt(indexs [i], 0);
+					row[1] = provModel.getValueAt(indexs [i], 1);
+					row[2] = provModel.getValueAt(indexs [i], 2);
+					row[3] = provModel.getValueAt(indexs [i], 3);	
+					row[4] = null;	//Provider方要檢查是否in stock
+
+					pchModel.addRow(row);
+				}
+
+				purchase.frmPurchaseList.setVisible(true);	
+			}
+		});
+		btnNewButton.setBounds(804, 371, 129, 31);
+		providerPanel.add(btnNewButton);
+
 		// Provider Connection tab
 		JPanel connectPanel = new JPanel();
 		connectPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
@@ -425,7 +453,6 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		        String id="", name="", brand="";
 		        double price = 0;
 		        int count = 0;
-//		        System.out.println("col欄位數:"+col+"; row列數:"+row);
     					        
  		        	customerOuterLoop:
 		        	for(int i = 0; custRow > i; i++){

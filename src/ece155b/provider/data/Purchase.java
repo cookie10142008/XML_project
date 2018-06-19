@@ -53,7 +53,7 @@ public class Purchase{
 	private void initialize() {
 		frmPurchaseList = new JFrame();
 		frmPurchaseList.setTitle("Purchase List");
-		frmPurchaseList.setBounds(100, 100, 550, 400);
+		frmPurchaseList.setBounds(100, 100, 650, 400);
 		frmPurchaseList.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPurchaseList.getContentPane().setLayout(null);
 		frmPurchaseList.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); //讓關閉(x)按鈕沒反應
@@ -64,7 +64,7 @@ public class Purchase{
 				
 			}
 		});
-		btnOkButton.setBounds(123, 34, 106, 32);
+		btnOkButton.setBounds(95, 34, 106, 32);
 		frmPurchaseList.getContentPane().add(btnOkButton);
 		
 		btnNoButton = new JButton("Cancel");
@@ -74,11 +74,11 @@ public class Purchase{
 
 			}
 		});
-		btnNoButton.setBounds(267, 34, 106, 32);
+		btnNoButton.setBounds(406, 34, 106, 32);
 		frmPurchaseList.getContentPane().add(btnNoButton);
 		
 		purchaseScrollPane = new JScrollPane();
-		purchaseScrollPane.setBounds(36, 94, 440, 233);
+		purchaseScrollPane.setBounds(36, 94, 570, 233);
 		frmPurchaseList.getContentPane().add(purchaseScrollPane);
 		
 		
