@@ -172,14 +172,14 @@ public class ConnHandler extends Thread {
             }
             else if(msg.type.equals(Common.REQUEST_SUPPLY_LIST))
             {
-                // Action to take..
+            	server.append(msg.toString());
             	
             	
             	return true;// continue to receive msg from dist. 
             }
             else if(msg.type.equals(Common.TERMINATE))
             {
-                
+            	server.append(msg.toString());
             	return false;// continue to receive msg from dist. 
             }
             else {

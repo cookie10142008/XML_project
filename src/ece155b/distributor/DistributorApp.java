@@ -14,17 +14,19 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class DistributorApp extends JFrame {
-    public Distributor distributor;
-    private ConnHandler handler;
-    private String distributor_Name;
+    public DistributorApplet distApplet;
+	public Distributor distributor;
+    public ConnHandler handler;
+    public String distributor_Name;
     JTextArea texta;
     boolean connect = false;
     Message message = new Message();
+    public String xmlContent = null;
     
-    public static void main(String [] args) {
-        new DistributorApp("dist name: MAIN()");
-    	
-    }
+//    public static void main(String [] args) {
+//        new DistributorApp("dist name: MAIN()");
+//    	
+//    }
     
     public DistributorApp(String distName) {
     	distributor_Name = distName;
@@ -84,9 +86,14 @@ public class DistributorApp extends JFrame {
 	            	}
 	            		
             	}
+            	if(message.type.equals(Common.BROADCAST)) {
+            		handler.broadcast(message);                  //Fix: not every type is broadcast
+            	}else {
+            		handler.listener.sendMessage(message);
+            		
+            	}
             	
-                handler.broadcast(message);
-                
+            	
             }
         });
         getContentPane().setLayout(null);
@@ -123,13 +130,27 @@ public class DistributorApp extends JFrame {
             		message.content = "Ask for authentication of connection";            		
             		message.from = distributor_Name;
             		
+            	}else if(message_comboBox.getSelectedItem() == "REQUEST_SUPPLY_LIST") {
+            		System.out.println(xmlContent);
+            		
+            		
+            		message.type = Common.REQUEST_SUPPLY_LIST;            	
+            		//message.content = "Ask for supply list request";            		
+            		if(xmlContent.equals(null))
+            			message.content = "no supply list";   
+            		else
+            			message.content = xmlContent;
+            			
+            			
+            		message.from = distributor_Name;
+            		
+            	}else if(message_comboBox.getSelectedItem() == "TERMINATE") {
+            		
+            		message.type = Common.TERMINATE;            	
+            		message.content = "End of the transaction";            		
+            		message.from = distributor_Name;
+            		
             	}
-            		
-            		
-            		
-
-            		
-            		
             		
             		
             	
@@ -152,4 +173,14 @@ public class DistributorApp extends JFrame {
     	
         texta.append("\n\n"+str);
     }
+    
+    public void setXMLContent(String xml) {
+    	
+    	xmlContent = xml;
+    	
+    	
+    }
+    
+    
+    
 }

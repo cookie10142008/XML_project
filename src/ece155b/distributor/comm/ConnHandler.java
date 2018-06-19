@@ -12,6 +12,8 @@ import java.util.Vector;
 public class ConnHandler {			  
     Vector<ConnListener> providers;   // vector that keeps track of connected "clients" -> providers?
     DistributorApp distApp;
+    public ConnListener listener;
+    
     
     public ConnHandler(DistributorApp distributorApp) {
         providers = new Vector <ConnListener>();
@@ -21,8 +23,9 @@ public class ConnHandler {
     public void connectToProvider(ProviderContact pro) {
         try {
             Socket socket = new Socket(pro.URL, pro.PORT);
-            providers.addElement(new ConnListener(this, socket, pro)); //ConnListener: deal w/ 
-            														   //getInputStream, getOutputStream
+            listener = new ConnListener(this, socket, pro);
+            
+            providers.addElement(listener); //ConnListener: deal w/ getInputStream, getOutputStream
         } catch (Exception ex) {
             ex.printStackTrace();
         }
