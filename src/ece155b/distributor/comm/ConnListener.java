@@ -6,7 +6,7 @@ import ece155b.distributor.data.ProviderContact;
 import java.io.*;
 import java.net.*;
 
-class ConnListener extends Thread{
+public class ConnListener extends Thread{
     public BufferedWriter bwrite;
     public BufferedReader bread;
     private ConnHandler PARENT_Handler;
@@ -54,7 +54,7 @@ class ConnListener extends Thread{
     public void sendMessage(Message msg) {
         try {
             System.out.println("\nSending to "+contact.Name+" \n"+msg);
-            PARENT_Handler.distApp.append("Sending to "+contact.Name+" \n"+msg);
+            PARENT_Handler.distApp.append("Sending to "+contact.Name+" \n"+msg); // contact.Name == provider
             
             bwrite.write(msg.toXML());
             bwrite.newLine();

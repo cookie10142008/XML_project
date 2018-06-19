@@ -53,6 +53,8 @@ public class DistributorApplet extends JApplet implements ActionListener{
     public static JTabbedPane tabbedPane;  //line 290
     public static DefaultTableModel custTable, provTable;
     
+    public DistributorApp distributorApp;
+    
     public void init()
     {
     	Frame title = (Frame)this.getParent().getParent();
@@ -264,7 +266,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		txtarea_PressEnter.setText("Please press enter after finishing editing info in table(make sure to leave the editting situation)");
 		txtarea_PressEnter.setBounds(809, 59, 357, 133);
 		customer_Panel.add(txtarea_PressEnter);
-		
+
 
 		JPanel providerPanel = new JPanel();
 		providerPanel.setLayout(null);
@@ -289,7 +291,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		});
 		pro_addRowBtn.setBounds(114, 371, 140, 31);
 		providerPanel.add(pro_addRowBtn);
-								
+
 		JButton pro_delRowBtn = new JButton("Delete selected rows");  //providerTable刪除列
 		pro_delRowBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -325,15 +327,16 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		txtarea_PressEnter1.setBounds(809, 59, 357, 133);
 		providerPanel.add(txtarea_PressEnter1);
 
+		// Supply List Request btn
 		JButton pro_purchaseBtn = new JButton("Supply List Request");  //把providerTable選取的資料放到purchase裡
 		pro_purchaseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				TableModel provModel = providerTable.getModel();
 				int indexs[] = providerTable.getSelectedRows();
-
 				Object[] row = new Object[5];
-				Purchase purchase = new Purchase();
+
+				Purchase purchase = new Purchase(distributorApp); // provider's Purchase class, build purchase list table 
 
 				DefaultTableModel pchModel = (DefaultTableModel) purchase.purchaseTable.getModel();
 				for(int i = 0; i < indexs.length; i++)
@@ -345,42 +348,19 @@ public class DistributorApplet extends JApplet implements ActionListener{
 					row[4] = null;	//Provider方要檢查是否in stock
 
 					pchModel.addRow(row);
+					
+					
+					//SellSupply item = new SellSupply();
+					//supplyList_toXML()
+					
 				}
 
 				purchase.frmPurchaseList.setVisible(true);				
 			}
 		});
-		pro_purchaseBtn.setBounds(547, 371, 232, 31);
+		pro_purchaseBtn.setBounds(577, 371, 174, 31);
 		providerPanel.add(pro_purchaseBtn);
 		
-		JButton btnNewButton = new JButton("Purchase"); //從provider那邊購買
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				TableModel provModel = providerTable.getModel();
-				int indexs[] = providerTable.getSelectedRows();
-
-				Object[] row = new Object[5];
-				Purchase purchase = new Purchase();
-
-				DefaultTableModel pchModel = (DefaultTableModel) purchase.purchaseTable.getModel();
-				for(int i = 0; i < indexs.length; i++)
-				{
-					row[0] = provModel.getValueAt(indexs [i], 0);
-					row[1] = provModel.getValueAt(indexs [i], 1);
-					row[2] = provModel.getValueAt(indexs [i], 2);
-					row[3] = provModel.getValueAt(indexs [i], 3);	
-					row[4] = null;	//Provider方要檢查是否in stock
-
-					pchModel.addRow(row);
-				}
-
-				purchase.frmPurchaseList.setVisible(true);	
-			}
-		});
-		btnNewButton.setBounds(804, 371, 129, 31);
-		providerPanel.add(btnNewButton);
-
 		// Provider Connection tab
 		JPanel connectPanel = new JPanel();
 		connectPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
@@ -393,7 +373,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 		btnConnProv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new DistributorApp(textField_companyName.getText());
+				distributorApp = new DistributorApp(textField_companyName.getText());
 				
 			}
 		});

@@ -8,9 +8,15 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+
+import ece155b.common.Message;
+import ece155b.distributor.DistributorApp;
+
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class Purchase{
@@ -22,28 +28,30 @@ public class Purchase{
 	private JButton btnOkButton, btnNoButton;
 	public String[] headings;
 	public Object[][] data;
+	public static ArrayList<String> itemNameList, neededAmountList;
+	public DistributorApp distApp;
 	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Purchase window = new Purchase();
-					window.frmPurchaseList.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Purchase window = new Purchase();
+//					window.frmPurchaseList.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public Purchase() {
+	public Purchase(DistributorApp distributorApp) {
+		distApp = distributorApp;
 		initialize();
 	}
 
@@ -51,6 +59,7 @@ public class Purchase{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frmPurchaseList = new JFrame();
 		frmPurchaseList.setTitle("Purchase List");
 		frmPurchaseList.setBounds(100, 100, 650, 400);
@@ -61,6 +70,44 @@ public class Purchase{
 		btnOkButton = new JButton("OK"); //檢查provider有沒有supply request list裡的資訊
 		btnOkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//if(string == supply list request)=> distinguish supplylist & purchase button
+				
+				System.out.println("ok");
+				itemNameList = new ArrayList();
+				neededAmountList = new ArrayList();
+				
+				
+				// get supply list from purchase list table
+				TableModel purchaseModel = purchaseTable.getModel();
+				int rowCount = purchaseTable.getRowCount();
+				//System.out.println(rowCount+ (String)purchaseModel.getValueAt(0, 1)+ " "+ purchaseModel.getValueAt(0, 4));
+				
+				for(int i = 0; i < rowCount; i++)
+				{
+					//System.out.println(purchaseModel.getValueAt(i, 0)); //id
+
+					itemNameList.add((String)purchaseModel.getValueAt(i, 1)); //name
+					neededAmountList.add((String)purchaseModel.getValueAt(i, 4));	//needed amount
+
+					
+				}
+				System.out.println(supplyList_toXML());
+				distApp.append("<supply list>");
+				distApp.append(supplyList_toXML());
+				distApp.setXMLContent(supplyList_toXML());
+				
+				
+				
+				//distApp.append(supplyList_toXML());
+				
+//				Message msg = new Message();
+//				//msg.content = supplyList_toXML();
+//				msg.type = "Request_Supply";
+//				msg.from = distApp.distributor_Name;
+//				msg.content ="supply list request test";
+//				
+//				distApp.handler.listener.sendMessage(msg);
+				
 				
 			}
 		});
@@ -111,4 +158,25 @@ public class Purchase{
 		columnCount.setPreferredWidth(150);
 		purchaseScrollPane.setViewportView(purchaseTable);
 	}
+
+
+	public String supplyList_toXML()
+    {
+        String xml = null;
+        xml = "<SupplyList>";
+        for(int i=0; i < itemNameList.size(); i++)
+        {
+        	xml += "<Supply>";
+            	xml += "<supplyName>"+itemNameList.get(i)+"</supplyName>";
+            	xml += "<supplyAmount>"+neededAmountList.get(i)+"</supplyAmount>";            	
+            xml += "</Supply>";	
+        
+        }    
+        xml += "</SupplyList>";
+        
+        return xml;
+    }
+
+
+
 }
