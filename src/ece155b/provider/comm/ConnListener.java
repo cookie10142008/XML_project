@@ -30,10 +30,19 @@ class ConnListener extends Thread{
             while(true) {
                 System.out.println("waiting for distributor message");
                 String xml 	= (String) bread.readLine(); // read msg.toXML() from distributor
+                System.out.println("xml: " + xml);
                 
                 if(xml == null) break;
-                if(! PARENT_handler.processMessage(xml, this) )
+                
+                if(! PARENT_handler.processMessage(xml, this) ) // judge if continue the socket or not 
                 	break;
+                
+//                if(xml.contains("<SupplyList>")) {
+//                	
+//                	//System.out.println("listen supply list");
+//                	SupplyList supplylist = new SupplyList();
+//                	
+//                }
                 
             }
         } catch(Exception e) {

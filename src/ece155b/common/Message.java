@@ -5,10 +5,11 @@ public class Message {
     public String type;
     public String from;
     public String content;
+    public MessageParser msgParser;
     
     public Message(String xml)
     {
-        new MessageParser(xml, this);
+    	msgParser = new MessageParser(xml, this);
     }
     
     public Message()

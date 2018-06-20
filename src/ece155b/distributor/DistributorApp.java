@@ -21,7 +21,7 @@ public class DistributorApp extends JFrame {
     JTextArea texta;
     boolean connect = false;
     Message message = new Message();
-    public String xmlContent = null;
+    public String xmlContent = "null test";
     
 //    public static void main(String [] args) {
 //        new DistributorApp("dist name: MAIN()");

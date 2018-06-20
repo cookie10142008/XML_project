@@ -113,7 +113,7 @@ public class ConnHandler extends Thread {
         boolean authenticate = false;
     	// msg: distributor's message
         Message msg = new Message(xml); // transform xml into message object
-        
+        System.out.println("process:" + xml);
         /*
             You will need to define message types,
             you might consider to have a Common.java class,
@@ -173,7 +173,7 @@ public class ConnHandler extends Thread {
             else if(msg.type.equals(Common.REQUEST_SUPPLY_LIST))
             {
             	server.append(msg.toString());
-            	
+            	System.out.println("Prov receive: "+msg.content);
             	
             	return true;// continue to receive msg from dist. 
             }

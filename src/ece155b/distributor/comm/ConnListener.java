@@ -55,7 +55,7 @@ public class ConnListener extends Thread{
         try {
             System.out.println("\nSending to "+contact.Name+" \n"+msg);
             PARENT_Handler.distApp.append("Sending to "+contact.Name+" \n"+msg); // contact.Name == provider
-            
+            System.out.println("dist send: "+ msg.content);
             bwrite.write(msg.toXML());
             bwrite.newLine();
             bwrite.flush();
