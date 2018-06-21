@@ -67,11 +67,8 @@ public class ConnHandler {
         } else if(msg.type.equals(Common.REQUEST_SUPPLY_LIST_REPLY)) {
         	distApp.append(msg.toString());
         	
-        	
-        	
-        	
         } else if(msg.type.equals(Common.REQUEST_PURCHASE_REPLY)) {
-            // Action to take..
+        	distApp.append(msg.toString());
         } else
             System.out.println("Unknown message type from provider");
         	distApp.append("Unknown message type from provider");

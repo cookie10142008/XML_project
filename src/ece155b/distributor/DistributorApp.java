@@ -144,6 +144,19 @@ public class DistributorApp extends JFrame {
             			
             		message.from = distributor_Name;
             		
+            	}else if(message_comboBox.getSelectedItem() == "REQUEST_PURCHASE") {
+            		System.out.println(xmlContent);
+            		
+            		
+            		message.type = Common.REQUEST_PURCHASE;            	
+            		//message.content = "Ask for supply list request";            		
+            		if(xmlContent.equals(null))
+            			message.content = "Ask for a purchase";   
+            		else
+            			message.content = xmlContent;
+            			
+            			
+            		message.from = distributor_Name;
             	}else if(message_comboBox.getSelectedItem() == "TERMINATE") {
             		
             		message.type = Common.TERMINATE;            	

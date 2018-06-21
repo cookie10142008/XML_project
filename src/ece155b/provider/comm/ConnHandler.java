@@ -2,6 +2,8 @@ package ece155b.provider.comm;
 
 import ece155b.common.Common;
 import ece155b.common.Message;
+import ece155b.common.SupplyList;
+import ece155b.distributor.data.SellSupply;
 import ece155b.provider.ProviderApp;
 import ece155b.provider.data.Provider;
 import ece155b.provider.xml.ProParser;
@@ -174,13 +176,73 @@ public class ConnHandler extends Thread {
             {
             	server.append(msg.toString());
             	System.out.println("Prov receive: "+msg.content);
+            	// get supply list item name & amount
+            	String temp = msg.content.substring(11); // del "supplylist:" in string
+            	Vector <SupplyList> supplylistArray = new Vector<SupplyList>();
+            	String supplylistReply = "supplylistReply: ";
+            	boolean found = false;
             	
+            	for(String item: temp.split(",")) { // supplylist : an item w/ name and amount
+            		SupplyList supplylist = new SupplyList();
+            		
+            		String value[] = item.split(":");
+            		supplylist.name = value[0];
+            		supplylist.amount = value[1];
+            		supplylistArray.add(supplylist);
+            	}
+            	// compare with stock in provider
+            	
+            	for(SupplyList needItem: supplylistArray) {
+            		supplylistReply += needItem.name;
+            		supplylistReply += ":";
+            		//System.out.println(sellItem.name +":"+sellItem.amountAvailable);
+            		
+            		for(SellSupply sellItem: Provider.sellItems) {
+            			if(sellItem.name.equals(needItem.name)) {
+            				supplylistReply += "Found, ";
+            				if(sellItem.amountAvailable >= Integer.parseInt(needItem.amount)) {
+            					supplylistReply += "Enough amount!";
+            					
+            				}else {
+            					supplylistReply += "Not enough amount!";
+
+            				}
+            				found = true;
+            				break;
+            			}
+            			
+            		}
+            		if(!found){
+        				supplylistReply += "Not found!";
+        			}
+            		
+            	}
+            	
+            	Message reply_msg = new Message();
+    			reply_msg.type = Common.REQUEST_SUPPLY_LIST_REPLY;
+    			reply_msg.from = server.company_Name;
+    			reply_msg.content = supplylistReply;
+    			
+    			listener.sendMessage(reply_msg);
+            	
+            	return true;// continue to receive msg from dist. 
+            }
+            else if(msg.type.equals(Common.REQUEST_PURCHASE))
+            {
+            	server.append(msg.toString());
+            	
+            	Message reply_msg = new Message();
+    			reply_msg.type = Common.REQUEST_PURCHASE_REPLY;
+    			reply_msg.from = server.company_Name;
+    			reply_msg.content = "Succeed to purchase or not";
+    			
+    			listener.sendMessage(reply_msg);
             	return true;// continue to receive msg from dist. 
             }
             else if(msg.type.equals(Common.TERMINATE))
             {
             	server.append(msg.toString());
-            	return false;// continue to receive msg from dist. 
+            	return false;// stop to receive msg from dist. 
             }
             else {
                 System.out.println("Provider: Unknown message type from distributor");

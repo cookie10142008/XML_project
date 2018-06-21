@@ -13,7 +13,7 @@ public class MessageParser extends DefaultHandler
     public Message message;
     private StringBuffer accumulator = new StringBuffer();
     boolean supplyListRead = false;
-    String supplyList = null;
+    String supplyList = "supplylist:";
     
     /** Creates a new instance of MessageParser */
     // extract info from xml into message(Message object contain type, from, content)
@@ -62,7 +62,6 @@ public class MessageParser extends DefaultHandler
         else if(name.equals("MessageContent")) {
         	if(supplyListRead) {
         		
-        		
         		message.content = supplyList;
         		
         	}
@@ -76,16 +75,7 @@ public class MessageParser extends DefaultHandler
         
     }
     
-    public String toSupplyList() {
-    	
-    	String list = null;
-    	
-    	
-    	
-    	
-    	
-    	return list;
-    }
+    
     
     
     
