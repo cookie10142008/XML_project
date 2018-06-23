@@ -358,7 +358,7 @@ public class DistributorApplet extends JApplet implements ActionListener{
 				purchase.frmPurchaseList.setVisible(true);				
 			}
 		});
-		pro_purchaseBtn.setBounds(577, 371, 174, 31);
+		pro_purchaseBtn.setBounds(577, 371, 248, 31);
 		providerPanel.add(pro_purchaseBtn);
 		
 		// Provider Connection tab

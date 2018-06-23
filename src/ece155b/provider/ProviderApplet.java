@@ -195,11 +195,11 @@ public class ProviderApplet extends JApplet implements ActionListener{
 		getContentPane().add(btnLoadInformation);
 		btnLoadInformation.addActionListener(this);
 		
-		// Load Distributor List button
-		JButton btnLoadDistributorList = new JButton("Load Distributor List");
-		btnLoadDistributorList.setBounds(699, 545, 234, 31);
-		getContentPane().add(btnLoadDistributorList);
-		btnLoadDistributorList.addActionListener(this);
+//		// Load Distributor List button
+//		JButton btnLoadDistributorList = new JButton("Load Distributor List");
+//		btnLoadDistributorList.setBounds(699, 545, 234, 31);
+//		getContentPane().add(btnLoadDistributorList);
+//		btnLoadDistributorList.addActionListener(this);
 
 		// tab to transfer between panels
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -354,8 +354,9 @@ public class ProviderApplet extends JApplet implements ActionListener{
 //				}
 					
 				prov.sellItems.removeAllElements(); // remove all items in vector sellItems	, needItems		
+				Provider.dist_list.removeAllElements();
 				
-    			String fileUrl = "Provider.xml";
+    			String fileUrl = "Provider_"+textField_companyName.getText()+".xml";
     			boolean customerSave = false;
 		        // get company info
 		    	prov.name = textField_companyName.getText();
@@ -434,14 +435,25 @@ public class ProviderApplet extends JApplet implements ActionListener{
 	        			prov.addSellItem(item);
 		              	
 		        	} // end row
-	        
+		        
+		        // get dist name from distributorName table
+		        int distRow = distributorNameTable.getRowCount(); //get Row Count = 5    
+		        String distname = "";
+		        
+		        for(int i = 0; distRow > i; i++){
+		        	distname = (String) distributorNameTable.getValueAt(i, 0);
+		        	Provider.dist_list.add(distname);
+		        } // end row
+		        
+		        //Provider.dist_list.add("dist name");
+		        
+		        // check customerSave
 		        if(customerSave) {
 		        	JOptionPane.showMessageDialog(null, "存檔成功");
-		        	toXmlFile(prov,fileUrl);	
+		        	toXmlFile(prov,fileUrl);	// write info into xml format
 		        }
 		        			        
 				break;
-				
 				
 			//"Load Information" button
 			case "Load Information":
@@ -473,10 +485,10 @@ public class ProviderApplet extends JApplet implements ActionListener{
 				break;
 				
 				
-			case "Load Distributor List":
-				//System.out.println(Provider.dist_list.get(1));
-				
-				break;
+//			case "Load Distributor List":
+//				//System.out.println(Provider.dist_list.get(1));
+//				
+//				break;
 	                
 		}
 		

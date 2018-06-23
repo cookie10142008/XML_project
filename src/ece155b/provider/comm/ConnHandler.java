@@ -3,11 +3,16 @@ package ece155b.provider.comm;
 import ece155b.common.Common;
 import ece155b.common.Message;
 import ece155b.common.SupplyList;
+import ece155b.distributor.data.Distributor;
+import ece155b.distributor.data.NeedSupply;
 import ece155b.distributor.data.SellSupply;
 import ece155b.provider.ProviderApp;
 import ece155b.provider.data.Provider;
 import ece155b.provider.xml.ProParser;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
 import java.util.Vector;
@@ -231,6 +236,63 @@ public class ConnHandler extends Thread {
             {
             	server.append(msg.toString());
             	
+            	System.out.println("Prov receive: "+msg.content);
+            	// get supply list item name & amount
+            	String temp = msg.content.substring(11); // del "supplylist:" in string
+            	Vector <SupplyList> supplylistArray = new Vector<SupplyList>();
+            	String supplylistReply = "supplylistReply: ";
+            	boolean found = false;
+            	
+            	for(String item: temp.split(",")) { // supplylist : an item w/ name and amount
+            		SupplyList supplylist = new SupplyList();
+            		
+            		String value[] = item.split(":");
+            		supplylist.name = value[0];
+            		supplylist.amount = value[1];
+            		supplylistArray.add(supplylist);
+            	}
+            	// compare with stock in provider
+            	
+            	for(SupplyList needItem: supplylistArray) {
+            		supplylistReply += needItem.name;
+            		supplylistReply += ":";
+            		//System.out.println(sellItem.name +":"+sellItem.amountAvailable);
+            		
+            		for(SellSupply sellItem: Provider.sellItems) {
+            			if(sellItem.name.equals(needItem.name)) {
+            				supplylistReply += "Found, ";
+            				if(sellItem.amountAvailable >= Integer.parseInt(needItem.amount)) {
+            					supplylistReply += "Enough amount!";
+            					
+            					//add amount into distributor xml
+            					String fileUrl = "Distributor.xml"; // set xml file name
+            					//toXmlFile();
+            					
+            					
+            					
+            				}else {
+            					supplylistReply += "Not enough amount!";
+
+            				}
+            				found = true;
+            				break;
+            			}
+            			
+            		}
+            		if(!found){
+        				supplylistReply += "Not found!";
+        			}
+            		
+            	}
+            	
+            	for(NeedSupply needitem:  Distributor.needItems){
+            		System.out.println(needitem.name);
+            		
+            		
+            		
+            	}
+            		
+            	
             	Message reply_msg = new Message();
     			reply_msg.type = Common.REQUEST_PURCHASE_REPLY;
     			reply_msg.from = server.company_Name;
@@ -249,6 +311,22 @@ public class ConnHandler extends Thread {
                 return true;// continue to receive msg from dist. 
             }
             
-            
     }
+    
+    public void toXmlFile(Distributor dist, String fileurl)
+    {
+    	try
+	    {
+	    	File xmlfile = new File(fileurl);
+    		BufferedWriter br = new BufferedWriter(new FileWriter(xmlfile));
+    		br.write("<?xml version='1.0' ?>"); // start to write XML into file
+    		br.write(dist.toXML());
+    		br.close();
+	    }
+	    catch (Exception ex)
+	    {
+	    	System.out.println ("Exception:"+ex);
+	    }
+    }
+    
 }

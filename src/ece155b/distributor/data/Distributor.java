@@ -63,13 +63,13 @@ public class Distributor extends Company
 		}
 		returnStr += "</ItemsNeeded>";
 		
-		//template
-		for (int i = 0; i < providers.size(); i++)
-			returnStr += providers.elementAt(i).toXML(); //elementAt(i) ?? get(i) ??
-        
-        for (int i = 0; i < purchase.size(); i++)
-        	returnStr += purchase.elementAt(i).toXML();
-        //template
+//		//template
+//		for (int i = 0; i < providers.size(); i++)
+//			returnStr += providers.elementAt(i).toXML(); //elementAt(i) ?? get(i) ??
+//        
+//        for (int i = 0; i < purchase.size(); i++)
+//        	returnStr += purchase.elementAt(i).toXML();
+//        //template
         
 		returnStr += "</Distributor>";
 		return returnStr;
